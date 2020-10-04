@@ -28,17 +28,34 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
     }
 
+    //for setting the color of the sprites/players
     public void SetPlayerColor(int index, Color32 spriteColor)
     {
         _playerConfigs[index].PlayerSpriteColor.color = spriteColor;
     }
 
+    //for indicating when the players press "Ready"
     public void ReadyPlayer(int index)
     {
         _playerConfigs[index].IsReady = true;
         if (_playerConfigs.Count == _maxPlayers && _playerConfigs.All(p => p.IsReady = true))
         {
             SceneManager.LoadScene("SampleScene");
+        }
+    }
+
+    public void HandlePlayerJoin(PlayerInput pi)
+    {
+        Debug.Log("Player Number: " + pi.playerIndex + " Joined");
+        
+       
+        //checking to seee if we haven't already added this player
+        if (!_playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
+        {
+            //since this gameobject is not destroyed when switching to other scenes,
+            //the same needs to happen to the players too
+            pi.transform.SetParent(transform);
+            _playerConfigs.Add(new PlayerConfiguration(pi));
         }
     }
 }
