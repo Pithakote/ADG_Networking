@@ -1,27 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 public class PlayerController : MonoBehaviour
 {
-    float speed = 5;
-    Vector2 _movementInput;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    PlayerMovement _playerMovement;
 
-    // Update is called once per frame
-    void Update()
+    private PlayerInput _playerInput;
+
+    private void Awake()
     {
-        transform.Translate(new Vector2(_movementInput.x, _movementInput.y)
-                            *speed
-                            * Time.deltaTime);
+        _playerInput = GetComponent<PlayerInput>();
+        PlayerMovement[] _playerMovementIntances = FindObjectsOfType<PlayerMovement>();
+        int _index = _playerInput.playerIndex; //automatically gets the input from playerInput
+
+        for (int i = 0; i < _playerMovementIntances.Length; i++)
+          _playerMovement =  _playerMovementIntances.FirstOrDefault(pm => pm.PlayerIndex == _index);
+            //if the index in the player is the same as the index given by the _index(playerInput.index)
     }
+  
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        _movementInput = ctx.ReadValue<Vector2>();
+        if (_playerMovement == null)
+            return;
+
+        _playerMovement.MovementInput = ctx.ReadValue<Vector2>();
     }
 }
