@@ -47,6 +47,7 @@ public class PlayerSetupMenu : MonoBehaviour
         _readyPanel.SetActive(true);
         _readyButton.Select();
         _menuPanel.SetActive(false);
+       
     }
 
     public void ReadyPlayer()

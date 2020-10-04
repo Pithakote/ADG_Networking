@@ -52,20 +52,22 @@ public class PlayerConfigurationManager : MonoBehaviour
     //for indicating when the players press "Ready"
     public void ReadyPlayer(int index)
     {
-        
-        _playerConfigs[index].IsReady = true;
+        if(!_playerConfigs[index].IsReady)
+             _playerConfigs[index].IsReady = true;
 
         for (int i = 0; i < _playerConfigs.Count; i++)
         {
             Debug.Log("Player: " + (index + 1) + " " + _playerConfigs[index].IsReady);
         }
-        if (_playerConfigs.Count == _maxPlayers) //&& _playerConfigs.All(p => p.IsReady = true))
+        if (_playerConfigs.Count == _maxPlayers && _playerConfigs.All(p => p.IsReady == true))
         {
-            foreach (var player in _playerConfigs)
-            {
-                if(player.IsReady)
-                SceneManager.LoadScene("SampleScene");
-            }
+            SceneManager.LoadScene("SampleScene");
+
+            /*  foreach (var player in _playerConfigs)
+              {
+                  if(player.IsReady)
+                  SceneManager.LoadScene("SampleScene");
+              }*/
         }
     }
 
@@ -81,6 +83,7 @@ public class PlayerConfigurationManager : MonoBehaviour
             //the same needs to happen to the players too
             pi.transform.SetParent(transform);
             _playerConfigs.Add(new PlayerConfiguration(pi));
+            _playerConfigs[pi.playerIndex].IsReady = false;
         }
         foreach(var player in _playerConfigs)
         Debug.Log("The number of players are: "+_playerConfigs.Count);
@@ -97,6 +100,6 @@ public class PlayerConfiguration
     }
     public PlayerInput Input { get; set; }
     public int PlayerIndex { get; set; }
-    public bool IsReady { get; set; }
+    public bool IsReady { get; set; } 
     public Color PlayerSpriteColor {get; set;}
 }
