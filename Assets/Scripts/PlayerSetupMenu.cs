@@ -23,6 +23,8 @@ public class PlayerSetupMenu : MonoBehaviour
 
     public void SetPlayerIndex(int pi)
     {
+        
+
         _playerIndex = pi;
         _titleText.SetText("Player "+(pi+1).ToString());
         _ignoreInputTime = Time.time + _ignoreInputTime;
