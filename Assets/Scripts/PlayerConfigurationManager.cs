@@ -22,7 +22,7 @@ public class PlayerConfigurationManager : MonoBehaviour
             Debug.Log("Singleton already exists");
         }
         else
-        {
+        { 
             Instance = this;
             DontDestroyOnLoad(Instance);
             _playerConfigs = new List<PlayerConfiguration>();
