@@ -46,7 +46,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void SetPlayerColor(int index, Image spriteColor)
     {
         Debug.Log("Player: "+(index+1)+" "+_playerConfigs[index].IsReady);
-      //  _playerConfigs[index].PlayerSpriteColor.color = spriteColor.color;
+        _playerConfigs[index].PlayerSpriteColor = spriteColor.color;
     }
 
     //for indicating when the players press "Ready"
@@ -98,5 +98,5 @@ public class PlayerConfiguration
     public PlayerInput Input { get; set; }
     public int PlayerIndex { get; set; }
     public bool IsReady { get; set; }
-    public SpriteRenderer PlayerSpriteColor {get; set;}
+    public Color PlayerSpriteColor {get; set;}
 }

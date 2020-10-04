@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public void InitializePlayer(PlayerConfiguration pc)
     {
         _playerConfig = pc;
-       // _playerColor.color = pc.PlayerSpriteColor.color;
+        _playerColor.color = pc.PlayerSpriteColor;
         _playerConfig.Input.onActionTriggered += Input_onActionTriggered;
     }
 
