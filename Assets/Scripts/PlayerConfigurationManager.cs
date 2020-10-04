@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
@@ -29,9 +30,9 @@ public class PlayerConfigurationManager : MonoBehaviour
     }
 
     //for setting the color of the sprites/players
-    public void SetPlayerColor(int index, Color32 spriteColor)
+    public void SetPlayerColor(int index, Image spriteColor)
     {
-        _playerConfigs[index].PlayerSpriteColor.color = spriteColor;
+        _playerConfigs[index].PlayerSpriteColor.color = spriteColor.color;
     }
 
     //for indicating when the players press "Ready"
