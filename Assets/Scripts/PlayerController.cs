@@ -17,13 +17,9 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-       // _playerInput = GetComponent<PlayerInput>();
+       
          _playerMovement = GetComponent<PlayerMovement>();
-        //  int _index = _playerInput.playerIndex; //automatically gets the input from playerInput
-
-        //    for (int i = 0; i < _playerMovementIntances.Length; i++)
-        //     _playerMovement =  _playerMovementIntances.FirstOrDefault(pm => pm.PlayerIndex == _index);
-        //if the index in the player is the same as the index given by the _index(playerInput.index)
+     
 
         _controls = new PlayerControls(); 
     }
@@ -49,5 +45,7 @@ public class PlayerController : MonoBehaviour
             return;
 
         _playerMovement.MovementInput = ctx.ReadValue<Vector2>();
+
+        //expand on this and make the gameobject rotate towards to input axis
     }
 }

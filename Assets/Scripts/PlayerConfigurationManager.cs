@@ -11,14 +11,14 @@ public class PlayerConfigurationManager : MonoBehaviour
     List<PlayerConfiguration> _playerConfigs;
 
     [SerializeField]
-    int _maxPlayers;
+    int _currentPlayers;
     PlayerInputManager _playerInputManager;
     public static PlayerConfigurationManager Instance { get; private set; }
 
-    public int MaxPlayers
+    public int CurrentPlayers
     {
-        get { return _maxPlayers; }
-        set { _maxPlayers = value; }
+        get { return _currentPlayers; }
+        set { _currentPlayers = value; }
     }
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     }
     private void Start()
     {
-       // _maxPlayers = 0;
+        _currentPlayers = 0;
     }
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
@@ -59,7 +59,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             Debug.Log("Player: " + (index + 1) + " " + _playerConfigs[index].IsReady);
         }
-        if (_playerConfigs.Count == _maxPlayers && _playerConfigs.All(p => p.IsReady == true))
+        if (_playerConfigs.Count == _currentPlayers && _playerConfigs.All(p => p.IsReady == true))
         {
             SceneManager.LoadScene("SampleScene");
 

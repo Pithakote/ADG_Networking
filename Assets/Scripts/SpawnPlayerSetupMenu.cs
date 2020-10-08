@@ -22,7 +22,7 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
             GameObject _gameMenu = Instantiate(PlayerSetupMenuPrefab, _mainLayout.transform);
             _playerInput.uiInputModule = _gameMenu.GetComponentInChildren<InputSystemUIInputModule>();
             _gameMenu.GetComponent<PlayerSetupMenu>().SetPlayerIndex(_playerInput.playerIndex);
-           // PlayerConfigurationManager.Instance.MaxPlayers += 1;
+            PlayerConfigurationManager.Instance.CurrentPlayers += 1;
           //  Debug.Log("The number of players: " + PlayerConfigurationManager.Instance.MaxPlayers);
         }
     }
