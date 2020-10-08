@@ -59,16 +59,13 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             Debug.Log("Player: " + (index + 1) + " " + _playerConfigs[index].IsReady);
         }
-        if (_playerConfigs.Count == _currentPlayers && _playerConfigs.All(p => p.IsReady == true))
-        {
-            SceneManager.LoadScene("SampleScene");
-
-            /*  foreach (var player in _playerConfigs)
-              {
-                  if(player.IsReady)
-                  SceneManager.LoadScene("SampleScene");
-              }*/
-        }
+        if (_playerConfigs.Count == _currentPlayers
+                                && _currentPlayers <= _playerInputManager.maxPlayerCount
+                                && _playerConfigs.All(p => p.IsReady == true))
+                     {            
+                          SceneManager.LoadScene("SampleScene");
+                          _playerInputManager.DisableJoining();//stops people from joining after the game has been set
+                     }
     }
 
     public void HandlePlayerJoin(PlayerInput pi)
@@ -84,8 +81,10 @@ public class PlayerConfigurationManager : MonoBehaviour
             pi.transform.SetParent(transform);
             _playerConfigs.Add(new PlayerConfiguration(pi));
             _playerConfigs[pi.playerIndex].IsReady = false;
+            _currentPlayers += 1;
+
         }
-        foreach(var player in _playerConfigs)
+        foreach (var player in _playerConfigs)
         Debug.Log("The number of players are: "+_playerConfigs.Count);
     }
 }

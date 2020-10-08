@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(new Vector2(MovementInput.x, MovementInput.y)
                                         * speed
                                         * Time.deltaTime);
-        RotateGameObject(toVector2(MovementInput), turningSpeed, 1);
+      //  RotateGameObject(toVector2(MovementInput), turningSpeed, 1);
         //  transform.rotation = Quaternion.LookRotation(transform.forward,new Vector2(MovementInput.x,
         //                                                                          MovementInput.y));
         // transform.LookAt(toVector2(transform.forward) + MovementInput);
