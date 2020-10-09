@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8298370440857379345}
   - component: {fileID: 8298370440857379344}
   m_Layer: 5
-  m_Name: Blue
+  m_Name: hexagon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 8298370441495209096}
   - component: {fileID: 8298370441495209103}
   m_Layer: 5
-  m_Name: Orange
+  m_Name: square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -735,7 +735,7 @@ GameObject:
   - component: {fileID: 8298370441623359283}
   - component: {fileID: 8298370441623359282}
   m_Layer: 5
-  m_Name: Purple
+  m_Name: triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1275,7 +1275,7 @@ GameObject:
   - component: {fileID: 8298370442244531185}
   - component: {fileID: 8298370442244531184}
   m_Layer: 5
-  m_Name: Red
+  m_Name: circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

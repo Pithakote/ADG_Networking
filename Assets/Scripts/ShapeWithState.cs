@@ -11,6 +11,5 @@ public class ShapeWithState
 
     public bool IsSelected = false;
 
- 
     public string GetName { get; set; }
 }

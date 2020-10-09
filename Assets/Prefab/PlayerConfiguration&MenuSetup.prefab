@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1882759102080814350}
   - component: {fileID: 7552552216874952354}
   m_Layer: 0
-  m_Name: PlayerConfiguration
+  m_Name: PlayerConfiguration&MenuSetup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,8 +58,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad&Keyboard
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
