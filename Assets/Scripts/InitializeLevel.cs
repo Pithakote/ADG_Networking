@@ -13,6 +13,8 @@ public class InitializeLevel : MonoBehaviour
     Vector2[] _playerSpawnsPositions;
     [SerializeField]
     GameObject _playerPrefab;
+
+  
    // [SerializeField]
     //Transform[] _spawnPosition;
     // Start is called before the first frame update
@@ -22,12 +24,13 @@ public class InitializeLevel : MonoBehaviour
     float _minPosValue, _maxPosValue;
     void Start()
     {
+       
         //sets the arrya length to the current number of players 
         //since, PlayerConfigurationManager is don't destroy on load, it'll find it
         _playerSpawnsPositions = new Vector2[PlayerConfigurationManager.Instance.CurrentPlayers];
         
 
-        PlayerConfiguration[] _playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
+        PlayerDataConfiguration[] _playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
         for (int i = 0; i < _playerConfigs.Length; i++)
 
         {

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c30520c297c9cd4ea33de0f3497d471, type: 3}
+  m_Name: PlayerShape&Color
+  m_EditorClassIdentifier: 
+  _playerColor: {r: 0, g: 0, b: 0, a: 0}
+  _playerShape:
+  - _playerShape: {fileID: 21300000, guid: b88e40fa2ad45004faa2935ee95aed82, type: 3}
+    IsSelected: 0
+  - _playerShape: {fileID: 21300000, guid: cdacab2dc8d660841ae335418b79087a, type: 3}
+    IsSelected: 0
+  - _playerShape: {fileID: 21300000, guid: 13cef8d119aa5a844b7748bd46c0c8c8, type: 3}
+    IsSelected: 0
+  - _playerShape: {fileID: 21300000, guid: 60e162fa8f3584049ae3c273c816922d, type: 3}
+    IsSelected: 0
+  IsTaken: 0

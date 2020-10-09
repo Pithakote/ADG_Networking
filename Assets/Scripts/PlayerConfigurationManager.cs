@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,13 +9,21 @@ using UnityEngine.UI;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
-    List<PlayerConfiguration> _playerConfigs;
+    List<PlayerDataConfiguration> _playerConfigs;
 
     [SerializeField]
     int _currentPlayers;
     PlayerInputManager _playerInputManager;
     public static PlayerConfigurationManager Instance { get; private set; }
+    [SerializeField]
+    List<GameObject> _listOfMenuUI;
 
+    public delegate void OnButtonSelect(Button _btn);
+    public  event OnButtonSelect ButtonSelectEvent;
+    public List<GameObject> ListOfMenuUI { get { return _listOfMenuUI; } set { _listOfMenuUI = value; } }
+    //  [SerializeField] PlayerColorAndShape _playerColorAndShape;
+
+    //    public PlayerColorAndShape PlayerColorAndShape { get { return _playerColorAndShape; } }
     public int CurrentPlayers
     {
         get { return _currentPlayers; }
@@ -22,6 +31,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     }
     private void Awake()
     {
+     //   ListOfMenuUI = new List<GameObject>();
         _playerInputManager = GetComponent<PlayerInputManager>();
         if (Instance != null)
         {
@@ -31,14 +41,18 @@ public class PlayerConfigurationManager : MonoBehaviour
         { 
             Instance = this;
             DontDestroyOnLoad(Instance);
-            _playerConfigs = new List<PlayerConfiguration>();
+            _playerConfigs = new List<PlayerDataConfiguration>();
         }
     }
     private void Start()
     {
         _currentPlayers = 0;
     }
-    public List<PlayerConfiguration> GetPlayerConfigs()
+    public void ButtonEventRaiser(Button _btn)
+    { if (ButtonSelectEvent != null)
+            ButtonSelectEvent(_btn);
+    }
+    public List<PlayerDataConfiguration> GetPlayerConfigs()
     {
         return _playerConfigs;
     }
@@ -48,9 +62,15 @@ public class PlayerConfigurationManager : MonoBehaviour
         Debug.Log("Player: "+(index+1)+" "+_playerConfigs[index].IsReady);
         _playerConfigs[index].PlayerSpriteColor = spriteColor.color;
     }
-
-    //for indicating when the players press "Ready"
-    public void ReadyPlayer(int index)
+    public void SetPlayerShape(int index, Sprite spriteShape)
+    {
+        if (ButtonSelectEvent == null)
+            return;
+        _playerConfigs[index].PlayerShape = spriteShape;
+    }
+    
+        //for indicating when the players press "Ready"
+        public void ReadyPlayer(int index)
     {
         if(!_playerConfigs[index].IsReady)
              _playerConfigs[index].IsReady = true;
@@ -79,7 +99,7 @@ public class PlayerConfigurationManager : MonoBehaviour
             //since this gameobject is not destroyed when switching to other scenes,
             //the same needs to happen to the players too
             pi.transform.SetParent(transform);
-            _playerConfigs.Add(new PlayerConfiguration(pi));
+            _playerConfigs.Add(new PlayerDataConfiguration(pi));
             _playerConfigs[pi.playerIndex].IsReady = false;
             _currentPlayers += 1;
 
@@ -88,10 +108,10 @@ public class PlayerConfigurationManager : MonoBehaviour
         Debug.Log("The number of players are: "+_playerConfigs.Count);
     }
 }
-
-public class PlayerConfiguration
+/*
+public class PlayerDataConfiguration
 {
-    public PlayerConfiguration(PlayerInput pi)
+    public PlayerDataConfiguration(PlayerInput pi)
     {
         Input = pi;
         PlayerIndex = pi.playerIndex;
@@ -102,3 +122,4 @@ public class PlayerConfiguration
     public bool IsReady { get; set; } 
     public Color PlayerSpriteColor {get; set;}
 }
+*/

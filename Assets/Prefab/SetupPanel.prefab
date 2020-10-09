@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.06132078, g: 0.75321734, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -120,7 +120,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: SetColor
+        m_MethodName: AssignButtonName
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8298370440857379344}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8298370440918943192}
+        m_MethodName: SetShape
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8298370440857379345}
@@ -225,6 +236,9 @@ MonoBehaviour:
   _readyPanel: {fileID: 8298370441164742510}
   _menuPanel: {fileID: 8298370441255516573}
   _readyButton: {fileID: 8298370441083478527}
+  _buttonsInPanel: []
+  _playerColorAndShape: {fileID: 11400000, guid: 3019a7f70d510d1468e3ed9163e30f10,
+    type: 2}
 --- !u!1 &8298370441083478525
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.764151, g: 0.37249207, b: 0.075694196, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -687,7 +701,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: SetColor
+        m_MethodName: AssignButtonName
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8298370441495209103}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8298370440918943192}
+        m_MethodName: SetShape
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8298370441495209096}
@@ -757,7 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8300292, g: 0.36912602, b: 0.990566, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -817,7 +842,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: SetColor
+        m_MethodName: AssignButtonName
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8298370441623359282}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8298370440918943192}
+        m_MethodName: SetShape
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8298370441623359283}
@@ -1286,7 +1322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8301887, g: 0.121395506, b: 0.121395506, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1346,7 +1382,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: SetColor
+        m_MethodName: AssignButtonName
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8298370442244531184}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8298370440918943192}
+        m_MethodName: SetShape
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8298370442244531185}

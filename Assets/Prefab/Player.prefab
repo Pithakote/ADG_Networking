@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -1204562665539671302}
   - component: {fileID: -3981849877370503737}
   - component: {fileID: 6157173757304089227}
-  - component: {fileID: -2573759414811288953}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -30,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8730542535621338594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.32146394, y: -1.0436112, z: -0.19252692}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 8730542536525824568}
   m_Father: {fileID: 0}
@@ -75,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 0.2387538, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,7 +82,7 @@ SpriteRenderer:
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &-1204562665539671302
@@ -110,7 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f102d8c70997cfe448d59991b1585351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerColor: {fileID: 4991151077153011750}
 --- !u!50 &6157173757304089227
 Rigidbody2D:
   serializedVersion: 4
@@ -132,37 +130,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &-2573759414811288953
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8730542535621338594}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 0.16, y: 0.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.08, y: 0.08}
-      - {x: -0.08, y: -0.08}
-      - {x: 0.074999996, y: -0.08}
-      - {x: 0.08, y: -0.06}
-      - {x: 0.08, y: 0.07}
-      - {x: 0.055, y: 0.08}
 --- !u!1 &8730542536525824571
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,4 +271,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f102d8c70997cfe448d59991b1585351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerColor: {fileID: 0}

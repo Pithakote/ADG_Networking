@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c6d57778c685b4bafdff8569f74795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxPlayers: 2
+  _currentPlayers: 0
+  _playerColorAndShape: {fileID: 11400000, guid: 3019a7f70d510d1468e3ed9163e30f10,
+    type: 2}
 --- !u!114 &7427446371779498828
 MonoBehaviour:
   m_ObjectHideFlags: 0

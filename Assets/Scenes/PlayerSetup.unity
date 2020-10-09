@@ -309,6 +309,12 @@ PrefabInstance:
       propertyPath: _maxPlayers
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7427446371779498829, guid: c9385903dba6a8b4c88cfb817d83b99f,
+        type: 3}
+      propertyPath: _playerColorAndShape
+      value: 
+      objectReference: {fileID: 11400000, guid: 3019a7f70d510d1468e3ed9163e30f10,
+        type: 2}
     - target: {fileID: 7427446371779498830, guid: c9385903dba6a8b4c88cfb817d83b99f,
         type: 3}
       propertyPath: m_LocalPosition.x
