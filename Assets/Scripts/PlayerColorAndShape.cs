@@ -6,6 +6,6 @@ using UnityEngine;
 public class PlayerColorAndShape : ScriptableObject
 {
     public Color _playerColor;
-    public ShapeWithState[] _playerShape;
-   // public bool IsTaken = false;
+    public Sprite [] _playerShape;
+  
 }

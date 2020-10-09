@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         _playerConfig = pc;
         _playerRenderer.sprite = pc.PlayerShape;
-     //   _playerRenderer.color = pc.PlayerSpriteColor;
+        _playerRenderer.color = pc.PlayerSpriteColor;
 
         _playerConfig.Input.onActionTriggered += Input_onActionTriggered;
        // BoxCollider2D _boxCollider = new BoxCollider2D();

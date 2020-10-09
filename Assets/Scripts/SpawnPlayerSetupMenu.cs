@@ -26,7 +26,6 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
             PlayerConfigurationManager.Instance.ListOfMenuUI.Add(_gameMenu);
             _playerInput.uiInputModule = _gameMenu.GetComponentInChildren<InputSystemUIInputModule>();//assigns the input to control the UI elements
             _gameMenu.GetComponent<PlayerSetupMenu>().SetPlayerIndex(_playerInput.playerIndex);
-           //  Debug.Log("The number of players: " + PlayerConfigurationManager.Instance.MaxPlayers);
-        }
+           }
     }
 }

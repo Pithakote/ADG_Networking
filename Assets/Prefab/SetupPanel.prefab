@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8298370440857379345}
   - component: {fileID: 8298370440857379344}
   m_Layer: 5
-  m_Name: hexagon
+  m_Name: blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.22014059, g: 0.3396812, b: 0.9150943, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -120,18 +120,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: AssignButtonName
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8298370440857379344}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: SetShape
+        m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8298370440857379345}
@@ -594,7 +583,7 @@ GameObject:
   - component: {fileID: 8298370441495209096}
   - component: {fileID: 8298370441495209103}
   m_Layer: 5
-  m_Name: square
+  m_Name: orange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.990566, g: 0.5428415, b: 0.0046724924, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -701,18 +690,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: AssignButtonName
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8298370441495209103}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: SetShape
+        m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8298370441495209096}
@@ -735,7 +713,7 @@ GameObject:
   - component: {fileID: 8298370441623359283}
   - component: {fileID: 8298370441623359282}
   m_Layer: 5
-  m_Name: triangle
+  m_Name: purple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -782,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.727001, g: 0.14208792, b: 0.9716981, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -842,18 +820,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: AssignButtonName
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8298370441623359282}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: SetShape
+        m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8298370441623359283}
@@ -1275,7 +1242,7 @@ GameObject:
   - component: {fileID: 8298370442244531185}
   - component: {fileID: 8298370442244531184}
   m_Layer: 5
-  m_Name: circle
+  m_Name: red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1322,7 +1289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8867924, g: 0.14640439, b: 0.14640439, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1382,18 +1349,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: AssignButtonName
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8298370442244531184}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8298370440918943192}
-        m_MethodName: SetShape
+        m_MethodName: SetColor
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 8298370442244531185}
