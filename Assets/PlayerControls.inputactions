@@ -20,6 +20,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "CancelOrBack",
+                    "type": "Button",
+                    "id": "0753243a-767e-432c-b7d5-cf64bf18941d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -59,7 +67,7 @@
                 {
                     "name": "WASD",
                     "id": "1235856b-0e26-40eb-8933-c38ac4c0e528",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=1)",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -110,6 +118,28 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "61302bdf-1e19-4a56-bdaf-e73445f8b4ef",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "CancelOrBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e2fe5137-4b5c-40f8-a0c1-10f6f358d1a6",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CancelOrBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
