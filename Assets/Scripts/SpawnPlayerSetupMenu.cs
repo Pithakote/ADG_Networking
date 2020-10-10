@@ -19,7 +19,9 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
     {
         
         _playerInput = GetComponent<PlayerInput>();
-        _mainLayout = GameObject.Find("UI_MainLayout");
+        //_mainLayout = GameObject.Find("UI_MainLayout");
+        _mainLayout = GameObject.Find("Canvas_LocalPlay");
+     //   _mainLayout = GameObject.Find("Canvas");
         if (_mainLayout != null)
         {
             GameObject _gameMenu = Instantiate(PlayerSetupMenuPrefab, _mainLayout.transform);
