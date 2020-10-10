@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.SceneManagement;
 //using Unity.Mathematics;
 
 public class InitializeLevel : MonoBehaviour
@@ -28,8 +29,8 @@ public class InitializeLevel : MonoBehaviour
         //sets the arrya length to the current number of players 
         //since, PlayerConfigurationManager is don't destroy on load, it'll find it
         _playerSpawnsPositions = new Vector2[PlayerConfigurationManager.Instance.CurrentPlayers];
-        
 
+       
         PlayerDataConfiguration[] _playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
         for (int i = 0; i < _playerConfigs.Length; i++)
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuControl : MonoBehaviour
 {
@@ -10,7 +11,15 @@ public class MainMenuControl : MonoBehaviour
     public void OpenPlayerSelection()
     {
         PlayerSelectionScreen.SetActive(true);
-        PlayerConfigurationManager.SetActive(true);
+        Instantiate(PlayerConfigurationManager);
         MainMenuCanvas.SetActive(false);
+    }
+
+    public void GoBack()
+    {
+      //  PlayerConfigurationManager.Ins
+     
+        SceneManager.LoadScene("PlayerSetup");
+    //    CanvasManager.Instance.ChangeCanvasForScene();
     }
 }

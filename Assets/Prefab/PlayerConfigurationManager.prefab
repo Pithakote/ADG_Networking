@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentPlayers: 0
-  _playerColorAndShape: {fileID: 11400000, guid: 3019a7f70d510d1468e3ed9163e30f10,
-    type: 2}
+  _listOfMenuUI: []
+  _setPlayerSetting: {fileID: 0}
 --- !u!114 &7427446371779498828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,10 +83,10 @@ MonoBehaviour:
   m_JoinAction:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 
+      m_Id: ec4550fd-bebe-4c84-9ae1-16a3d50c29f5
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []

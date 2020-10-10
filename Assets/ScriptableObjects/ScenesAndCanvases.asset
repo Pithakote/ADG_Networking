@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a8f241545455648aa77efe58422181, type: 3}
+  m_Name: ScenesAndCanvases
+  m_EditorClassIdentifier: 
+  _scenesAndCanvasesArray:
+  - TheSceneName: {fileID: 102900000, guid: b0ecdcd7be6827a499a341c0b9598617, type: 3}
+    TheSceneAssetName: 
+    CanvasesForScenes: {fileID: 7025761475516016440, guid: 05837df30b3c31042836873fd3972aa6,
+      type: 3}
+  - TheSceneName: {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
+    TheSceneAssetName: 
+    CanvasesForScenes: {fileID: 8837786841103102155, guid: 0ba7e9924a05e3642bf63cc3fd45293d,
+      type: 3}
