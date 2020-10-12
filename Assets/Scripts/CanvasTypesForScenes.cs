@@ -13,7 +13,7 @@ public enum ButtonTypes
     BackButton
 }
 public enum CanvasTypesInsideScenes
-{ 
+{ None,
     MainMenu,
     LocalPlay,
     Option,

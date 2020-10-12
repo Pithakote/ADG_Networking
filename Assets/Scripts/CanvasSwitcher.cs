@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CanvasSwitcher : MonoBehaviour
 {
+    public ButtonTypes _buttonType;
     public CanvasTypesInsideScenes _desiredCanvasType;
     CanvasManager _canvasManager;
     Button menuButton;
@@ -18,7 +19,8 @@ public class CanvasSwitcher : MonoBehaviour
     }
     void OnButtonClick()
     {
-        _canvasManager.SwitchCanvas(_desiredCanvasType);
+       //    _canvasManager.SwitchScreen(_desiredCanvasType);
+       
     }
     
 }

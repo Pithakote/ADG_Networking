@@ -36,20 +36,11 @@ public class PlayerConfigurationManager : MonoBehaviour
         //   ListOfMenuUI = new List<GameObject>();
            _setPlayerSetting = GetComponent<PlayerPropertySetting>();
            _playerInputManager = GetComponent<PlayerInputManager>();
-            if (Instance != null || 
-            (CanvasManager.Instance._newCanvas.CanvasType != CanvasTypesInsideScenes.LocalPlay &&
-                SceneManager.GetActiveScene().name == "PlayerSetup"))
+            if (Instance != null)
             {
                      Debug.Log("Singleton already exists");
               
-                    GameObject.Destroy(this.gameObject);
-            //if (SceneManager.GetActiveScene().name == "PlayerSetup" &&
-            //    PlayerConfigurationManager.Instance.GetPlayerConfigs() != null)
-            //{
-              //  PlayerConfigurationManager.Instance.PlayerConfigs.Clear();
-                Transform[] managerChildren = gameObject.GetComponentsInChildren<Transform>();
-                foreach (var child in managerChildren)
-                    Destroy(child.gameObject);
+                 
             //}
 
         }
@@ -93,8 +84,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         public void HandlePlayerJoin(PlayerInput pi)
         {
             //checking to seee if we haven't already added this player
-            if (!_playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex) &&
-                CanvasManager.Instance._newCanvas.CanvasType == CanvasTypesInsideScenes.LocalPlay)
+            if (!_playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
             {
                 //since this gameobject is not destroyed when switching to other scenes,
                 //the same needs to happen to the players too

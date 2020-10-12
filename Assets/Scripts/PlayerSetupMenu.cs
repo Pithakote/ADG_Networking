@@ -28,12 +28,18 @@ public class PlayerSetupMenu : MonoBehaviour
     [SerializeField] PlayerColorAndShape _playerColorAndShape;
     string _buttonName;
     public PlayerColorAndShape PlayerColorAndShape { get { return _playerColorAndShape; } }
- 
+    List<ButtonType> backButtons; 
     private void Awake()
     {
         _buttonsInPanel = GetComponentsInChildren<Button>();
       
     }
+    private void Start()
+    {
+        backButtons = GetComponentsInChildren<ButtonType>().ToList();
+        SetLastCanvas();
+    }
+
 
     public void SetPlayerIndex(int pi)
     {
@@ -62,7 +68,18 @@ public class PlayerSetupMenu : MonoBehaviour
         _menuPanel.SetActive(false);
        
     }
-    
+
+    void SetLastCanvas()
+    {
+       GameObject canvas_mainMenu = GameObject.Find("Canvas_MainMenu");
+       GameObject mainMenuCanvas = GameObject.Find("MainMenuCanvas");
+
+        foreach (var button in backButtons)
+        {
+            if (button._buttonType == ButtonTypes.BackButton)
+                button.GetComponent<Button>().onClick.AddListener(delegate { CanvasManager.Instance.GoToPreviousScreen(); });
+        }  
+    }
     
     //public void SetShape(Image shape)
     //{

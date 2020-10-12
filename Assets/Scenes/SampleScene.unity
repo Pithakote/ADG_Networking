@@ -183,6 +183,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8196032410536431194, guid: 0ba7e9924a05e3642bf63cc3fd45293d,
+        type: 3}
+      propertyPath: MainMenuCanvas
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8837786841103102155, guid: 0ba7e9924a05e3642bf63cc3fd45293d,
         type: 3}
       propertyPath: m_Name
@@ -421,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f8036f80268914b9d7cf367414d973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buttonType: 0
   _desiredCanvasType: 0
 --- !u!1001 &4223912544655819333
 PrefabInstance:
