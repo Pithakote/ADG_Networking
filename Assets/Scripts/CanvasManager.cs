@@ -9,8 +9,10 @@ public class CanvasManager : MonoBehaviour
 {
     List<CanvasController> _canvasControllerList;
     public static CanvasManager Instance { get; private set; }
+    [SerializeField]
     CanvasController _previousActiveCanvas;
     public CanvasController _newCanvas { get; set; }
+    CanvasController _lastActiveCanvas;
     private void Awake()
     {
         if (Instance == null)
@@ -32,15 +34,21 @@ public class CanvasManager : MonoBehaviour
 
     public void SwitchCanvas(CanvasTypesInsideScenes _cType)
     {
-        if (_previousActiveCanvas != null)
-            _previousActiveCanvas.gameObject.SetActive(false);
-
+        if (_newCanvas != null &&
+            _newCanvas.CanvasType != _cType)
+        {
+            _previousActiveCanvas = _newCanvas;
+         //   _previousActiveCanvas.gameObject.SetActive(false);
+        }
+        if (_lastActiveCanvas)
+            _lastActiveCanvas.gameObject.SetActive(false);
          _newCanvas = _canvasControllerList.Find(
                                         newCanvas => newCanvas.CanvasType == _cType);
         if (_newCanvas != null)
         {
             _newCanvas.gameObject.SetActive(true);
-            _previousActiveCanvas = _newCanvas;
+            _lastActiveCanvas = _newCanvas;
+          //  _previousActiveCanvas = _newCanvas;
         }
     }
 }
