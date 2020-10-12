@@ -7,10 +7,16 @@ public enum CanvasTypesForScenes
 
    
 }
-
+public enum ButtonTypes
+{ 
+    NextButton,
+    BackButton
+}
 public enum CanvasTypesInsideScenes
 { 
     MainMenu,
     LocalPlay,
-    Option
+    Option,
+    PlayerSelectionMenu,
+    ReadyMenu
 }

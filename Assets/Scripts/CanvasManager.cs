@@ -12,6 +12,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField]
     CanvasController _previousActiveCanvas;
     public CanvasController _newCanvas { get; set; }
+    [SerializeField]
     CanvasController _lastActiveCanvas;
     private void Awake()
     {
@@ -51,6 +52,8 @@ public class CanvasManager : MonoBehaviour
           //  _previousActiveCanvas = _newCanvas;
         }
     }
+
+
 }
 #region OldCode
 /* [SerializeField] CanvasSceneandCanvasHolder _sceneAndCanvases;
