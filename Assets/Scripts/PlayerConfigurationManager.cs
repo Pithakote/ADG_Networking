@@ -11,16 +11,15 @@ using UnityEngine.UI;
 public class PlayerConfigurationManager : MonoBehaviour
 {
         List<PlayerDataConfiguration> _playerConfigs;
-    public List<PlayerDataConfiguration> PlayerConfigs { get { return _playerConfigs; } set { _playerConfigs = value; } }
+        public List<PlayerDataConfiguration> PlayerConfigs { get { return _playerConfigs; } set { _playerConfigs = value; } }
         [SerializeField]int _currentPlayers;
         PlayerInputManager _playerInputManager;
         public static PlayerConfigurationManager Instance { get; private set; }
     
-        [SerializeField]List<GameObject> _listOfMenuUI;
+        [SerializeField] List<GameObject> _listOfMenuUI;
 
         public List<GameObject> ListOfMenuUI { get { return _listOfMenuUI; } set { _listOfMenuUI = value; } }
-        [SerializeField]
-        PlayerPropertySetting _setPlayerSetting;
+        [SerializeField] PlayerPropertySetting _setPlayerSetting;
 
         public delegate void onSelectLocal(Button _btn);
         public event onSelectLocal ButtonSelectEvent;

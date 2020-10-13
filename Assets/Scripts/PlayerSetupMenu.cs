@@ -28,13 +28,17 @@ public class PlayerSetupMenu : MonoBehaviour
     [SerializeField] PlayerColorAndShape _playerColorAndShape;
     string _buttonName;
     public PlayerColorAndShape PlayerColorAndShape { get { return _playerColorAndShape; } }
- 
+
+    private void OnEnable()
+    {
+        PlayerConfigurationManager.Instance.ButtonSelectEvent += DisableButton;
+
+    }
     private void Awake()
     {
         _buttonsInPanel = GetComponentsInChildren<Button>();
 
-        PlayerConfigurationManager.Instance.ButtonSelectEvent += DisableButton;
-
+   
     }
     void DisableButton(Button _btn)
     {
