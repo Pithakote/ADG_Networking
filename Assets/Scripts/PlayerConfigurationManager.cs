@@ -22,8 +22,8 @@ public class PlayerConfigurationManager : MonoBehaviour
         [SerializeField]
         PlayerPropertySetting _setPlayerSetting;
 
-        public delegate void onSelectLocal();
-        public event onSelectLocal OnSelectingLocalMode;
+        public delegate void onSelectLocal(Button _btn);
+        public event onSelectLocal ButtonSelectEvent;
   
          public PlayerPropertySetting SetPlayerProperty { get {return _setPlayerSetting; } }
         public int CurrentPlayers
@@ -102,6 +102,11 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void SetShape(int index, Sprite PlayerShape)
     {
         _playerConfigs[index].PlayerShape = PlayerShape;
+    }
+    public void ButtonEventRaiser(Button _btn)
+    {
+        if (ButtonSelectEvent != null)
+            ButtonSelectEvent(_btn);
     }
     /*
     

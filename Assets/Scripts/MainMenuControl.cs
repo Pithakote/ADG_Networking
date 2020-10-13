@@ -10,9 +10,7 @@ public class MainMenuControl : MonoBehaviour
 
     public void OpenPlayerSelection()
     {
-        PlayerSelectionScreen.SetActive(true);
-        Instantiate(PlayerConfigurationManager);
-        MainMenuCanvas.SetActive(false);
+        SceneManager.LoadScene("PlayerSelection");
     }
 
     public void GoBack()

@@ -32,9 +32,22 @@ public class PlayerSetupMenu : MonoBehaviour
     private void Awake()
     {
         _buttonsInPanel = GetComponentsInChildren<Button>();
-      
+
+        PlayerConfigurationManager.Instance.ButtonSelectEvent += DisableButton;
+
+    }
+    void DisableButton(Button _btn)
+    {
+        foreach (var button in _buttonsInPanel.Where(btnarr => btnarr.name == _btn.name))
+            button.interactable = false;
+
     }
 
+    private void OnDisable()
+    {
+        PlayerConfigurationManager.Instance.ButtonSelectEvent -= DisableButton;
+
+    }
     public void SetPlayerIndex(int pi)
     {
         _playerIndex = pi;
@@ -57,13 +70,20 @@ public class PlayerSetupMenu : MonoBehaviour
         PlayerConfigurationManager.Instance.SetShape(_playerIndex,_playerColorAndShape._playerShape[_playerIndex]);
         PlayerConfigurationManager.Instance.SetPlayerColor(_playerIndex, color);
 
+
         _readyPanel.SetActive(true);
         _readyButton.Select();
         _menuPanel.SetActive(false);
-       
+
+        PlayerConfigurationManager.Instance.ButtonEventRaiser(_pressedButton);
+
     }
-    
-    
+    public void AssignButtonName(Button _assignedButton)
+    {
+        _buttonName = _assignedButton.name;
+        _pressedButton = _assignedButton;
+    }
+
     //public void SetShape(Image shape)
     //{
     //    if (!_inputEnabled)
@@ -73,7 +93,7 @@ public class PlayerSetupMenu : MonoBehaviour
 
     //  //  _assignedButton.interactable = false;
 
-             
+
 
 
 
