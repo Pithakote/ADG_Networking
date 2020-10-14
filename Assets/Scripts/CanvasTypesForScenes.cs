@@ -14,11 +14,15 @@ public enum ButtonTypes
 }
 public enum CanvasTypesInsideScenes
 { 
+    None,
     MainMenu,
     LocalPlay,
     Option,
     PlayerSelectionMenu,
     ReadyMenu,
     LoadingScreen,
-    MultiplayerOptionsScene
+    MultiplayerOptionsScene,
+    CreateRoomMenu,
+    RoomMenu,
+    ErrorMenu
 }

@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class CanvasManager : MonoBehaviour
 {
+    [SerializeField]
     List<CanvasController> _canvasControllerList;
     public static CanvasManager Instance { get; private set; }
     [SerializeField]
-    CanvasController _previousActiveCanvas;
-    public CanvasController _newCanvas { get; set; }
+    CanvasController _previousActiveCanvas, _currentCanvas,_startingCanvas;
+    public CanvasController _newCanvas { get {return _currentCanvas; } set { _currentCanvas = value; } }
     [SerializeField]
     CanvasController _lastActiveCanvas;
     private void Awake()
@@ -30,31 +31,42 @@ public class CanvasManager : MonoBehaviour
 
         _canvasControllerList = GetComponentsInChildren<CanvasController>().ToList();
         _canvasControllerList.ForEach(canvas => canvas.gameObject.SetActive(false));
-     //   SwitchCanvas(CanvasTypesInsideScenes.MainMenu);
-    }
+      
 
+        
+       
+    }
+    private void Start()
+    {
+        if (_startingCanvas == null)
+            return;
+        _currentCanvas = _startingCanvas;
+        SwitchCanvas(_currentCanvas.CanvasType);
+    }
     public void SwitchCanvas(CanvasTypesInsideScenes _cType)
     {
-        if (_newCanvas != null &&
-            _newCanvas.CanvasType != _cType)
+        if (_currentCanvas != null &&
+            _currentCanvas.CanvasType != _cType)
         {
-            _previousActiveCanvas = _newCanvas;
+            _previousActiveCanvas = _currentCanvas;
          //   _previousActiveCanvas.gameObject.SetActive(false);
         }
         if (_lastActiveCanvas)
             _lastActiveCanvas.gameObject.SetActive(false);
-         _newCanvas = _canvasControllerList.Find(
+        _currentCanvas = _canvasControllerList.Find(
                                         newCanvas => newCanvas.CanvasType == _cType);
-        if (_newCanvas != null)
+        if (_currentCanvas != null)
         {
-            _newCanvas.gameObject.SetActive(true);
-            _lastActiveCanvas = _newCanvas;
-          //  _previousActiveCanvas = _newCanvas;
+            _currentCanvas.gameObject.SetActive(true);
+            _lastActiveCanvas = _currentCanvas;
+            //  _previousActiveCanvas = _newCanvas;
+        }
+        
         }
     }
 
 
-}
+
 #region OldCode
 /* [SerializeField] CanvasSceneandCanvasHolder _sceneAndCanvases;
     //  public Dictionary<Scene, GameObject> _scenesAndCanvasesForScenes;
