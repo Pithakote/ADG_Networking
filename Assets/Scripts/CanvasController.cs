@@ -6,13 +6,13 @@ public class CanvasController : MonoBehaviour
 {
     
     public CanvasTypesInsideScenes CanvasType;
-    [SerializeField] PlayerConfigurationManager _configManager;
-    private void Awake()
-    {
-        if (CanvasType == CanvasTypesInsideScenes.LocalPlay)
-        {
+  //  [SerializeField] PlayerConfigurationManager _configManager;
+    //private void Awake()
+    //{
+    //    if (CanvasType == CanvasTypesInsideScenes.LocalPlay)
+    //    {
             
-            Instantiate(_configManager);
-        }
-    }
+    //        Instantiate(_configManager);
+    //    }
+    //}
 }

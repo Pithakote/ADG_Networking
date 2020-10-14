@@ -30,7 +30,7 @@ public class CanvasManager : MonoBehaviour
 
         _canvasControllerList = GetComponentsInChildren<CanvasController>().ToList();
         _canvasControllerList.ForEach(canvas => canvas.gameObject.SetActive(false));
-        SwitchCanvas(CanvasTypesInsideScenes.MainMenu);
+     //   SwitchCanvas(CanvasTypesInsideScenes.MainMenu);
     }
 
     public void SwitchCanvas(CanvasTypesInsideScenes _cType)

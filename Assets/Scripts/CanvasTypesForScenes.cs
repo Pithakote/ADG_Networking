@@ -18,5 +18,7 @@ public enum CanvasTypesInsideScenes
     LocalPlay,
     Option,
     PlayerSelectionMenu,
-    ReadyMenu
+    ReadyMenu,
+    LoadingScreen,
+    MultiplayerOptionsScene
 }
