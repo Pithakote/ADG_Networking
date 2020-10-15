@@ -24,5 +24,6 @@ public enum CanvasTypesInsideScenes
     MultiplayerOptionsScene,
     CreateRoomMenu,
     RoomMenu,
-    ErrorMenu
+    ErrorMenu,
+    FindRoomMenu
 }

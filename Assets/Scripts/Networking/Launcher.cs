@@ -3,11 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using Photon.Realtime;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_InputField _roomNameInputField;
     [SerializeField] TMP_Text _errorText, _roomName;
+    [SerializeField] Transform _roomListContent;
+    [SerializeField] GameObject _roomListItemPrefab;
+
+    public static Launcher Instance;
+
+    private void Awake()
+    {
+        if (Instance != null)
+            Destroy(this);
+        else
+            Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -61,8 +74,22 @@ public class Launcher : MonoBehaviourPunCallbacks
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
     }
 
+    public void JoinRoom(RoomInfo info)
+    {
+        PhotonNetwork.JoinRoom(info.Name);
+        CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
+    }
     public override void OnLeftRoom()
     {
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.MultiplayerOptionsScene);
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        foreach (Transform _trans in _roomListContent)
+            Destroy(_trans.gameObject);
+
+        foreach (RoomInfo _room in roomList)
+            Instantiate(_roomListItemPrefab, _roomListContent).GetComponent<RoomListItem>().SetUp(_room);
     }
 }

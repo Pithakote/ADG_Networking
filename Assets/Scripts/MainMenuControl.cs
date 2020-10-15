@@ -20,4 +20,9 @@ public class MainMenuControl : MonoBehaviour
         SceneManager.LoadScene("PlayerSetup");
     //    CanvasManager.Instance.ChangeCanvasForScene();
     }
+
+    public void OpenOnlineMenu()
+    {
+        SceneManager.LoadScene("NetworkedScene");
+    }
 }
