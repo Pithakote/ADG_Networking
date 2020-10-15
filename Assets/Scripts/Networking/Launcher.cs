@@ -66,6 +66,9 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         Player[] players = PhotonNetwork.PlayerList;
 
+        foreach (Transform children in _playerListContent)
+            Destroy(children.gameObject);
+
         foreach (Player _player in players)
             Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(_player);
 
@@ -112,7 +115,11 @@ public class Launcher : MonoBehaviourPunCallbacks
             Destroy(_trans.gameObject);
 
         foreach (RoomInfo _room in roomList)
+        {
+            if (_room.RemovedFromList)
+                continue;
             Instantiate(_roomListItemPrefab, _roomListContent).GetComponent<RoomListItem>().SetUp(_room);
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
