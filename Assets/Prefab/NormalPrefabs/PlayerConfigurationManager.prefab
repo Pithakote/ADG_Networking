@@ -62,7 +62,7 @@ MonoBehaviour:
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -89,7 +89,23 @@ MonoBehaviour:
       m_Id: ec4550fd-bebe-4c84-9ae1-16a3d50c29f5
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 5bc1db2e-77a6-4036-bfec-747eca88fb96
+        m_Path: <Keyboard>/enter
+        m_Interactions: Press(behavior=2)
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
+      - m_Name: 
+        m_Id: 86a97895-82db-45f1-9f74-9eff9b3720ed
+        m_Path: <Gamepad>/buttonSouth
+        m_Interactions: Press(behavior=2)
+        m_Processors: 
+        m_Groups: 
+        m_Action: Join
+        m_Flags: 0
     m_Reference: {fileID: 0}
   m_PlayerPrefab: {fileID: 6401339712178237256, guid: a471009e46cecf743aa488205c9adf36,
     type: 3}
