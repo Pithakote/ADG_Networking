@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class ScenesWithTheirCanvases
 {
-  public SceneAsset TheSceneName;
+ // public SceneAsset TheSceneName;
  
   public GameObject CanvasesForScenes;
 
