@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NetworkedScene.unity
     guid: edbdc84bab3425c498d498d6dd49f251
+  - enabled: 1
+    path: Assets/Scenes/NetworkedSampleScene.unity
+    guid: 9ff16a9ca65e6b148ba50ebb6f2b9db8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b37d16d85307b0e49800cb49d9138cc2,
       type: 2}

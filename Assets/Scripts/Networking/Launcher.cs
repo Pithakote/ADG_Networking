@@ -4,13 +4,15 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_InputField _roomNameInputField;
     [SerializeField] TMP_Text _errorText, _roomName;
-    [SerializeField] Transform _roomListContent;
-    [SerializeField] GameObject _roomListItemPrefab;
+    [SerializeField] Transform _roomListContent, _playerListContent;
+    [SerializeField] GameObject _roomListItemPrefab, _playerListItemPrefab;
+    [SerializeField] Button _startGameButton;
 
     public static Launcher Instance;
 
@@ -34,12 +36,14 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         Debug.Log("Connected to Master");
         PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public override void OnJoinedLobby()
     {
         Debug.Log("Joined Lobby");
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.MultiplayerOptionsScene);
+        PhotonNetwork.NickName = "Player" + Random.Range(0, 1000).ToString("0000");
     }
     // Update is called once per frame
     public void CreateRoom()
@@ -59,8 +63,19 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.RoomMenu);
         _roomName.text = PhotonNetwork.CurrentRoom.Name;
+
+        Player[] players = PhotonNetwork.PlayerList;
+
+        foreach (Player _player in players)
+            Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(_player);
+
+        _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
     }
 
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
+    }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         _errorText.text = "Room Creation failed: "+ message;
@@ -78,6 +93,13 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinRoom(info.Name);
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
+
+       
+    }
+
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel("NetworkedSampleScene");
     }
     public override void OnLeftRoom()
     {
@@ -91,5 +113,11 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         foreach (RoomInfo _room in roomList)
             Instantiate(_roomListItemPrefab, _roomListContent).GetComponent<RoomListItem>().SetUp(_room);
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+
     }
 }
