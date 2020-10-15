@@ -132,13 +132,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_PointAction
       value: 
-      objectReference: {fileID: -4930856826267601955, guid: 69ed067a33f7aa44287c1d0e74c79dc3,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3293955093362715724, guid: 0ba7e9924a05e3642bf63cc3fd45293d,
         type: 3}
       propertyPath: m_LeftClickAction
       value: 
-      objectReference: {fileID: -2551951669512981521, guid: 69ed067a33f7aa44287c1d0e74c79dc3,
+      objectReference: {fileID: 0}
+    - target: {fileID: 3293955093362715724, guid: 0ba7e9924a05e3642bf63cc3fd45293d,
+        type: 3}
+      propertyPath: m_MoveAction
+      value: 
+      objectReference: {fileID: 5061732259140791493, guid: 69ed067a33f7aa44287c1d0e74c79dc3,
         type: 3}
     - target: {fileID: 4824042658911469477, guid: 0ba7e9924a05e3642bf63cc3fd45293d,
         type: 3}

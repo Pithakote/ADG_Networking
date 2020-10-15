@@ -283,7 +283,7 @@ PrefabInstance:
     - target: {fileID: 4966150717254498673, guid: a749392e6adbb4f498f261cd697d1d91,
         type: 3}
       propertyPath: m_Name
-      value: Canvas_LocalPlay
+      value: MultiplayerCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 4966150717254498685, guid: a749392e6adbb4f498f261cd697d1d91,
         type: 3}

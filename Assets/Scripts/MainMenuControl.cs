@@ -23,6 +23,6 @@ public class MainMenuControl : MonoBehaviour
 
     public void OpenOnlineMenu()
     {
-        SceneManager.LoadScene("NetworkedScene");
+        SceneManager.LoadScene("NetworkedSelectionScene");
     }
 }

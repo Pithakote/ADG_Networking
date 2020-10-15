@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayerSelection.unity
     guid: 7a89faec487610446a44fab3271c45e1
   - enabled: 1
-    path: Assets/Scenes/NetworkedScene.unity
+    path: Assets/Scenes/NetworkedSelectionScene.unity
     guid: edbdc84bab3425c498d498d6dd49f251
   - enabled: 1
     path: Assets/Scenes/NetworkedSampleScene.unity
