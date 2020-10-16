@@ -59,7 +59,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
-                    ""groups"": ""Gamepad;Keyboard&GamepadUI"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""CancelOrBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -70,20 +70,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
-                    ""groups"": ""Keyboard;Keyboard&GamepadUI"",
+                    ""groups"": ""Keyboard"",
                     ""action"": ""CancelOrBack"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""7e14ef63-6df7-4641-8509-b684e752cf01"",
-                    ""path"": ""2DVector(mode=1)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&GamepadUI"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
@@ -92,40 +81,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/#(W)"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&GamepadUI;UI;Keyboard;Gamepad"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""bf07a57e-341d-4dff-9d53-1041101a6b15"",
-                    ""path"": ""<Keyboard>/#(S)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&GamepadUI"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""1d7edf7c-b4a8-4b73-b003-fbf0fb9fcad0"",
-                    ""path"": ""<Keyboard>/#(A)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&GamepadUI"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""6d000d03-fb1a-466d-b597-19d1bd27e577"",
-                    ""path"": ""<Keyboard>/#(D)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&GamepadUI"",
+                    ""groups"": ""UI;Keyboard;Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -136,10 +92,65 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&GamepadUI;UI;Keyboard;Gamepad"",
+                    ""groups"": ""UI;Keyboard;Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""bb579bf0-31c2-4ef4-b504-6c4e9da46db5"",
+                    ""path"": ""2DVector(mode=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""8b3b2f3e-cda8-43ac-b861-eb4bf5ef4d1c"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a1bd2681-28fe-43b9-b301-115f721c638f"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""3a080b7a-9478-4814-b7ef-aaf6b9d2487f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""3a5ae122-d224-43a9-94bb-72632beb3df7"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -147,7 +158,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&GamepadUI;UI;Keyboard;Gamepad"",
+                    ""groups"": ""UI;Keyboard;Gamepad"",
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -158,7 +169,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&GamepadUI;UI;Keyboard;Gamepad"",
+                    ""groups"": ""UI;Keyboard;Gamepad"",
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -206,22 +217,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Touchscreen>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Keyboard&GamepadUI"",
-            ""bindingGroup"": ""Keyboard&GamepadUI"",
-            ""devices"": [
-                {
-                    ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": false,
-                    ""isOR"": false
-                },
-                {
-                    ""devicePath"": ""<Keyboard>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -372,15 +367,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         {
             if (m_MobileSchemeIndex == -1) m_MobileSchemeIndex = asset.FindControlSchemeIndex("Mobile");
             return asset.controlSchemes[m_MobileSchemeIndex];
-        }
-    }
-    private int m_KeyboardGamepadUISchemeIndex = -1;
-    public InputControlScheme KeyboardGamepadUIScheme
-    {
-        get
-        {
-            if (m_KeyboardGamepadUISchemeIndex == -1) m_KeyboardGamepadUISchemeIndex = asset.FindControlSchemeIndex("Keyboard&GamepadUI");
-            return asset.controlSchemes[m_KeyboardGamepadUISchemeIndex];
         }
     }
     public interface IPlayerMovementActions
