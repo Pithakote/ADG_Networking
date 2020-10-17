@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -29,7 +30,9 @@ public class CanvasSwitcher : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
             PhotonNetwork.LeaveRoom();
-            _canvasManager.SwitchCanvas(_desiredCanvasType);
+          //  _canvasManager.SwitchCanvas(_desiredCanvasType);
+          //  PhotonNetwork.Disconnect();
+            //   ChangeScene();
         }
         else
         {
@@ -41,17 +44,23 @@ public class CanvasSwitcher : MonoBehaviourPunCallbacks
 
     }
 
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("Disconnedted because: " + cause);
+        PhotonNetwork.LoadLevel("NetworkedSelectionScene");
+    }
+
     public override void OnLeftRoom()
     {
         Debug.Log("Online Mode changing scene");
-
+      //  PhotonNetwork.Disconnect();
         ChangeScene();
     }
 
     void ChangeScene()
     {
-        SceneManager.LoadScene("NetworkedSelectionScene");
-       // PhotonNetwork.LoadLevel("NetworkedSelectionScene");
+        //SceneManager.LoadScene("NetworkedSelectionScene");
+        PhotonNetwork.LoadLevel("NetworkedSelectionScene");
     }
 
 }

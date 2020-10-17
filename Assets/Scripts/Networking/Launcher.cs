@@ -135,7 +135,11 @@ public class Launcher : MonoBehaviourPunCallbacks
             Instantiate(_roomListItemPrefab, _roomListContent).GetComponent<RoomListItem>().SetUp(_room);
         }
     }
-
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log("Disconnedted because: "+cause);
+        PhotonNetwork.LoadLevel("NetworkedSelectionScene");
+    }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
