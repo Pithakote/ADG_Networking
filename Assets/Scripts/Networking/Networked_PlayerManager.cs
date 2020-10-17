@@ -11,8 +11,8 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public static GameObject LocalPlayerInstance;
     public Vector2 MovementInput { get; set; }//property value set in PlayerController
     PlayerControls _controls;
-
-    bool _isActivated = false;
+    SpriteRenderer _spriteRendererComponent;
+    [SerializeField] bool _isActivated = false;
     private void Awake()
     {
         if (photonView.IsMine)
@@ -20,21 +20,23 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
            Networked_PlayerManager.LocalPlayerInstance = this.gameObject;
         }
         DontDestroyOnLoad(this.gameObject);
-         _controls = new PlayerControls(); 
+         _controls = new PlayerControls();
+
+        _spriteRendererComponent = gameObject.GetComponent<SpriteRenderer>();
     }
     // Update is called once per frame
     void Update()
     {
-        if (!photonView.IsMine && PhotonNetwork.IsConnected)
-            return;
+        if (photonView.IsMine || !PhotonNetwork.IsConnected)
+        {
 
-        this.gameObject.GetComponent<PlayerInput>().onActionTriggered += Input_onActionTriggered;
-        
+            this.gameObject.GetComponent<PlayerInput>().onActionTriggered += Input_onActionTriggered;
+        }
 
         if (_isActivated)
-            this.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            _spriteRendererComponent.color = Color.red;
         else
-            this.gameObject.GetComponent<SpriteRenderer>().color = Color.gray;
+            _spriteRendererComponent.color = Color.gray;
     }
 
     private void Input_onActionTriggered(CallbackContext obj)
@@ -71,8 +73,12 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)//if the client who owns this variable is doing this action, the value of the variable is sent across the network
         {
             stream.SendNext(_isActivated);
+         //   stream.SendNext(_spriteRendererComponent.color);
         }
-        else//else be ready to receive the action
+        else if (stream.IsReading)//else be ready to receive the action
+        {
             this._isActivated = (bool)stream.ReceiveNext();
+          //  _spriteRendererComponent = (SpriteRenderer)stream.ReceiveNext();
+        }
     }
 }
