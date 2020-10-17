@@ -50,6 +50,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""5f4a57ae-2f15-4586-8b1c-502747fc8111"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -162,6 +170,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d9b71ae-706a-459d-978b-4368128225c0"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""455b5e7d-f0ee-4b15-a433-3dd35f92bbef"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -218,6 +248,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMovement_Select = m_PlayerMovement.FindAction("Select", throwIfNotFound: true);
         m_PlayerMovement_CancelOrBack = m_PlayerMovement.FindAction("CancelOrBack", throwIfNotFound: true);
+        m_PlayerMovement_Fire = m_PlayerMovement.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -280,6 +311,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Movement;
     private readonly InputAction m_PlayerMovement_Select;
     private readonly InputAction m_PlayerMovement_CancelOrBack;
+    private readonly InputAction m_PlayerMovement_Fire;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -287,6 +319,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_PlayerMovement_Movement;
         public InputAction @Select => m_Wrapper.m_PlayerMovement_Select;
         public InputAction @CancelOrBack => m_Wrapper.m_PlayerMovement_CancelOrBack;
+        public InputAction @Fire => m_Wrapper.m_PlayerMovement_Fire;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -305,6 +338,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CancelOrBack.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCancelOrBack;
                 @CancelOrBack.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCancelOrBack;
                 @CancelOrBack.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCancelOrBack;
+                @Fire.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -318,6 +354,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @CancelOrBack.started += instance.OnCancelOrBack;
                 @CancelOrBack.performed += instance.OnCancelOrBack;
                 @CancelOrBack.canceled += instance.OnCancelOrBack;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -363,5 +402,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnCancelOrBack(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }
