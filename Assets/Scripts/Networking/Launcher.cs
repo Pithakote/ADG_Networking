@@ -51,11 +51,20 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (string.IsNullOrEmpty(_roomNameInputField.text))
             return;
 
-
         PhotonNetwork.CreateRoom(_roomNameInputField.text);
-       
+
+
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
         //PhotonNetwork.CreateRoom("");  //for random room names
+    }
+
+    public override void OnCreatedRoom()
+    {
+        if (!PhotonNetwork.CurrentRoom.IsOpen && !PhotonNetwork.CurrentRoom.IsVisible)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = true;
+            PhotonNetwork.CurrentRoom.IsVisible = true;
+        }
     }
     //works for both oncreate a room and onjoined room
     public override void OnJoinedRoom()
@@ -102,12 +111,15 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-       PhotonNetwork.LoadLevel("Testing");
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+        PhotonNetwork.LoadLevel("Testing");
      //  PhotonNetwork.LoadLevel("NetworkedSampleScene");
        // PhotonNetwork.LoadLevel("PlayerSelection");
     }
     public override void OnLeftRoom()
     {
+
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.MultiplayerOptionsScene);
     }
 

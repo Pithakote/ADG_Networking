@@ -25,5 +25,7 @@ public enum CanvasTypesInsideScenes
     CreateRoomMenu,
     RoomMenu,
     ErrorMenu,
-    FindRoomMenu
+    FindRoomMenu,
+    InGameMenu,
+    PauseMenu
 }
