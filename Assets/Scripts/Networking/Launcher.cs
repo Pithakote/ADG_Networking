@@ -102,7 +102,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-       PhotonNetwork.LoadLevel("NetworkedSampleScene");
+       PhotonNetwork.LoadLevel("Testing");
+     //  PhotonNetwork.LoadLevel("NetworkedSampleScene");
        // PhotonNetwork.LoadLevel("PlayerSelection");
     }
     public override void OnLeftRoom()

@@ -76,17 +76,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""0c8cf50e-8ca5-4e14-b7e1-bde465294a12"",
-                    ""path"": ""<Keyboard>/#(W)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""UI;Keyboard;Gamepad"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""e7e6e015-c539-4008-8c71-2775eea56a70"",
                     ""path"": ""<Gamepad>/leftStick"",

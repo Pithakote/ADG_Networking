@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
             else
             { 
+                
                 Instance = this;
                 DontDestroyOnLoad(Instance);
                 _playerConfigs = new List<PlayerDataConfiguration>();
