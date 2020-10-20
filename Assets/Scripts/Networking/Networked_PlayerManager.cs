@@ -13,6 +13,8 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     PlayerControls _controls;
     SpriteRenderer _spriteRendererComponent;
     [SerializeField] bool _isActivated = false;
+
+    public PlayerInput PlayerInput { get; set; }
     private void Awake()
     {
         if (photonView.IsMine)
@@ -30,7 +32,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine || !PhotonNetwork.IsConnected)
         {
 
-            this.gameObject.GetComponent<PlayerInput>().onActionTriggered += Input_onActionTriggered;
+            PlayerInput.onActionTriggered += Input_onActionTriggered;
         }
 
         if (_isActivated)
