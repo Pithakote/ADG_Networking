@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619359d6899d4524a84ef2a6536a48b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerSetupMenuPrefab: {fileID: 3559370750279609980, guid: b5834bc036a15db46a88a3d62d8503b3,
+  PlayerSetupMenuPrefab: {fileID: 8730542535621338594, guid: 5e1d1a4cdcc67f74cbae66dfebc49a65,
     type: 3}
   _isNetworked: 1
 --- !u!114 &5308401033684545769

@@ -11,7 +11,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public static GameObject LocalPlayerInstance;
     public Vector2 MovementInput { get; set; }//property value set in PlayerController
     PlayerControls _controls;
-    SpriteRenderer _spriteRendererComponent;
+    public SpriteRenderer SpriteRendererComponent { get; set; }
     [SerializeField] bool _isActivated = false;
 
     public PlayerInput PlayerInput { get; set; }
@@ -24,7 +24,9 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         DontDestroyOnLoad(this.gameObject);
          _controls = new PlayerControls();
 
-        _spriteRendererComponent = gameObject.GetComponent<SpriteRenderer>();
+        SpriteRendererComponent = gameObject.GetComponent<SpriteRenderer>();
+        if (PlayerInput == null)
+            PlayerInput = GetComponent<PlayerInput>();
     }
     // Update is called once per frame
     void Update()
@@ -36,9 +38,9 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         if (_isActivated)
-            _spriteRendererComponent.color = Color.red;
+            SpriteRendererComponent.color = Color.red;
         else
-            _spriteRendererComponent.color = Color.gray;
+            SpriteRendererComponent.color = Color.gray;
     }
 
     private void Input_onActionTriggered(CallbackContext obj)

@@ -4,10 +4,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
+
+[RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(PlayerShooting))]
 public class PlayerController : MonoBehaviour
 {
     PlayerMovement _playerMovement;
-
+    PlayerShooting _playerShooting;
     private PlayerDataConfiguration _playerConfig;
 
     
@@ -19,8 +22,9 @@ public class PlayerController : MonoBehaviour
     {
         _playerRenderer = GetComponent<SpriteRenderer>();
          _playerMovement = GetComponent<PlayerMovement>();
-     
+        _playerShooting = GetComponent<PlayerShooting>();
 
+        _playerShooting._spriteRendererComponent = _playerRenderer;
         _controls = new PlayerControls(); 
     }
 
@@ -33,6 +37,8 @@ public class PlayerController : MonoBehaviour
         _playerConfig.Input.onActionTriggered += Input_onActionTriggered;
        // BoxCollider2D _boxCollider = new BoxCollider2D();
         gameObject.AddComponent(typeof(PolygonCollider2D));
+
+       
     }
 
     private void Input_onActionTriggered(CallbackContext obj)
@@ -40,6 +46,10 @@ public class PlayerController : MonoBehaviour
         if (obj.action.name == _controls.PlayerMovement.Movement.name)
         {
             OnMove(obj);
+        }
+        if (obj.action.name == _controls.PlayerMovement.Fire.name)
+        {
+            OnChangeColor(obj);
         }
     }
 
@@ -51,5 +61,9 @@ public class PlayerController : MonoBehaviour
         _playerMovement.MovementInput = ctx.ReadValue<Vector2>();
 
         //expand on this and make the gameobject rotate towards to input axis
+    }
+    public void OnChangeColor(InputAction.CallbackContext ctx)
+    {
+        _playerShooting._isActivated = ctx.ReadValueAsButton();
     }
 }

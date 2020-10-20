@@ -16,6 +16,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public static Launcher Instance;
 
+    public List<PlayerDataConfiguration> PlayerConfigs { get; set ;  }
+    
+
+
     private void Awake()
     {
         if (Instance != null)
@@ -44,6 +48,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("Joined Lobby");
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.MultiplayerOptionsScene);
         PhotonNetwork.NickName = "Player" + Random.Range(0, 1000).ToString("0000");
+
     }
     // Update is called once per frame
     public void CreateRoom()

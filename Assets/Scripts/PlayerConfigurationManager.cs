@@ -109,26 +109,28 @@ public class PlayerConfigurationManager : MonoBehaviour
         if (ButtonSelectEvent != null)
             ButtonSelectEvent(_btn);
     }
-    /*
-    
-    public delegate void OnButtonSelect(Button _btn);
-    public  event OnButtonSelect ButtonSelectEvent;
-    
-    public void ButtonEventRaiser(Button _btn)
-   { 
-       if (ButtonSelectEvent != null)
-           ButtonSelectEvent(_btn);
-   }
-   
-    
-        public void SetPlayerShape(int index, Sprite spriteShape)
-        {
-            if (ButtonSelectEvent == null)
-                return;
 
-            _playerConfigs[index].PlayerShape = spriteShape;
-        }
-    */
+   
+    /*
+
+public delegate void OnButtonSelect(Button _btn);
+public  event OnButtonSelect ButtonSelectEvent;
+
+public void ButtonEventRaiser(Button _btn)
+{ 
+  if (ButtonSelectEvent != null)
+      ButtonSelectEvent(_btn);
+}
+
+
+   public void SetPlayerShape(int index, Sprite spriteShape)
+   {
+       if (ButtonSelectEvent == null)
+           return;
+
+       _playerConfigs[index].PlayerShape = spriteShape;
+   }
+*/
 }
 /*
 public class PlayerDataConfiguration

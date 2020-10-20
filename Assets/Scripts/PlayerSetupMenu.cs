@@ -28,7 +28,7 @@ public class PlayerSetupMenu : MonoBehaviour
     [SerializeField] PlayerColorAndShape _playerColorAndShape;
     string _buttonName;
     public PlayerColorAndShape PlayerColorAndShape { get { return _playerColorAndShape; } }
-
+    GameObject _parent;
     private void OnEnable()
     {
         PlayerConfigurationManager.Instance.ButtonSelectEvent += DisableButton;
@@ -36,10 +36,43 @@ public class PlayerSetupMenu : MonoBehaviour
     }
     private void Awake()
     {
+        _parent = gameObject.transform.parent.gameObject;
         _buttonsInPanel = GetComponentsInChildren<Button>();
 
    
     }
+
+    private void Start()
+    {
+        CheckIfAnyButtonsHaveBeenSelected();
+    }
+
+    private void CheckIfAnyButtonsHaveBeenSelected()
+    {
+        if (_parent.transform.childCount != 0)
+        {
+            PlayerSetupMenu[] otherPanels = _parent.GetComponentsInChildren<PlayerSetupMenu>().ToArray();
+
+            foreach (PlayerSetupMenu child in otherPanels)
+            {
+                foreach (Button but in child._buttonsInPanel)
+                {
+                    if (but.interactable == false)
+                    {
+                        foreach (Button button in _buttonsInPanel)
+                        {
+                            if (button.name == but.name)
+                            {
+                                button.interactable = false;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
     void DisableButton(Button _btn)
     {
         foreach (var button in _buttonsInPanel.Where(btnarr => btnarr.name == _btn.name))
