@@ -13,7 +13,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] Transform _roomListContent, _playerListContent;
     [SerializeField] GameObject _roomListItemPrefab, _playerListItemPrefab;
     [SerializeField] Button _startGameButton;
-
+    [SerializeField] int _numberOfPlayersAllowedInRoom = 4;
     public static Launcher Instance;
 
     public List<PlayerDataConfiguration> PlayerConfigs { get; set ;  }
@@ -30,6 +30,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        
         Debug.Log("Connecting to Master");
        // CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
 
@@ -57,7 +58,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             return;
 
         PhotonNetwork.CreateRoom(_roomNameInputField.text);
-
+       
 
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
         //PhotonNetwork.CreateRoom("");  //for random room names
@@ -65,10 +66,13 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnCreatedRoom()
     {
+        PhotonNetwork.CurrentRoom.MaxPlayers = System.Convert.ToByte(_numberOfPlayersAllowedInRoom);
         if (!PhotonNetwork.CurrentRoom.IsOpen && !PhotonNetwork.CurrentRoom.IsVisible)
         {
-            PhotonNetwork.CurrentRoom.IsOpen = true;
-            PhotonNetwork.CurrentRoom.IsVisible = true;
+            SetRoomVisibilityAndJoining(true);
+           
+            
+            
         }
     }
     //works for both oncreate a room and onjoined room
@@ -116,8 +120,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        PhotonNetwork.CurrentRoom.IsOpen = false;
-        PhotonNetwork.CurrentRoom.IsVisible = false;
+        SetRoomVisibilityAndJoining(false);
         PhotonNetwork.LoadLevel("Testing");
      //  PhotonNetwork.LoadLevel("NetworkedSampleScene");
        // PhotonNetwork.LoadLevel("PlayerSelection");
@@ -139,6 +142,8 @@ public class Launcher : MonoBehaviourPunCallbacks
                 continue;
             Instantiate(_roomListItemPrefab, _roomListContent).GetComponent<RoomListItem>().SetUp(_room);
         }
+
+      
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
@@ -148,6 +153,13 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+            SetRoomVisibilityAndJoining(false);
+    }
 
+    void SetRoomVisibilityAndJoining(bool state)
+    {
+        PhotonNetwork.CurrentRoom.IsOpen = state;
+        PhotonNetwork.CurrentRoom.IsVisible = state;
     }
 }
