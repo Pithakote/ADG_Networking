@@ -63,4 +63,9 @@ public class CanvasSwitcher : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("NetworkedSelectionScene");
     }
 
+    public void BackToMainMenu()
+    {
+        PhotonNetwork.LoadLevel("PlayerSetup");
+    }
+
 }
