@@ -9,10 +9,16 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_Text _text;
     Player player;
+    int _playerNumber;
     public void SetUp(Player _player)
     {
         player = _player;
         _text.text = _player.NickName;
+        _playerNumber = _player.ActorNumber;
+
+
+        if(PhotonNetwork.LocalPlayer.IsLocal)
+        Debug.Log("The player index is: "+_playerNumber);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)

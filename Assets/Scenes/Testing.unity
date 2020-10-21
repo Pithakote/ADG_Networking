@@ -382,8 +382,8 @@ MonoBehaviour:
   _playerPrefab: {fileID: 3559370750279609980, guid: b5834bc036a15db46a88a3d62d8503b3,
     type: 3}
   _playerSpawnsPositions: []
-  _minPosValue: 0
-  _maxPosValue: 0
+  _minPosValue: -5
+  _maxPosValue: 5
   _playerShapesAndColor: {fileID: 11400000, guid: 3019a7f70d510d1468e3ed9163e30f10,
     type: 2}
 --- !u!4 &199031580

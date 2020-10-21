@@ -10,11 +10,11 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject _playerPrefab;
     [SerializeField]Vector2[] _playerSpawnsPositions;
-    [SerializeField]float _minPosValue, _maxPosValue;
+    [SerializeField]float _minPosValue = -5, _maxPosValue = 5;
     [SerializeField] PlayerColorAndShape _playerShapesAndColor;
     private void Start()
     {
-#region Newcode
+        #region Newcode
         //replace with the number of players in the room
         /*
         _playerSpawnsPositions = new Vector2[PlayerConfigurationManager.Instance.CurrentPlayers];
@@ -38,45 +38,72 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
             player.GetComponent<PlayerController>().InitializePlayer(_playerConfigs[i]);
         }
         */
-#endregion
-         // PhotonNetwork.Instantiate(Path.Combine("NetworkedPrefabs", "PlayerConfiguration&MenuSetup_Networked"),
-              //                      Vector3.zero,
-                //                  Quaternion.identity);
+        #endregion
+        // PhotonNetwork.Instantiate(Path.Combine("NetworkedPrefabs", "PlayerConfiguration&MenuSetup_Networked"),
+        //                      Vector3.zero,
+        //                  Quaternion.identity);
+
+        Debug.Log("The number of players are: "+ PhotonNetwork.PlayerList.Length);
+        AssignShapes();
 
 
-        
-       if (Networked_PlayerManager.LocalPlayerInstance == null)
-       {
-        var _player = PhotonNetwork.Instantiate(this._playerPrefab.name,
-                                                Vector3.zero,
-                                                Quaternion.identity
-                                                );
-            _player.transform.parent = gameObject.transform;
-       }
-       else
-       {
-           Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
-       }
 
-        for (int i = 0; i < gameObject.transform.childCount; i++)
-        {
-            gameObject.transform.GetChild(i).GetComponent<Networked_PlayerManager>().SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[i];
-
-        }
-      
     }
 
     private void SetSpawnPosition(int i)
     {
-        _playerSpawnsPositions[i] = Vector2.zero;
+       // _playerSpawnsPositions[i] = Vector2.zero;
         Vector2 _newSpawnPos = new Vector2(Random.Range(_minPosValue, _maxPosValue),
                                          Random.Range(_minPosValue, _maxPosValue));
 
 
-        if (_playerSpawnsPositions == null &&
-            _playerSpawnsPositions.Any(sp => sp == _newSpawnPos))
-            return;
+        //  if (_playerSpawnsPositions == null &&
+        if (_playerSpawnsPositions.Any(sp => sp == _newSpawnPos))
+            return ;
 
         _playerSpawnsPositions[i] = _newSpawnPos;
+        
+    }
+
+    void AssignShapes()
+    {
+        Player[] _players = PhotonNetwork.PlayerList;
+
+        for(int i = 0;i<_players.Length;i++)
+        {
+            //  SetSpawnPosition(i);
+            Vector2 _newSpawnPos = new Vector2(Random.Range(_minPosValue, _maxPosValue),
+                                           Random.Range(_minPosValue, _maxPosValue));
+            photonView.RPC("RPCAssignPlayerData",
+                            _players[i],
+                            _newSpawnPos,
+                            Quaternion.identity,
+                            i);
+        }
+    }
+
+    [PunRPC]
+    void RPCAssignPlayerData(Vector2 _spawnPosition, Quaternion _spawnRotation, int _playerShapeNumber)
+    {
+        if (Networked_PlayerManager.LocalPlayerInstance == null)
+        {
+            var _player = PhotonNetwork.Instantiate(this._playerPrefab.name,
+                                                    _spawnPosition,
+                                                    _spawnRotation
+                                                    );
+            _player.transform.parent = gameObject.transform;//sets this gameobject as the player's parent
+            if (_player.GetComponent<Networked_PlayerManager>())
+                _player.GetComponent<Networked_PlayerManager>().InitialisePlayer(_playerShapesAndColor._playerShape[_playerShapeNumber]);
+        }
+        else
+        {
+            Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+        }
+
+        //for (int i = 0; i < gameObject.transform.childCount; i++)
+        //{
+        //    gameObject.transform.GetChild(i).GetComponent<Networked_PlayerManager>().SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[i];
+
+        //}
     }
 }

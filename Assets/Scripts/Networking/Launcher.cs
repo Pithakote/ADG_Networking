@@ -90,6 +90,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         foreach (Player _player in players)
             Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(_player);
 
+
+
         _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
     }
 
@@ -143,8 +145,11 @@ public class Launcher : MonoBehaviourPunCallbacks
             Instantiate(_roomListItemPrefab, _roomListContent).GetComponent<RoomListItem>().SetUp(_room);
         }
 
+       
       
     }
+
+   
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.Log("Disconnedted because: "+cause);

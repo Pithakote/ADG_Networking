@@ -28,6 +28,11 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (PlayerInput == null)
             PlayerInput = GetComponent<PlayerInput>();
     }
+
+    public void InitialisePlayer(Sprite _networkPlayerShape)
+    {
+        SpriteRendererComponent.sprite = _networkPlayerShape;
+    }
     // Update is called once per frame
     void Update()
     {
