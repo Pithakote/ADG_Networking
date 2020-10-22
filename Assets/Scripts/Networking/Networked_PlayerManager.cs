@@ -116,9 +116,9 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
         int _playerNumber ;
 
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("PlayerIndexNumber"))
-            _playerNumber = (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerIndexNumber"];
-        else
+       // if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("PlayerIndexNumber"))
+       //     _playerNumber = (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerIndexNumber"];
+      //  else
             _playerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
 
 
