@@ -28,10 +28,12 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
             if (fireTimer >= _refireRate)
             {
                 fireTimer = 0;
-              if(PhotonNetwork.IsConnected)
-                photonView.RPC("Fire", null);
-              else
-                Fire();
+
+                if (photonView != null && !PhotonNetwork.IsConnected)
+                    photonView.RPC("Fire", null);
+                else
+                    Fire();
+              
             }
         }
     }
