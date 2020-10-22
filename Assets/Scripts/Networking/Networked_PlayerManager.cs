@@ -46,7 +46,10 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     void Start()
     {
-        InitialisePlayer();
+        if (photonView.IsMine)
+        {
+            InitialisePlayer();
+        }
        // _playerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
       //  _playerNumber = _player.ActorNumber;
       //  if (photonView.IsMine)
@@ -97,14 +100,26 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         _playerInfo.text = _playerNumber.ToString() + PhotonNetwork.LocalPlayer.NickName;
         
     }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        if (otherPlayer == PhotonNetwork.LocalPlayer && photonView.IsMine)
+        {
+            PhotonNetwork.RemoveRPCs(PhotonNetwork.LocalPlayer);
+            _myCustomProperty.Remove("PlayerIndexNumber");
+        }
+    }
+    
     public void InitialisePlayer()
     {
         //_playerNumbefr = thisPlayer.ActorNumber;
 
-        int _playerNumber = 1;
+        int _playerNumber ;
 
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("PlayerIndexNumber"))
             _playerNumber = (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerIndexNumber"];
+        else
+            _playerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
 
 
         int shapeID = _playerNumber - 1;
