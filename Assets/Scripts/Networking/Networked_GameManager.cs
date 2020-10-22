@@ -92,9 +92,9 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
 
         //  _myCustomProperty.Add("PlayerIndexNumber", photonView.Owner.ActorNumber);
 
-        _myCustomProperty.Add("PlayerIndexNumber", PhotonNetwork.LocalPlayer.ActorNumber);
-        Debug.Log("GameManager actor number is " + PhotonNetwork.LocalPlayer.ActorNumber);
-        PhotonNetwork.LocalPlayer.SetCustomProperties(_myCustomProperty);
+       // _myCustomProperty.Add("PlayerIndexNumber", PhotonNetwork.LocalPlayer.ActorNumber);
+     //   Debug.Log("GameManager actor number is " + PhotonNetwork.LocalPlayer.ActorNumber);
+      //  PhotonNetwork.LocalPlayer.SetCustomProperties(_myCustomProperty);
 
 
         for (int i = 0;i<_players.Length;i++)

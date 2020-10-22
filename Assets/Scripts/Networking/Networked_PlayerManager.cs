@@ -24,6 +24,8 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private ExitGames.Client.Photon.Hashtable _myCustomProperty = new ExitGames.Client.Photon.Hashtable();
     Player _player;
+
+    PlayerShooting _playerShootingComponent;
     private void Awake()
     {
         if (photonView.IsMine)
@@ -37,8 +39,8 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (PlayerInput == null)
             PlayerInput = GetComponent<PlayerInput>();
         transform.parent = GameObject.Find("Newtowked_GameManager").transform;
+        _playerShootingComponent = GetComponent<PlayerShooting>();
 
-       
         //  InitialisePlayer(PhotonNetwork.LocalPlayer);
         //  SetSkin();
 
@@ -166,13 +168,19 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (obj.action.name == _controls.PlayerMovement.Fire.name)
         {
-            OnChangeColor(obj);
+            //  OnChangeColor(obj);
+            OnShoot(obj);
         }
     }
     public void OnMove(InputAction.CallbackContext ctx)
     {
         MovementInput = ctx.ReadValue<Vector2>();
 
+    }
+
+    public void OnShoot(InputAction.CallbackContext ctx)
+    {
+        _playerShootingComponent._isActivated = ctx.ReadValueAsButton();
     }
 
     public void OnChangeColor(InputAction.CallbackContext ctx)
