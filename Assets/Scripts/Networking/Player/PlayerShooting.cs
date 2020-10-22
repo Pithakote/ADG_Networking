@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviourPunCallbacks
 {
-    [SerializeField] Transform bulletFirer;
-    [SerializeField] GameObject _bullets;
-    [SerializeField] float _refireRate = 0.2f;
-    float fireTimer = 0;
+    [SerializeField] protected Transform bulletFirer;
+    [SerializeField] protected GameObject _bullets;
+    [SerializeField] protected float _refireRate = 0.2f;
+    protected float fireTimer = 0;
     public bool _isActivated { get; set; }
     public SpriteRenderer _spriteRendererComponent{ get; set; }
 
@@ -19,7 +19,7 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
         _isActivated = false;
     }
 
-    private void Update()
+    protected  virtual void Update()
     {
         if (_isActivated)
         {
@@ -36,8 +36,8 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
         }
     }
 
-    
-    void Fire()
+    [PunRPC]
+    protected virtual void Fire()
     {
         var shot = Instantiate(_bullets,
                                             bulletFirer.position,

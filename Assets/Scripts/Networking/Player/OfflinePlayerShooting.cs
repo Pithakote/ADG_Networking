@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-public class NetworkedPlayerShooting : PlayerShooting
-{
 
-   
+public class OfflinePlayerShooting : PlayerShooting
+{
     protected override void Update()
     {
         if (_isActivated)
@@ -16,13 +14,12 @@ public class NetworkedPlayerShooting : PlayerShooting
             {
                 fireTimer = 0;
 
-               photonView.RPC("Fire",RpcTarget.All,  null);
 
-                Debug.Log("Online shooting");
+                Fire();
+
+                Debug.Log("Offline shooting");
 
             }
         }
     }
-
-    
 }
