@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
+public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable, ITakeDamage
 {
     [SerializeField] float _speed = 0.03f;
     public static GameObject LocalPlayerInstance;
@@ -26,6 +26,9 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     Player _player;
 
     PlayerShooting _playerShootingComponent;
+
+    public int PlayerHealth = 10;
+    public int PlayerTakeDamageAmount = 2;
     private void Awake()
     {
         if (photonView.IsMine)
@@ -200,12 +203,14 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)//if the client who owns this variable is doing this action, the value of the variable is sent across the network
         {
             stream.SendNext(_isActivated);
+            stream.SendNext(PlayerHealth);
         //    stream.SendNext(_playerNumber);
          //   stream.SendNext(_spriteRendererComponent.color);
         }
         else if (stream.IsReading)//else be ready to receive the action
         {
             this._isActivated = (bool)stream.ReceiveNext();
+            this.PlayerHealth = (int)stream.ReceiveNext();
         //    this._playerNumber = (int)stream.ReceiveNext();
           //  _spriteRendererComponent = (SpriteRenderer)stream.ReceiveNext();
         }
@@ -217,8 +222,14 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
        // SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[_playerNumber-1];
         SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[shapeID];
-        _playerInfo.text = name;
+        _playerInfo.text = name + PlayerHealth.ToString();
         //SpriteRendererComponent.sprite = (Sprite)thisPlayer.CustomProperties["PlayerShape"];
 
+    }
+
+    [PunRPC]
+    public void ReduceHealth()
+    {
+        PlayerHealth -= PlayerTakeDamageAmount;
     }
 }

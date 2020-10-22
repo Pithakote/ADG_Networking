@@ -7,7 +7,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(PlayerShooting))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ITakeDamage
 {
     PlayerMovement _playerMovement;
     PlayerShooting _playerShooting;
@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer _playerRenderer;
 
     PlayerControls _controls;
+    public int PlayerHealth = 10;
+    public int PlayerTakeDamageAmount = 2;
+    PlayerShooting _playerShootingComponent;
 
     private void Awake()
     {
@@ -25,7 +28,10 @@ public class PlayerController : MonoBehaviour
         _playerShooting = GetComponent<PlayerShooting>();
 
         _playerShooting._spriteRendererComponent = _playerRenderer;
-        _controls = new PlayerControls(); 
+        _controls = new PlayerControls();
+
+        _playerShootingComponent = GetComponent<PlayerShooting>();
+
     }
 
     public void InitializePlayer(PlayerDataConfiguration pc)
@@ -36,7 +42,8 @@ public class PlayerController : MonoBehaviour
 
         _playerConfig.Input.onActionTriggered += Input_onActionTriggered;
        // BoxCollider2D _boxCollider = new BoxCollider2D();
-        gameObject.AddComponent(typeof(PolygonCollider2D));
+       
+        //gameObject.AddComponent(typeof(PolygonCollider2D));
 
        
     }
@@ -49,7 +56,8 @@ public class PlayerController : MonoBehaviour
         }
         if (obj.action.name == _controls.PlayerMovement.Fire.name)
         {
-            OnChangeColor(obj);
+            OnShoot(obj);
+          //  OnChangeColor(obj);
         }
     }
 
@@ -62,8 +70,18 @@ public class PlayerController : MonoBehaviour
 
         //expand on this and make the gameobject rotate towards to input axis
     }
+
+    public void OnShoot(InputAction.CallbackContext ctx)
+    {
+        _playerShootingComponent._isActivated = ctx.ReadValueAsButton();
+    }
     public void OnChangeColor(InputAction.CallbackContext ctx)
     {
         _playerShooting._isActivated = ctx.ReadValueAsButton();
+    }
+
+    public void ReduceHealth()
+    {
+        PlayerHealth -= PlayerTakeDamageAmount;
     }
 }

@@ -43,6 +43,8 @@ MonoBehaviour:
   - RPCAssignActorNumber
   - SetSkin
   - SetupCharacter
+  - OnTriggerEnter2D
+  - ReduceHealth
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
