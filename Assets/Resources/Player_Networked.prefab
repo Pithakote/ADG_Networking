@@ -146,8 +146,8 @@ GameObject:
   - component: {fileID: 2144869656150636367}
   - component: {fileID: 5373666163265500413}
   - component: {fileID: -6261924048756453356}
+  - component: {fileID: 2206166201347103073}
   - component: {fileID: -7366127845652830871}
-  - component: {fileID: 5417706333700703252}
   - component: {fileID: 1496448873531337342}
   - component: {fileID: 8296290341844064148}
   - component: {fileID: -5561124699754293289}
@@ -285,6 +285,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2206166201347103073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559370750279609980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27ac748b44482044b1b028b92f28b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletFirer: {fileID: 3468666282547530150}
+  _bullets: {fileID: 4157696462344666892, guid: 870574cc5c7df0949b2610204d3cb087,
+    type: 3}
+  _refireRate: 0.2
 --- !u!114 &-7366127845652830871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,22 +395,6 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5417706333700703252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3559370750279609980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a65052e12e1f8b4ca6f5832dfa9f2c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletFirer: {fileID: 3468666282547530150}
-  _bullets: {fileID: 4157696462344666892, guid: 870574cc5c7df0949b2610204d3cb087,
-    type: 3}
-  _refireRate: 0.3
 --- !u!222 &1496448873531337342
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,18 +1,18 @@
-﻿using Photon.Pun;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerShooting : MonoBehaviourPunCallbacks
+using Photon.Pun;
+public class NetworkedPlayerShooting : MonoBehaviourPunCallbacks
 {
+
     [SerializeField] Transform bulletFirer;
     [SerializeField] GameObject _bullets;
     [SerializeField] float _refireRate = 0.2f;
     float fireTimer = 0;
     public bool _isActivated { get; set; }
-    public SpriteRenderer _spriteRendererComponent{ get; set; }
+    public SpriteRenderer _spriteRendererComponent { get; set; }
 
-    
+
     private void Awake()
     {
 
@@ -29,20 +29,19 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
             {
                 fireTimer = 0;
 
-               
-                    Fire();
-              
+               photonView.RPC("Fire",RpcTarget.All,  null);
+                
+
             }
         }
     }
 
-    
+    [PunRPC]
     void Fire()
     {
-        var shot = Instantiate(_bullets,
-                                            bulletFirer.position,
-                                            bulletFirer.rotation
-                                            );
+        var shot =  Instantiate(_bullets,
+                                bulletFirer.position,
+                                bulletFirer.rotation
+                                );
     }
-    
 }

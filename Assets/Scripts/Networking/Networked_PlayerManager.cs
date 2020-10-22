@@ -25,7 +25,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     private ExitGames.Client.Photon.Hashtable _myCustomProperty = new ExitGames.Client.Photon.Hashtable();
     Player _player;
 
-    PlayerShooting _playerShootingComponent;
+    NetworkedPlayerShooting _playerShootingComponent;
 
     public int PlayerHealth = 10;
     public int PlayerTakeDamageAmount = 2;
@@ -42,7 +42,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (PlayerInput == null)
             PlayerInput = GetComponent<PlayerInput>();
         transform.parent = GameObject.Find("Newtowked_GameManager").transform;
-        _playerShootingComponent = GetComponent<PlayerShooting>();
+        _playerShootingComponent = GetComponent<NetworkedPlayerShooting>();
 
         //  InitialisePlayer(PhotonNetwork.LocalPlayer);
         //  SetSkin();
