@@ -1,6 +1,8 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -13,8 +15,15 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     PlayerControls _controls;
     public SpriteRenderer SpriteRendererComponent { get; set; }
     [SerializeField] bool _isActivated = false;
-
+    [SerializeField] Sprite [] test;
     public PlayerInput PlayerInput { get; set; }
+
+    [SerializeField] PlayerColorAndShape _playerShapesAndColor;
+   // [SerializeField] int _playerNumber = 3;
+    [SerializeField] TMP_Text _playerInfo;
+
+    private ExitGames.Client.Photon.Hashtable _myCustomProperty = new ExitGames.Client.Photon.Hashtable();
+    Player _player;
     private void Awake()
     {
         if (photonView.IsMine)
@@ -27,11 +36,90 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         SpriteRendererComponent = gameObject.GetComponent<SpriteRenderer>();
         if (PlayerInput == null)
             PlayerInput = GetComponent<PlayerInput>();
+        transform.parent = GameObject.Find("Newtowked_GameManager").transform;
+
+       
+        //  InitialisePlayer(PhotonNetwork.LocalPlayer);
+        //  SetSkin();
+
     }
 
-    public void InitialisePlayer(Sprite _networkPlayerShape)
+    void Start()
     {
-        SpriteRendererComponent.sprite = _networkPlayerShape;
+        InitialisePlayer();
+       // _playerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+      //  _playerNumber = _player.ActorNumber;
+      //  if (photonView.IsMine)
+     //  {
+
+       //     base.photonView.RPC("ChangeSprite", RpcTarget.AllBuffered, null);
+      //  }
+    }
+    public override void OnLeftRoom()
+    {
+     //   if (photonView.IsMine)
+          //  PhotonNetwork.RemoveRPCs(photonView);
+    }
+    [PunRPC]
+    void SetSkin()
+    {
+
+        int _playerNumber = 0;
+        if (photonView.IsMine)
+        {
+            //_myCustomProperty["PlayerIndexNumber"] = PhotonNetwork.LocalPlayer.ActorNumber;
+            //Debug.Log("GameManager actor number is " + PhotonNetwork.LocalPlayer.ActorNumber);
+            //PhotonNetwork.LocalPlayer.CustomProperties = _myCustomProperty;
+            
+            _myCustomProperty.Add("PlayerIndexNumber",PhotonNetwork.LocalPlayer.ActorNumber);
+            Debug.Log("GameManager actor number is " + PhotonNetwork.LocalPlayer.ActorNumber);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(_myCustomProperty);
+
+            //SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[PhotonNetwork.LocalPlayer.ActorNumber];
+            _playerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+            SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[_playerNumber];
+
+          
+        }
+        else
+        {
+            _player = photonView.Owner;
+            int otherPlayerindex = (int)photonView.Owner.CustomProperties["PlayerIndexNumber"];
+            Debug.Log("Other player index is: "+otherPlayerindex);
+            SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[otherPlayerindex];
+
+
+
+        }
+
+      //  Debug.Log("The actor number " + _playerNumber);
+        //  SpriteRendererComponent.sprite =  (Sprite)thisPlayer.CustomProperties["PlayerShape"];
+        _playerInfo.text = _playerNumber.ToString() + PhotonNetwork.LocalPlayer.NickName;
+        
+    }
+    public void InitialisePlayer()
+    {
+        //_playerNumbefr = thisPlayer.ActorNumber;
+
+        int _playerNumber = 1;
+
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("PlayerIndexNumber"))
+            _playerNumber = (int)PhotonNetwork.LocalPlayer.CustomProperties["PlayerIndexNumber"];
+
+
+        int shapeID = _playerNumber - 1;
+        string name = PhotonNetwork.LocalPlayer.NickName;
+        Debug.Log("The actor number " + _playerNumber);
+        //  SpriteRendererComponent.sprite =  (Sprite)thisPlayer.CustomProperties["PlayerShape"];
+        _playerInfo.text = _playerNumber.ToString() + name;
+        //SpriteRendererComponent.sprite = _networkPlayerShape;
+
+        photonView.RPC("SetupCharacter", RpcTarget.All, shapeID, name);
+      //  ChangeSprite();
+
+        //   _myCustomProperty["PlayerShape"] = System.Convert.ToByte(_networkPlayerShape);
+        //    SpriteRendererComponent.sprite = _myCustomProperty["PlayerShape"];
+
     }
     // Update is called once per frame
     void Update()
@@ -43,9 +131,16 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         if (_isActivated)
+        {
+           // SpriteRendererComponent.sprite = test[0];
             SpriteRendererComponent.color = Color.red;
+        }
         else
+        {
+
+         //   SpriteRendererComponent.sprite = test[1];
             SpriteRendererComponent.color = Color.gray;
+        }
     }
 
     private void Input_onActionTriggered(CallbackContext obj)
@@ -82,12 +177,25 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)//if the client who owns this variable is doing this action, the value of the variable is sent across the network
         {
             stream.SendNext(_isActivated);
+        //    stream.SendNext(_playerNumber);
          //   stream.SendNext(_spriteRendererComponent.color);
         }
         else if (stream.IsReading)//else be ready to receive the action
         {
             this._isActivated = (bool)stream.ReceiveNext();
+        //    this._playerNumber = (int)stream.ReceiveNext();
           //  _spriteRendererComponent = (SpriteRenderer)stream.ReceiveNext();
         }
+    }
+
+   
+    [PunRPC]
+    void SetupCharacter(int shapeID, string name)
+    {
+       // SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[_playerNumber-1];
+        SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[shapeID];
+        _playerInfo.text = name;
+        //SpriteRendererComponent.sprite = (Sprite)thisPlayer.CustomProperties["PlayerShape"];
+
     }
 }

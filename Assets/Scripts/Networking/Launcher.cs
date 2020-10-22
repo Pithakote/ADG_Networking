@@ -93,6 +93,8 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
         _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
+
+        
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)

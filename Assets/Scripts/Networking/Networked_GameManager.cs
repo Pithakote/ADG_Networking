@@ -12,6 +12,22 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
     [SerializeField]Vector2[] _playerSpawnsPositions;
     [SerializeField]float _minPosValue = -5, _maxPosValue = 5;
     [SerializeField] PlayerColorAndShape _playerShapesAndColor;
+
+    private ExitGames.Client.Photon.Hashtable _myCustomProperty = new ExitGames.Client.Photon.Hashtable();
+
+    //public Networked_GameManager Instance { get; set; }
+    //private void Awake()
+    //{
+    //    if (Instance)
+    //    {
+    //        Instance = this;
+    //        DontDestroyOnLoad(this);
+    //    }
+    //    else
+    //    {
+    //        Destroy(this);
+    //    }
+    //}
     private void Start()
     {
         #region Newcode
@@ -50,6 +66,11 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
 
     }
 
+    private void OnDisable()
+    {
+        
+    }
+
     private void SetSpawnPosition(int i)
     {
        // _playerSpawnsPositions[i] = Vector2.zero;
@@ -69,7 +90,14 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
     {
         Player[] _players = PhotonNetwork.PlayerList;
 
-        for(int i = 0;i<_players.Length;i++)
+        //  _myCustomProperty.Add("PlayerIndexNumber", photonView.Owner.ActorNumber);
+
+        _myCustomProperty.Add("PlayerIndexNumber", PhotonNetwork.LocalPlayer.ActorNumber);
+        Debug.Log("GameManager actor number is " + PhotonNetwork.LocalPlayer.ActorNumber);
+        PhotonNetwork.LocalPlayer.SetCustomProperties(_myCustomProperty);
+
+
+        for (int i = 0;i<_players.Length;i++)
         {
             //  SetSpawnPosition(i);
             Vector2 _newSpawnPos = new Vector2(Random.Range(_minPosValue, _maxPosValue),
@@ -78,22 +106,51 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
                             _players[i],
                             _newSpawnPos,
                             Quaternion.identity,
-                            i);
+                            _players[i]); 
+            
+           
+
+           
         }
     }
 
     [PunRPC]
-    void RPCAssignPlayerData(Vector2 _spawnPosition, Quaternion _spawnRotation, int _playerShapeNumber)
+    void RPCAssignActorNumber()
+    {
+        _myCustomProperty["PlayerIndexNumber"] = PhotonNetwork.LocalPlayer.ActorNumber;
+        Debug.Log("GameManager actor number is " + PhotonNetwork.LocalPlayer.ActorNumber);
+        PhotonNetwork.LocalPlayer.CustomProperties = _myCustomProperty;
+    }
+
+    [PunRPC]
+    void RPCAssignPlayerData(Vector2 _spawnPosition, Quaternion _spawnRotation,  Player thisPlayer)
     {
         if (Networked_PlayerManager.LocalPlayerInstance == null)
         {
+            
+
             var _player = PhotonNetwork.Instantiate(this._playerPrefab.name,
                                                     _spawnPosition,
                                                     _spawnRotation
                                                     );
-            _player.transform.parent = gameObject.transform;//sets this gameobject as the player's parent
-            if (_player.GetComponent<Networked_PlayerManager>())
-                _player.GetComponent<Networked_PlayerManager>().InitialisePlayer(_playerShapesAndColor._playerShape[_playerShapeNumber]);
+
+           
+
+            //_player.GetComponent<Networked_PlayerManager>().InitialisePlayer(thisPlayer);
+
+
+            // _player.transform.parent = gameObject.transform;//sets this gameobject as the player's parent
+
+            //  _myCustomProperty["PlayerIndexNumber"] = thisPlayer.ActorNumber;
+
+            //  _myCustomProperty["PlayerShape"] = System.Convert.ToByte(_playerShapesAndColor._playerShape[_playerShapeNumber]);
+
+            //  _myCustomProperty.Add("PlayerShape", _playerShapesAndColor._playerShape[_playerShapeNumber]);
+            //PhotonNetwork.LocalPlayer.SetCustomProperties(_myCustomProperty);
+            // PhotonNetwork.LocalPlayer.CustomProperties = _myCustomProperty;
+            //   
+            //  if (_player.GetComponent<Networked_PlayerManager>())
+            //     _player.GetComponent<Networked_PlayerManager>().InitialisePlayer(thisPlayer);
         }
         else
         {

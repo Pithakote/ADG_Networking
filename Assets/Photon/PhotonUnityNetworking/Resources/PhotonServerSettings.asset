@@ -39,6 +39,10 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - RPCAssignPlayerData
+  - ChangeSprite
+  - RPCAssignActorNumber
+  - SetSkin
+  - SetupCharacter
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
