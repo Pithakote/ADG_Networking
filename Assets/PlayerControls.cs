@@ -88,7 +88,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""e7e6e015-c539-4008-8c71-2775eea56a70"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": ""UI;Keyboard;Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,

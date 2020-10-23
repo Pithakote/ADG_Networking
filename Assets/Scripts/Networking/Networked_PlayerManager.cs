@@ -145,11 +145,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         PlayerHealth = PlayerMaxHealth;
         //  ChangeSprite();
 
-        if (photonView.IsMine || !PhotonNetwork.IsConnected)
-        {
-
-            PlayerInput.onActionTriggered += Input_onActionTriggered;
-        }
+       
 
         //   _myCustomProperty["PlayerShape"] = System.Convert.ToByte(_networkPlayerShape);
         //    SpriteRendererComponent.sprite = _myCustomProperty["PlayerShape"];
@@ -158,7 +154,12 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void Update()
     {
-      
+
+        if (photonView.IsMine || !PhotonNetwork.IsConnected)
+        {
+
+            PlayerInput.onActionTriggered += Input_onActionTriggered;
+        }
 
         if (_isActivated)
         {
