@@ -33,6 +33,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public float PlayerMaxHealth;
     public int PlayerTakeDamageAmount;
     float _newHealthValue;
+    string name;
     private void Awake()
     {
         if (photonView.IsMine)
@@ -136,13 +137,13 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
 
         int shapeID = _playerNumber - 1;
-        string name = PhotonNetwork.LocalPlayer.NickName;
+         
         Debug.Log("The actor number " + _playerNumber);
         //  SpriteRendererComponent.sprite =  (Sprite)thisPlayer.CustomProperties["PlayerShape"];
-        _playerInfo.text = _playerNumber.ToString() + name;
+      //  _playerInfo.text = _playerNumber.ToString() + name;
         //SpriteRendererComponent.sprite = _networkPlayerShape;
 
-        photonView.RPC("SetupCharacter", RpcTarget.All, shapeID, name);
+        photonView.RPC("SetupCharacter", RpcTarget.All, shapeID);
 
 
         PlayerHealth = PlayerMaxHealth;
@@ -220,14 +221,16 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)//if the client who owns this variable is doing this action, the value of the variable is sent across the network
         {
             stream.SendNext(_isActivated);
-            stream.SendNext(_healthBar.fillAmount);
+            stream.SendNext(name);
+          //  stream.SendNext(_healthBar.fillAmount);
         //    stream.SendNext(_playerNumber);
          //   stream.SendNext(_spriteRendererComponent.color);
         }
         else if (stream.IsReading)//else be ready to receive the action
         {
             this._isActivated = (bool)stream.ReceiveNext();
-            this._healthBar.fillAmount = (float)stream.ReceiveNext();
+            this.name = (string)stream.ReceiveNext();
+           // this._healthBar.fillAmount = (float)stream.ReceiveNext();
            // this._playerInfo
         //    this._playerNumber = (int)stream.ReceiveNext();
           //  _spriteRendererComponent = (SpriteRenderer)stream.ReceiveNext();
@@ -236,9 +239,10 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
    
     [PunRPC]
-    void SetupCharacter(int shapeID, string name)
+    void SetupCharacter(int shapeID)
     {
-       // SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[_playerNumber-1];
+        name = PhotonNetwork.LocalPlayer.NickName;
+        // SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[_playerNumber-1];
         SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[shapeID];
       //  _playerInfo.text = "Name is: "+ name +" Health Amount: " + PlayerHealth.ToString();
         //SpriteRendererComponent.sprite = (Sprite)thisPlayer.CustomProperties["PlayerShape"];
