@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable, ITakeDamage
@@ -16,6 +17,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public SpriteRenderer SpriteRendererComponent { get; set; }
     [SerializeField] bool _isActivated = false;
     [SerializeField] Sprite [] test;
+    [SerializeField] Image _healthBar;
     public PlayerInput PlayerInput { get; set; }
 
     [SerializeField] PlayerColorAndShape _playerShapesAndColor;
@@ -27,8 +29,10 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     NetworkedPlayerShooting _playerShootingComponent;
 
-    public int PlayerHealth = 10;
-    public int PlayerTakeDamageAmount = 2;
+    public float PlayerHealth;
+    public float PlayerMaxHealth;
+    public int PlayerTakeDamageAmount;
+    float _newHealthValue;
     private void Awake()
     {
         if (photonView.IsMine)
@@ -55,13 +59,14 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             InitialisePlayer();
         }
+     //   PlayerHealth = PlayerMaxHealth;
        // _playerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-      //  _playerNumber = _player.ActorNumber;
-      //  if (photonView.IsMine)
-     //  {
+       //  _playerNumber = _player.ActorNumber;
+       //  if (photonView.IsMine)
+       //  {
 
-       //     base.photonView.RPC("ChangeSprite", RpcTarget.AllBuffered, null);
-      //  }
+        //     base.photonView.RPC("ChangeSprite", RpcTarget.AllBuffered, null);
+        //  }
     }
     public override void OnLeftRoom()
     {
@@ -135,7 +140,16 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         //SpriteRendererComponent.sprite = _networkPlayerShape;
 
         photonView.RPC("SetupCharacter", RpcTarget.All, shapeID, name);
-      //  ChangeSprite();
+
+
+        PlayerHealth = PlayerMaxHealth;
+        //  ChangeSprite();
+
+        if (photonView.IsMine || !PhotonNetwork.IsConnected)
+        {
+
+            PlayerInput.onActionTriggered += Input_onActionTriggered;
+        }
 
         //   _myCustomProperty["PlayerShape"] = System.Convert.ToByte(_networkPlayerShape);
         //    SpriteRendererComponent.sprite = _myCustomProperty["PlayerShape"];
@@ -144,11 +158,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void Update()
     {
-        if (photonView.IsMine || !PhotonNetwork.IsConnected)
-        {
-
-            PlayerInput.onActionTriggered += Input_onActionTriggered;
-        }
+      
 
         if (_isActivated)
         {
@@ -206,14 +216,14 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)//if the client who owns this variable is doing this action, the value of the variable is sent across the network
         {
             stream.SendNext(_isActivated);
-            stream.SendNext(PlayerHealth);
+            stream.SendNext(_healthBar.fillAmount);
         //    stream.SendNext(_playerNumber);
          //   stream.SendNext(_spriteRendererComponent.color);
         }
         else if (stream.IsReading)//else be ready to receive the action
         {
             this._isActivated = (bool)stream.ReceiveNext();
-            this.PlayerHealth = (int)stream.ReceiveNext();
+            this._healthBar.fillAmount = (float)stream.ReceiveNext();
            // this._playerInfo
         //    this._playerNumber = (int)stream.ReceiveNext();
           //  _spriteRendererComponent = (SpriteRenderer)stream.ReceiveNext();
@@ -237,7 +247,11 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         if (PlayerHealth > 0)
         {
             PlayerHealth -= PlayerTakeDamageAmount;
-         
+            //  _newHealthValue = (float)(PlayerHealth / PlayerMaxHealth);
+            //   _healthBar.fillAmount = Mathf.Lerp(_healthBar.fillAmount, _newHealthValue, Time.deltaTime); 
+
+            _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
+
         }
         else
         {

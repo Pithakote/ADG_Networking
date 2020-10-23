@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 [RequireComponent(typeof(PlayerMovement))]
@@ -16,11 +17,16 @@ public class PlayerController : MonoBehaviour, ITakeDamage
     
     SpriteRenderer _playerRenderer;
 
-    PlayerControls _controls;
-    public int PlayerHealth = 10;
-    public int PlayerTakeDamageAmount = 2;
+    PlayerControls _controls; 
+    public float PlayerHealth;
+    public float PlayerMaxHealth;
+    public int PlayerTakeDamageAmount;
     PlayerShooting _playerShootingComponent;
 
+
+
+    [SerializeField] Image _healthBar;
+    float _newHealthValue;
     private void Awake()
     {
         _playerRenderer = GetComponent<SpriteRenderer>();
@@ -34,6 +40,11 @@ public class PlayerController : MonoBehaviour, ITakeDamage
 
     }
 
+    void Start()
+    {
+        PlayerHealth = PlayerMaxHealth;
+
+    }
     public void InitializePlayer(PlayerDataConfiguration pc)
     {
         _playerConfig = pc;
@@ -79,12 +90,14 @@ public class PlayerController : MonoBehaviour, ITakeDamage
     {
         _playerShooting._isActivated = ctx.ReadValueAsButton();
     }
-
+   
     public void ReduceHealth()
     {
         if (PlayerHealth > 0)
         {
             PlayerHealth -= PlayerTakeDamageAmount;
+            _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
+
         }
         else
         {
