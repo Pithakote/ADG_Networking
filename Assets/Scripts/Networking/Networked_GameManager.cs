@@ -102,15 +102,44 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
             //  SetSpawnPosition(i);
             Vector2 _newSpawnPos = new Vector2(Random.Range(_minPosValue, _maxPosValue),
                                            Random.Range(_minPosValue, _maxPosValue));
-            photonView.RPC("RPCAssignPlayerData",
-                            _players[i],
-                            _newSpawnPos,
-                            Quaternion.identity,
-                            _players[i]); 
-            
-           
+            //photonView.RPC("RPCAssignPlayerData",
+            //                _players[i],
+            //                _newSpawnPos,
+            //                Quaternion.identity,
+            //                _players[i]); 
 
-           
+            if (Networked_PlayerManager.LocalPlayerInstance == null)
+            {
+
+
+                var _player = PhotonNetwork.Instantiate(this._playerPrefab.name,
+                                                        _newSpawnPos,
+                                                        Quaternion.identity           );
+
+
+
+                //_player.GetComponent<Networked_PlayerManager>().InitialisePlayer(thisPlayer);
+
+
+                // _player.transform.parent = gameObject.transform;//sets this gameobject as the player's parent
+
+                //  _myCustomProperty["PlayerIndexNumber"] = thisPlayer.ActorNumber;
+
+                //  _myCustomProperty["PlayerShape"] = System.Convert.ToByte(_playerShapesAndColor._playerShape[_playerShapeNumber]);
+
+                //  _myCustomProperty.Add("PlayerShape", _playerShapesAndColor._playerShape[_playerShapeNumber]);
+                //PhotonNetwork.LocalPlayer.SetCustomProperties(_myCustomProperty);
+                // PhotonNetwork.LocalPlayer.CustomProperties = _myCustomProperty;
+                //   
+                //  if (_player.GetComponent<Networked_PlayerManager>())
+                //     _player.GetComponent<Networked_PlayerManager>().InitialisePlayer(thisPlayer);
+            }
+            else
+            {
+                Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+            }
+
+
         }
     }
 
