@@ -176,7 +176,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             SpriteRendererComponent.color = Color.gray;
         }
 
-        _playerInfo.text = "Name is: " + PhotonNetwork.LocalPlayer.NickName + " Health Amount: " + PlayerHealth.ToString();
+        _playerInfo.text = "Name is: " + name + " Health Amount: " + PlayerHealth.ToString();
 
     }
 
