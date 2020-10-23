@@ -5,10 +5,11 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using UnityEngine.UI;
+using WebSocketSharp;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
-    [SerializeField] TMP_InputField _roomNameInputField;
+    [SerializeField] TMP_InputField _roomNameInputField, _playerNameInputField;
     [SerializeField] TMP_Text _errorText, _roomName;
     [SerializeField] Transform _roomListContent, _playerListContent;
     [SerializeField] GameObject _roomListItemPrefab, _playerListItemPrefab;
@@ -45,12 +46,23 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         PhotonNetwork.AutomaticallySyncScene = true;
     }
+    void NameSetter()
+    {
+        if (_playerNameInputField.text.IsNullOrEmpty())
+        {
+            PhotonNetwork.NickName = "Player" + Random.Range(0, 1000).ToString("0000");
 
+        }
+        else
+        {
+            PhotonNetwork.NickName = _playerNameInputField.text;
+        }
+    }
     public override void OnJoinedLobby()
     {
         Debug.Log("Joined Lobby");
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.MultiplayerOptionsScene);
-        PhotonNetwork.NickName = "Player" + Random.Range(0, 1000).ToString("0000");
+       // PhotonNetwork.NickName = "Player" + Random.Range(0, 1000).ToString("0000");
 
     }
     // Update is called once per frame
@@ -58,7 +70,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         if (string.IsNullOrEmpty(_roomNameInputField.text))
             return;
-
+        NameSetter();
         PhotonNetwork.CreateRoom(_roomNameInputField.text);
        
 
@@ -118,6 +130,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public void JoinRoom(RoomInfo info)
     {
+        NameSetter();
         PhotonNetwork.JoinRoom(info.Name);
         CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
 
