@@ -60,11 +60,14 @@ public class CanvasSwitcher : MonoBehaviourPunCallbacks
     void ChangeScene()
     {
         //SceneManager.LoadScene("NetworkedSelectionScene");
+        
         PhotonNetwork.LoadLevel("NetworkedSelectionScene");
     }
 
     public void BackToMainMenu()
     {
+        PhotonNetwork.LeaveLobby();
+        PhotonNetwork.Disconnect();
         PhotonNetwork.LoadLevel("PlayerSetup");
     }
 

@@ -30,11 +30,13 @@ public class Launcher : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        
-        Debug.Log("Connecting to Master");
-       // CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
 
-        PhotonNetwork.ConnectUsingSettings();
+        Debug.Log("Connecting to Master");
+        // CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.ConnectUsingSettings();
+        }
     }
 
     public override void OnConnectedToMaster()
