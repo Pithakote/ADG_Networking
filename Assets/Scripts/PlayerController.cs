@@ -82,6 +82,13 @@ public class PlayerController : MonoBehaviour, ITakeDamage
 
     public void ReduceHealth()
     {
-        PlayerHealth -= PlayerTakeDamageAmount;
+        if (PlayerHealth > 0)
+        {
+            PlayerHealth -= PlayerTakeDamageAmount;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

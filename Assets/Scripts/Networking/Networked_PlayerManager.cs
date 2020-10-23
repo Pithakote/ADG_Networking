@@ -211,6 +211,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             this._isActivated = (bool)stream.ReceiveNext();
             this.PlayerHealth = (int)stream.ReceiveNext();
+           // this._playerInfo
         //    this._playerNumber = (int)stream.ReceiveNext();
           //  _spriteRendererComponent = (SpriteRenderer)stream.ReceiveNext();
         }
@@ -222,7 +223,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
        // SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[_playerNumber-1];
         SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[shapeID];
-        _playerInfo.text = name + PlayerHealth.ToString();
+        _playerInfo.text = "Name is: "+ name +" Health Amount: " + PlayerHealth.ToString();
         //SpriteRendererComponent.sprite = (Sprite)thisPlayer.CustomProperties["PlayerShape"];
 
     }
@@ -230,6 +231,15 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void ReduceHealth()
     {
-        PlayerHealth -= PlayerTakeDamageAmount;
+        if (PlayerHealth > 0)
+        {
+            PlayerHealth -= PlayerTakeDamageAmount;
+            _playerInfo.text = "Name is: " + name + " Health Amount: " + PlayerHealth.ToString();
+
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

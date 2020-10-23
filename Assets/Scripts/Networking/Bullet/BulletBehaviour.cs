@@ -29,16 +29,18 @@ public class BulletBehaviour : MonoBehaviourPunCallbacks
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ITakeDamage _damageTakingObject = collision.gameObject.GetComponent<ITakeDamage>() as ITakeDamage;
+        
         if (_damageTakingObject != null)
         {
-            //   photonView.RPC()  _damageTakingObject.ReduceHealth();
-            /*
-             * if (other.name != "Shield_Collider")
-                 {
-                     other.SendMessage("TakeDamage", damage);
-                 }
-             * */
-          //  Debug.Log("Shot");
+               //photonView.RPC()
+               _damageTakingObject.ReduceHealth();
+            
+              //if (other.name != "Shield_Collider")
+              //{
+              //       other.SendMessage("TakeDamage", damage);
+              //}
+             
+            Debug.Log("Shot");
 
             Destroy(gameObject);
         }
