@@ -161,6 +161,9 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
          //   SpriteRendererComponent.sprite = test[1];
             SpriteRendererComponent.color = Color.gray;
         }
+
+        _playerInfo.text = "Name is: " + name + " Health Amount: " + PlayerHealth.ToString();
+
     }
 
     private void Input_onActionTriggered(CallbackContext obj)
@@ -223,19 +226,18 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
        // SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[_playerNumber-1];
         SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[shapeID];
-        _playerInfo.text = "Name is: "+ name +" Health Amount: " + PlayerHealth.ToString();
+      //  _playerInfo.text = "Name is: "+ name +" Health Amount: " + PlayerHealth.ToString();
         //SpriteRendererComponent.sprite = (Sprite)thisPlayer.CustomProperties["PlayerShape"];
 
     }
 
-    [PunRPC]
+   // [PunRPC]
     public void ReduceHealth()
     {
         if (PlayerHealth > 0)
         {
             PlayerHealth -= PlayerTakeDamageAmount;
-            _playerInfo.text = "Name is: " + name + " Health Amount: " + PlayerHealth.ToString();
-
+         
         }
         else
         {
