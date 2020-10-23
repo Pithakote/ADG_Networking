@@ -5,6 +5,7 @@ using Photon.Pun;
 using System.IO;
 using System.Linq;
 using Photon.Realtime;
+using UnityEngine.InputSystem;
 
 public class Networked_GameManager : MonoBehaviourPunCallbacks
 {
@@ -66,9 +67,12 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
 
     }
 
-    private void OnDisable()
+    public void OnJoinBehaviour(PlayerInput pi)
     {
         
+
+
+        pi.DeactivateInput();
     }
 
     private void SetSpawnPosition(int i)
@@ -116,23 +120,11 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
                                                         _newSpawnPos,
                                                         Quaternion.identity           );
 
-
-
-                //_player.GetComponent<Networked_PlayerManager>().InitialisePlayer(thisPlayer);
-
-
-                // _player.transform.parent = gameObject.transform;//sets this gameobject as the player's parent
-
-                //  _myCustomProperty["PlayerIndexNumber"] = thisPlayer.ActorNumber;
-
-                //  _myCustomProperty["PlayerShape"] = System.Convert.ToByte(_playerShapesAndColor._playerShape[_playerShapeNumber]);
-
-                //  _myCustomProperty.Add("PlayerShape", _playerShapesAndColor._playerShape[_playerShapeNumber]);
-                //PhotonNetwork.LocalPlayer.SetCustomProperties(_myCustomProperty);
-                // PhotonNetwork.LocalPlayer.CustomProperties = _myCustomProperty;
-                //   
-                //  if (_player.GetComponent<Networked_PlayerManager>())
-                //     _player.GetComponent<Networked_PlayerManager>().InitialisePlayer(thisPlayer);
+                if (!photonView.IsMine)
+                {
+                    OnJoinBehaviour(_player.gameObject.GetComponent<PlayerInput>());
+                }
+                
             }
             else
             {

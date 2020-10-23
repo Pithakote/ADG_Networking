@@ -43,8 +43,11 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
          _controls = new PlayerControls();
 
         SpriteRendererComponent = gameObject.GetComponent<SpriteRenderer>();
-        if (PlayerInput == null)
+        if (photonView.IsMine && PlayerInput == null)
             PlayerInput = GetComponent<PlayerInput>();
+        else if (!photonView.IsMine && GetComponent<PlayerInput>())
+            GetComponent<PlayerInput>().enabled = false;
+
         transform.parent = GameObject.Find("Newtowked_GameManager").transform;
         _playerShootingComponent = GetComponent<NetworkedPlayerShooting>();
 
@@ -145,7 +148,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         PlayerHealth = PlayerMaxHealth;
         //  ChangeSprite();
 
-        if (photonView.IsMine || !PhotonNetwork.IsConnected)
+        if (photonView.IsMine || !PhotonNetwork.IsConnected || PhotonNetwork.LocalPlayer.IsLocal)
         {
 
             PlayerInput.onActionTriggered += Input_onActionTriggered;
