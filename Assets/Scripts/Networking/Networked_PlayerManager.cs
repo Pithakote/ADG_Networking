@@ -198,9 +198,15 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (obj.action.name == _controls.PlayerMovement.AimingMouse.name)
         {
-            OnRotate(obj);
+
+            OnRotateMouse(obj);
         }
-       
+        if (obj.action.name == _controls.PlayerMovement.AimingController.name)
+        {
+
+            OnRotateController(obj);
+        }
+
     }
     public void OnMove(InputAction.CallbackContext ctx)
     {
@@ -218,28 +224,53 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         _isActivated = ctx.ReadValueAsButton();
     }
 
-    public void OnRotate(InputAction.CallbackContext ctx)
+    public void OnRotateMouse(InputAction.CallbackContext ctx)
     {
         // _mousePos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
-        _mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        // if(ctx.control.device)
+        _mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue() -
+                                                                   new Vector2(transform.position.x,
+                                                                                transform.position.y));
+        //else if(_controls.devices is Gamepad)
+
+        //  _playerMovement._mousePos = ctx.ReadValue<Vector2>();
+        // _playerMovement._mousePos = ctx.ReadValue<Axis>();
+
+    }
+    public void OnRotateController(InputAction.CallbackContext ctx)
+    {
+        // _mousePos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+
+        // if(ctx.control.device)
+        // _playerMovement._mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        //else if(_controls.devices is Gamepad)
+
+        _mousePos = ctx.ReadValue<Vector2>();
+        // _playerMovement._mousePos = ctx.ReadValue<Axis>();
 
     }
     private void FixedUpdate()
     {
-        transform.Translate(new Vector2(MovementInput.x, MovementInput.y)
-                                       * _speed
-                                      * Time.deltaTime);
+        //transform.Translate(new Vector2(MovementInput.x, MovementInput.y)
+        //                               * _speed
+        //                              * Time.deltaTime);
+        rb.MovePosition(rb.position + MovementInput * _speed * Time.deltaTime);
 
-        // var lookDir = _mousePos - Camera.main.WorldToScreenPoint(transform.position); //new Vector2( transform.position.x, transform.position.y);
-      
-        var lookDir = _mousePos - transform.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - offset;
-          transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-       // transform.rotation = angle;
 
+        MouseRotation();
 
     }
-
+    private void MouseRotation()
+    {
+        //var lookDir = _mousePos - transform.position;
+        var lookDir = _mousePos;
+        //  var lookDir = new Vector2(_mousePos.x, _mousePos.y) - rb.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - offset;
+        //-offset don't need to calculate with offser because forward vector is the right i.e the read arrow 
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //  GetComponent<Transform>().Rotate(Vector3.back * _mousePos.x * speed);
+    }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)//if the client who owns this variable is doing this action, the value of the variable is sent across the network
