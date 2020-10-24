@@ -114,10 +114,10 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
                                                         _newSpawnPos,
                                                         Quaternion.identity           );
 
-                if (!photonView.IsMine)
-                {
-                    _player.gameObject.GetComponent<PlayerInput>().enabled = false;
-                }
+                //if (!photonView.IsMine)
+                //{
+                //    _player.gameObject.GetComponent<PlayerInput>().enabled = false;
+              //  }
                 
             }
             else
