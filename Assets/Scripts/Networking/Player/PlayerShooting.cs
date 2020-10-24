@@ -9,7 +9,8 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     [SerializeField] protected GameObject _bullets;
     [SerializeField] protected float _refireRate = 0.2f;
     protected float fireTimer = 0;
-    public bool _isActivated { get; set; }
+    bool isShooting;
+    public bool _isActivated { get { return isShooting; } set { isShooting = value; } }
     public SpriteRenderer _spriteRendererComponent{ get; set; }
 
     

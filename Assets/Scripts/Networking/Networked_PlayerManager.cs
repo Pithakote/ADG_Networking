@@ -39,8 +39,8 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     Rigidbody2D rb;
     [SerializeField] float offset;
 
-
-    float networkedRotation;
+    bool isUsed;
+    float networkedRotation, initialRotation;
     private void Awake()
     {
         if (photonView.IsMine)
@@ -161,7 +161,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
             PlayerInput.onActionTriggered += Input_onActionTriggered;
         }
-
+        initialRotation = rb.rotation;
         //   _myCustomProperty["PlayerShape"] = System.Convert.ToByte(_networkPlayerShape);
         //    SpriteRendererComponent.sprite = _myCustomProperty["PlayerShape"];
 
@@ -194,11 +194,19 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             OnMove(obj);
         }
-        if (obj.action.name == _controls.PlayerMovement.Fire.name)
-        {
+        if (obj.action.name == _controls.PlayerMovement.Fire.name )
+         {
             //  OnChangeColor(obj);
+
             OnShoot(obj);
         }
+        if (obj.action.name == _controls.PlayerMovement.FireWhileAimingMobile.name)
+        {
+           
+            
+            OnShootWithJoystick(obj);
+        }
+       
         if (obj.action.name == _controls.PlayerMovement.AimingMouse.name)
         {
 
@@ -208,7 +216,15 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         {
 
             OnRotateController(obj);
+
+            
+          //  Debug.Log("Vector2 value when shooting is: " + value);
+
+            
+
+
         }
+       
 
     }
     public void OnMove(InputAction.CallbackContext ctx)
@@ -216,9 +232,23 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         MovementInput = ctx.ReadValue<Vector2>();
 
     }
-
+    public void OnShootWithJoystick(InputAction.CallbackContext ctx)
+    {
+        Vector2 value = ctx.ReadValue<Vector2>();
+        
+        if(value != Vector2.zero)
+        isUsed = true;
+        else
+        {
+            isUsed = false;
+        }
+        _playerShootingComponent._isActivated = isUsed;
+       
+    }
     public void OnShoot(InputAction.CallbackContext ctx)
     {
+        
+
         _playerShootingComponent._isActivated = ctx.ReadValueAsButton();
     }
 

@@ -10,7 +10,7 @@ public class NetworkedPlayerShooting : PlayerShooting
     {
         if (_isActivated)
         {
-            Debug.Log("Shooting");
+           // Debug.Log("Shooting");
             fireTimer += Time.deltaTime;
             if (fireTimer >= _refireRate)
             {
@@ -18,7 +18,7 @@ public class NetworkedPlayerShooting : PlayerShooting
 
                photonView.RPC("Fire",RpcTarget.All,  null);
 
-                Debug.Log("Online shooting");
+             //   Debug.Log("Online shooting");
 
             }
         }

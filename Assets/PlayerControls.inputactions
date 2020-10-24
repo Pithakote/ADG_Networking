@@ -52,6 +52,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "FireWhileAimingMobile",
+                    "type": "Value",
+                    "id": "3b59d1db-fdf5-45dc-b6b8-e002d728333b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -83,7 +91,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Gamepad;Mobile",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -189,11 +197,22 @@
                 },
                 {
                     "name": "",
+                    "id": "d2708bd5-17a1-41e4-b569-7e73a7bccfec",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fee4b691-1bd3-4838-9b58-e033a0637035",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Gamepad;Mobile",
                     "action": "AimingController",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -206,6 +225,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "AimingMouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "473cefc7-bfae-4106-853d-48c230035750",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "MobileJoystick;Gamepad",
+                    "action": "FireWhileAimingMobile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -257,6 +287,22 @@
             "devices": [
                 {
                     "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<AndroidJoystick>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "MobileJoystick",
+            "bindingGroup": "MobileJoystick",
+            "devices": [
+                {
+                    "devicePath": "<AndroidJoystick>",
                     "isOptional": false,
                     "isOR": false
                 }

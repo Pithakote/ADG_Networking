@@ -74,6 +74,14 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""FireWhileAimingMobile"",
+                    ""type"": ""Value"",
+                    ""id"": ""3b59d1db-fdf5-45dc-b6b8-e002d728333b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -105,7 +113,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Gamepad;Mobile"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -211,11 +219,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d2708bd5-17a1-41e4-b569-7e73a7bccfec"",
+                    ""path"": ""<Touchscreen>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""fee4b691-1bd3-4838-9b58-e033a0637035"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Gamepad;Mobile"",
                     ""action"": ""AimingController"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -228,6 +247,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""AimingMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""473cefc7-bfae-4106-853d-48c230035750"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": ""MobileJoystick;Gamepad"",
+                    ""action"": ""FireWhileAimingMobile"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -281,6 +311,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""devicePath"": ""<Touchscreen>"",
                     ""isOptional"": false,
                     ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<AndroidJoystick>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""MobileJoystick"",
+            ""bindingGroup"": ""MobileJoystick"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<AndroidJoystick>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
                 }
             ]
         }
@@ -294,6 +340,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_Fire = m_PlayerMovement.FindAction("Fire", throwIfNotFound: true);
         m_PlayerMovement_AimingController = m_PlayerMovement.FindAction("AimingController", throwIfNotFound: true);
         m_PlayerMovement_AimingMouse = m_PlayerMovement.FindAction("AimingMouse", throwIfNotFound: true);
+        m_PlayerMovement_FireWhileAimingMobile = m_PlayerMovement.FindAction("FireWhileAimingMobile", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +406,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Fire;
     private readonly InputAction m_PlayerMovement_AimingController;
     private readonly InputAction m_PlayerMovement_AimingMouse;
+    private readonly InputAction m_PlayerMovement_FireWhileAimingMobile;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -369,6 +417,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Fire => m_Wrapper.m_PlayerMovement_Fire;
         public InputAction @AimingController => m_Wrapper.m_PlayerMovement_AimingController;
         public InputAction @AimingMouse => m_Wrapper.m_PlayerMovement_AimingMouse;
+        public InputAction @FireWhileAimingMobile => m_Wrapper.m_PlayerMovement_FireWhileAimingMobile;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -396,6 +445,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AimingMouse.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimingMouse;
                 @AimingMouse.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimingMouse;
                 @AimingMouse.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimingMouse;
+                @FireWhileAimingMobile.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnFireWhileAimingMobile;
+                @FireWhileAimingMobile.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnFireWhileAimingMobile;
+                @FireWhileAimingMobile.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnFireWhileAimingMobile;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -418,6 +470,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @AimingMouse.started += instance.OnAimingMouse;
                 @AimingMouse.performed += instance.OnAimingMouse;
                 @AimingMouse.canceled += instance.OnAimingMouse;
+                @FireWhileAimingMobile.started += instance.OnFireWhileAimingMobile;
+                @FireWhileAimingMobile.performed += instance.OnFireWhileAimingMobile;
+                @FireWhileAimingMobile.canceled += instance.OnFireWhileAimingMobile;
             }
         }
     }
@@ -458,6 +513,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_MobileSchemeIndex];
         }
     }
+    private int m_MobileJoystickSchemeIndex = -1;
+    public InputControlScheme MobileJoystickScheme
+    {
+        get
+        {
+            if (m_MobileJoystickSchemeIndex == -1) m_MobileJoystickSchemeIndex = asset.FindControlSchemeIndex("MobileJoystick");
+            return asset.controlSchemes[m_MobileJoystickSchemeIndex];
+        }
+    }
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -466,5 +530,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnAimingController(InputAction.CallbackContext context);
         void OnAimingMouse(InputAction.CallbackContext context);
+        void OnFireWhileAimingMobile(InputAction.CallbackContext context);
     }
 }
