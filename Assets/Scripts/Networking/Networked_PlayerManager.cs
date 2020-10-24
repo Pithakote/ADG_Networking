@@ -34,6 +34,10 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     public int PlayerTakeDamageAmount;
     float _newHealthValue;
     string name;
+
+    Vector3 _mousePos;
+    Rigidbody2D rb;
+    [SerializeField] float offset;
     private void Awake()
     {
         if (photonView.IsMine)
@@ -51,7 +55,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
         transform.parent = GameObject.Find("Newtowked_GameManager").transform;
         _playerShootingComponent = GetComponent<NetworkedPlayerShooting>();
-
+        rb = GetComponent<Rigidbody2D>();
         //  InitialisePlayer(PhotonNetwork.LocalPlayer);
         //  SetSkin();
 
@@ -192,6 +196,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             //  OnChangeColor(obj);
             OnShoot(obj);
         }
+       
     }
     public void OnMove(InputAction.CallbackContext ctx)
     {
@@ -208,12 +213,27 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         _isActivated = ctx.ReadValueAsButton();
     }
+
+    public void OnRotate(InputAction.CallbackContext ctx)
+    {
+       // _mousePos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        _mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+    }
     private void FixedUpdate()
     {
         transform.Translate(new Vector2(MovementInput.x, MovementInput.y)
                                        * _speed
                                       * Time.deltaTime);
-      
+
+        // var lookDir = _mousePos - Camera.main.WorldToScreenPoint(transform.position); //new Vector2( transform.position.x, transform.position.y);
+        _mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        var lookDir = _mousePos - transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - offset;
+          transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+       // transform.rotation = angle;
+
+
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

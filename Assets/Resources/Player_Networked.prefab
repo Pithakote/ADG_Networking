@@ -237,6 +237,7 @@ MonoBehaviour:
   PlayerHealth: 50
   PlayerMaxHealth: 50
   PlayerTakeDamageAmount: 2
+  offset: 90
 --- !u!212 &-6261924048756453356
 SpriteRenderer:
   m_ObjectHideFlags: 0
