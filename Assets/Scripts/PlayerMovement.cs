@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         //var lookDir = _mousePos - transform.position;
         var lookDir = _mousePos ;
         //  var lookDir = new Vector2(_mousePos.x, _mousePos.y) - rb.position;
-        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg ;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - offset;
         //-offset don't need to calculate with offser because forward vector is the right i.e the read arrow 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
       //  GetComponent<Transform>().Rotate(Vector3.back * _mousePos.x * speed);

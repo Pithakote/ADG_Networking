@@ -167,22 +167,22 @@
                 },
                 {
                     "name": "",
-                    "id": "7d9b71ae-706a-459d-978b-4368128225c0",
-                    "path": "<Keyboard>/e",
+                    "id": "455b5e7d-f0ee-4b15-a433-3dd35f92bbef",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "Hold",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Gamepad",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "455b5e7d-f0ee-4b15-a433-3dd35f92bbef",
-                    "path": "<Gamepad>/rightShoulder",
+                    "id": "f30dc3c6-ba86-4d6b-ad19-bdb783003c38",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "Hold",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Keyboard",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
