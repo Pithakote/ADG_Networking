@@ -67,13 +67,7 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
 
     }
 
-    public void OnJoinBehaviour(PlayerInput pi)
-    {
-        
-
-
-        pi.DeactivateInput();
-    }
+   
 
     private void SetSpawnPosition(int i)
     {
@@ -120,10 +114,10 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
                                                         _newSpawnPos,
                                                         Quaternion.identity           );
 
-                //if (!photonView.IsMine)
-               // {
-                //    OnJoinBehaviour(_player.gameObject.GetComponent<PlayerInput>());
-              //  }
+                if (!photonView.IsMine)
+                {
+                    _player.gameObject.GetComponent<PlayerInput>().enabled = false;
+                }
                 
             }
             else

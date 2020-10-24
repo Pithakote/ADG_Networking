@@ -38,6 +38,9 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     Vector3 _mousePos;
     Rigidbody2D rb;
     [SerializeField] float offset;
+
+
+    float networkedRotation;
     private void Awake()
     {
         if (photonView.IsMine)
@@ -230,8 +233,8 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
         // if(ctx.control.device)
         _mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue() -
-                                                                   new Vector2(transform.position.x,
-                                                                                transform.position.y));
+                                                                   new Vector2(rb.position.x,
+                                                                                rb.position.y));
         //else if(_controls.devices is Gamepad)
 
         //  _playerMovement._mousePos = ctx.ReadValue<Vector2>();
@@ -260,6 +263,11 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
         MouseRotation();
 
+        if (!photonView.IsMine)
+        {
+            rb.rotation = networkedRotation + Time.deltaTime * 100.0f;
+        }
+
     }
     private void MouseRotation()
     {
@@ -268,13 +276,17 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         //  var lookDir = new Vector2(_mousePos.x, _mousePos.y) - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - offset;
         //-offset don't need to calculate with offser because forward vector is the right i.e the read arrow 
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+       //  transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        rb.rotation = angle;
         //  GetComponent<Transform>().Rotate(Vector3.back * _mousePos.x * speed);
     }
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)//if the client who owns this variable is doing this action, the value of the variable is sent across the network
         {
+            stream.SendNext(rb.rotation);
             stream.SendNext(_isActivated);
             stream.SendNext(name);
           //  stream.SendNext(_healthBar.fillAmount);
@@ -283,6 +295,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         else if (stream.IsReading)//else be ready to receive the action
         {
+            this.networkedRotation = (float)stream.ReceiveNext();
             this._isActivated = (bool)stream.ReceiveNext();
             this.name = (string)stream.ReceiveNext();
            // this._healthBar.fillAmount = (float)stream.ReceiveNext();
