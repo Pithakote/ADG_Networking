@@ -103,9 +103,11 @@ public class PlayerController : MonoBehaviour, ITakeDamage
     public void OnRotateMouse(InputAction.CallbackContext ctx)
     {
         // _mousePos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
-      
-      // if(ctx.control.device)
-        _playerMovement._mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        // if(ctx.control.device)
+        _playerMovement._mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()-
+                                                                   new Vector2(transform.position.x,
+                                                                                transform.position.y));
        //else if(_controls.devices is Gamepad)
        
       //  _playerMovement._mousePos = ctx.ReadValue<Vector2>();
