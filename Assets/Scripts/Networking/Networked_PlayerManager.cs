@@ -196,6 +196,10 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
             //  OnChangeColor(obj);
             OnShoot(obj);
         }
+        if (obj.action.name == _controls.PlayerMovement.AimingMouse.name)
+        {
+            OnRotate(obj);
+        }
        
     }
     public void OnMove(InputAction.CallbackContext ctx)
@@ -216,8 +220,9 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnRotate(InputAction.CallbackContext ctx)
     {
-       // _mousePos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        // _mousePos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
         _mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
     }
     private void FixedUpdate()
     {
@@ -226,8 +231,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
                                       * Time.deltaTime);
 
         // var lookDir = _mousePos - Camera.main.WorldToScreenPoint(transform.position); //new Vector2( transform.position.x, transform.position.y);
-        _mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
+      
         var lookDir = _mousePos - transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - offset;
           transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);

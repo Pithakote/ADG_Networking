@@ -77,3 +77,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSetupMenuPrefab: {fileID: 8298370440918943196, guid: 34ff83e30c55e464cb3e220c547e2549,
     type: 3}
+  _isNetworked: 0

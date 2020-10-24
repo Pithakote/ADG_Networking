@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,21 +13,40 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 MovementInput { get; set; }//property value set in PlayerController
                                               //   public int PlayerIndex { get { return _playerIndex; } }
 
+    public Vector3 _mousePos;
+    [SerializeField] float offset;
+    Rigidbody2D rb;
     // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        transform.Translate(new Vector2(MovementInput.x, MovementInput.y)
-                                        * speed
-                                        * Time.deltaTime);
-      //  RotateGameObject(toVector2(MovementInput), turningSpeed, 1);
-        //  transform.rotation = Quaternion.LookRotation(transform.forward,new Vector2(MovementInput.x,
-        //                                                                          MovementInput.y));
-        // transform.LookAt(toVector2(transform.forward) + MovementInput);
-       // Vector3 lookVector = new Vector3(MovementInput.x, MovementInput.y, turningSpeed);
-     //   if (lookVector.x != 0 && lookVector.y != 0)
-       //     transform.rotation = Quaternion.LookRotation(lookVector, Vector3.forward);
-
+        rb = GetComponent<Rigidbody2D>();
     }
+    void FixedUpdate()
+    {
+        //transform.Translate(new Vector2(MovementInput.x, MovementInput.y)
+        //                                * speed
+        //                                * Time.deltaTime);
+
+        rb.MovePosition(rb.position + MovementInput * speed * Time.deltaTime);
+      
+
+        /*
+         get playercontroller
+          MouseRotation();
+
+        GetComponent<Transform>().Rotate(Vector3.back * _mousePos.x  * speed);
+       */
+    }
+
+    private void MouseRotation()
+    {
+        var lookDir = _mousePos - transform.position;
+        //  var lookDir = new Vector2(_mousePos.x, _mousePos.y) - rb.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - offset;
+      //  transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+      //  GetComponent<Transform>().Rotate(Vector3.back * _mousePos.x * speed);
+    }
+
     private void RotateGameObject(Vector3 target, float RotationSpeed, float offset)
     {
         //https://www.youtube.com/watch?v=mKLp-2iseDc

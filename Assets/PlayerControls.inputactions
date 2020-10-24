@@ -9,8 +9,8 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "2823d281-dd27-4e9b-9710-845913730a57",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
+                    "expectedControlType": "",
+                    "processors": "NormalizeVector2",
                     "interactions": ""
                 },
                 {
@@ -34,6 +34,22 @@
                     "type": "Button",
                     "id": "5f4a57ae-2f15-4586-8b1c-502747fc8111",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AimingController",
+                    "type": "Value",
+                    "id": "c63d49e2-1cc4-4161-86c9-80e45e89cced",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AimingMouse",
+                    "type": "Value",
+                    "id": "e291a7c2-3b4b-4bc0-af0d-090c1ba947f3",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 }
@@ -66,8 +82,8 @@
                     "id": "e7e6e015-c539-4008-8c71-2775eea56a70",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "NormalizeVector2",
-                    "groups": "UI;Keyboard;Gamepad",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -168,6 +184,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fee4b691-1bd3-4838-9b58-e033a0637035",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "AimingController",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6153db3-3f06-4147-851b-50a8d6e256f8",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "AimingMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

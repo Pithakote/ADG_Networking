@@ -31,8 +31,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""2823d281-dd27-4e9b-9710-845913730a57"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
+                    ""expectedControlType"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""interactions"": """"
                 },
                 {
@@ -56,6 +56,22 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""5f4a57ae-2f15-4586-8b1c-502747fc8111"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AimingController"",
+                    ""type"": ""Value"",
+                    ""id"": ""c63d49e2-1cc4-4161-86c9-80e45e89cced"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AimingMouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""e291a7c2-3b4b-4bc0-af0d-090c1ba947f3"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -88,8 +104,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""id"": ""e7e6e015-c539-4008-8c71-2775eea56a70"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
-                    ""groups"": ""UI;Keyboard;Gamepad"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -192,6 +208,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fee4b691-1bd3-4838-9b58-e033a0637035"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AimingController"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6153db3-3f06-4147-851b-50a8d6e256f8"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""AimingMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -254,6 +292,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerMovement_Select = m_PlayerMovement.FindAction("Select", throwIfNotFound: true);
         m_PlayerMovement_CancelOrBack = m_PlayerMovement.FindAction("CancelOrBack", throwIfNotFound: true);
         m_PlayerMovement_Fire = m_PlayerMovement.FindAction("Fire", throwIfNotFound: true);
+        m_PlayerMovement_AimingController = m_PlayerMovement.FindAction("AimingController", throwIfNotFound: true);
+        m_PlayerMovement_AimingMouse = m_PlayerMovement.FindAction("AimingMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +357,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_Select;
     private readonly InputAction m_PlayerMovement_CancelOrBack;
     private readonly InputAction m_PlayerMovement_Fire;
+    private readonly InputAction m_PlayerMovement_AimingController;
+    private readonly InputAction m_PlayerMovement_AimingMouse;
     public struct PlayerMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -325,6 +367,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Select => m_Wrapper.m_PlayerMovement_Select;
         public InputAction @CancelOrBack => m_Wrapper.m_PlayerMovement_CancelOrBack;
         public InputAction @Fire => m_Wrapper.m_PlayerMovement_Fire;
+        public InputAction @AimingController => m_Wrapper.m_PlayerMovement_AimingController;
+        public InputAction @AimingMouse => m_Wrapper.m_PlayerMovement_AimingMouse;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -346,6 +390,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Fire.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnFire;
+                @AimingController.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimingController;
+                @AimingController.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimingController;
+                @AimingController.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimingController;
+                @AimingMouse.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimingMouse;
+                @AimingMouse.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimingMouse;
+                @AimingMouse.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnAimingMouse;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -362,6 +412,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @AimingController.started += instance.OnAimingController;
+                @AimingController.performed += instance.OnAimingController;
+                @AimingController.canceled += instance.OnAimingController;
+                @AimingMouse.started += instance.OnAimingMouse;
+                @AimingMouse.performed += instance.OnAimingMouse;
+                @AimingMouse.canceled += instance.OnAimingMouse;
             }
         }
     }
@@ -408,5 +464,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnSelect(InputAction.CallbackContext context);
         void OnCancelOrBack(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+        void OnAimingController(InputAction.CallbackContext context);
+        void OnAimingMouse(InputAction.CallbackContext context);
     }
 }

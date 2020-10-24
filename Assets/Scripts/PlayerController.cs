@@ -70,6 +70,16 @@ public class PlayerController : MonoBehaviour, ITakeDamage
             OnShoot(obj);
           //  OnChangeColor(obj);
         }
+        if (obj.action.name == _controls.PlayerMovement.AimingMouse.name)
+        {
+            
+            OnRotateMouse(obj);
+        }
+        if (obj.action.name == _controls.PlayerMovement.AimingController.name)
+        {
+            
+            OnRotateController(obj);
+        }
     }
 
     public void OnMove(InputAction.CallbackContext ctx)
@@ -90,7 +100,29 @@ public class PlayerController : MonoBehaviour, ITakeDamage
     {
         _playerShooting._isActivated = ctx.ReadValueAsButton();
     }
-   
+    public void OnRotateMouse(InputAction.CallbackContext ctx)
+    {
+        // _mousePos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+      
+      // if(ctx.control.device)
+        _playerMovement._mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+       //else if(_controls.devices is Gamepad)
+       
+      //  _playerMovement._mousePos = ctx.ReadValue<Vector2>();
+      // _playerMovement._mousePos = ctx.ReadValue<Axis>();
+
+    } public void OnRotateController(InputAction.CallbackContext ctx)
+    {
+        // _mousePos = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+      
+      // if(ctx.control.device)
+       // _playerMovement._mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+       //else if(_controls.devices is Gamepad)
+       
+        _playerMovement._mousePos = ctx.ReadValue<Vector2>();
+      // _playerMovement._mousePos = ctx.ReadValue<Axis>();
+
+    }
     public void ReduceHealth()
     {
         if (PlayerHealth > 0)
