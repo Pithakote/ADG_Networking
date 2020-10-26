@@ -93,7 +93,7 @@ public class Networked_PlayerManager : PlayerBase, IPunObservable
 
       //  PlayerInput.onActionTriggered += base.Input_onActionTriggered;
 
-        photonView.RPC("SetupCharacter", RpcTarget.All, shapeID, PlayerMaxHealth);
+        photonView.RPC("SetupCharacter", RpcTarget.All, shapeID);
         
    
 
@@ -133,11 +133,11 @@ public class Networked_PlayerManager : PlayerBase, IPunObservable
 
 
     [PunRPC]
-    void SetupCharacter(int shapeID, float _startingHealth)
+    void SetupCharacter(int shapeID)
     {
         name = PhotonNetwork.LocalPlayer.NickName;
         GetComponent<SpriteRenderer>().sprite = _playerShapesAndColor._playerShape[shapeID];
-        PlayerHealth = _startingHealth;
+       
 
     }
 

@@ -24,7 +24,7 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
     public PlayerInput PlayerInput { get; set; }
 
 
-    protected float PlayerHealth;
+    [SerializeField] protected float PlayerHealth;
     [SerializeField] protected float PlayerMaxHealth;
     protected int PlayerTakeDamageAmount;
     public float networkedRotation { get; set; }
@@ -53,31 +53,30 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
     }
     protected virtual void Start()
     {
-        if(PlayerMaxHealth == 0)
+        PlayerTakeDamageAmount = 2;
+        if (PlayerMaxHealth == 0)
         PlayerMaxHealth = 50;
         // PlayerHealth = PlayerMaxHealth;
 
-       
+        PlayerHealth = PlayerMaxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 
 
     protected abstract void InitializePlayer();
 
     public abstract void InitializePlayer(PlayerDataConfiguration pc);
    
-    public void ReduceHealth()
+    public virtual void ReduceHealth()
     {
         if (PlayerHealth > 0)
         {
             PlayerHealth -= PlayerTakeDamageAmount;
           
             _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
+
+            Debug.Log("Health decreasing");
 
         }
         else

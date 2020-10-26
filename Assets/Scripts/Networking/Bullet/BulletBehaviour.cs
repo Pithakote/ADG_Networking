@@ -40,7 +40,7 @@ public class BulletBehaviour : MonoBehaviourPunCallbacks
               //       other.SendMessage("TakeDamage", damage);
               //}
              
-            Debug.Log("Shot");
+         //   Debug.Log("Shot");
 
             Destroy(gameObject);
         }

@@ -8,7 +8,7 @@ public class OfflinePlayerShooting : PlayerShooting
     {
         if (_isActivated)
         {
-            Debug.Log("Shooting");
+        //    Debug.Log("Shooting");
             fireTimer += Time.deltaTime;
             if (fireTimer >= _refireRate)
             {
@@ -17,7 +17,7 @@ public class OfflinePlayerShooting : PlayerShooting
 
                 Fire();
 
-                Debug.Log("Offline shooting");
+              //  Debug.Log("Offline shooting");
 
             }
         }
