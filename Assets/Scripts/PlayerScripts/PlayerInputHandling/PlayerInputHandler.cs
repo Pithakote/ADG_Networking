@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
@@ -19,6 +20,8 @@ public class PlayerInputHandler : MonoBehaviour
         if (_playerMovement == null)
             gameObject.AddComponent<PlayerMovement>();
         _playerShooting = GetComponent<PlayerShooting>();
+
+        if(GetComponent<Rigidbody2D>())
         rb = GetComponent<Rigidbody2D>();
 
     }
@@ -83,6 +86,9 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnRotateMouse(InputAction.CallbackContext ctx)
     {
+        if (SceneManager.GetActiveScene().name == "PlayerSetup")
+            return;
+
         _playerMovement._mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue() -
                                                                    new Vector2(rb.position.x,
                                                                                 rb.position.y));

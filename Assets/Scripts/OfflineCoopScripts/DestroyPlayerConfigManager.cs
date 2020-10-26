@@ -8,6 +8,7 @@ public class DestroyPlayerConfigManager : MonoBehaviour
     void Start()
     {
      //   if (GameObject.Find("PlayerConfigurationManager(Clone)"))
+    // if(GameObject.Find("PlayerConfigurationManager"))
             Destroy(GameObject.Find("PlayerConfigurationManager"));
     }
 

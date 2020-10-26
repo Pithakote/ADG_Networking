@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,5 +83,12 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
         }
     }
 
-   
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        if (otherPlayer == PhotonNetwork.LocalPlayer && photonView.IsMine && PhotonNetwork.OfflineMode == false)
+        {
+            PhotonNetwork.RemoveRPCs(PhotonNetwork.LocalPlayer);
+         //   _myCustomProperty.Remove("PlayerIndexNumber");
+        }
+    }
 }

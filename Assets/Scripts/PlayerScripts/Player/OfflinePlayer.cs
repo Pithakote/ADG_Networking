@@ -20,8 +20,7 @@ public class OfflinePlayer : PlayerBase
     protected override void Awake()
     {
         
-        PhotonNetwork.OfflineMode = true;
-
+       
         base.Awake();
 
     }
@@ -29,6 +28,8 @@ public class OfflinePlayer : PlayerBase
     protected override void Start()
     {
         base.Start();
+     //   if(GetComponent<Rigidbody2D>())
+    
     }
 
     public override void InitializePlayer(PlayerDataConfiguration pc)
@@ -37,13 +38,13 @@ public class OfflinePlayer : PlayerBase
         _playerRenderer.sprite = pc.PlayerShape;
         _playerRenderer.color = pc.PlayerSpriteColor;
 
+
         _playerConfig.Input.onActionTriggered += _playerInputHandler.Input_onActionTriggered;
-     
-       
+
     }
 
-    
-    
+
+
 
     protected override void InitializePlayer()
     {

@@ -33,14 +33,16 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
         private void Awake()
         {
+         PhotonNetwork.OfflineMode = true;
+
         //   ListOfMenuUI = new List<GameObject>();
-           _setPlayerSetting = GetComponent<PlayerPropertySetting>();
+        _setPlayerSetting = GetComponent<PlayerPropertySetting>();
            _playerInputManager = GetComponent<PlayerInputManager>();
             if (Instance != null)
             {
             //}
-
-        }
+              Destroy(this);
+            }
             else
             { 
                 
@@ -48,6 +50,8 @@ public class PlayerConfigurationManager : MonoBehaviour
                 DontDestroyOnLoad(Instance);
                 _playerConfigs = new List<PlayerDataConfiguration>();
             }
+
+       //SceneManager.activeSceneChanged += DestroyInMainMenu;
         }
         private void Start()
         {
@@ -58,10 +62,11 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             return _playerConfigs;
         }
-       
-   
+
+    
+
         //for indicating when the players press "Ready"
-        public void ReadyPlayer(int index)
+    public void ReadyPlayer(int index)
         {
                 if(!_playerConfigs[index].IsReady)
                      _playerConfigs[index].IsReady = true;
