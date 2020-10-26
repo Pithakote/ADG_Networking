@@ -42,7 +42,7 @@ public class InitializeLevel : MonoBehaviour
                                      _playerPrefab.transform.rotation,
                                      gameObject.transform);
 
-            player.GetComponent<PlayerController>().InitializePlayer(_playerConfigs[i]);
+            player.GetComponent<OfflinePlayer>().InitializePlayer(_playerConfigs[i]);
         }
     }
 

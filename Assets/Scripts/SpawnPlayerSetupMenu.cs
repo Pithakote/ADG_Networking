@@ -48,7 +48,7 @@ public class SpawnPlayerSetupMenu : MonoBehaviourPunCallbacks
         else 
         {
            _gameMenu  =  PhotonNetwork.Instantiate(this.PlayerSetupMenuPrefab.name, Vector3.zero, Quaternion.identity) ;
-            _gameMenu.GetComponent<Networked_PlayerManager>().PlayerInput = _playerInput;
+            _gameMenu.GetComponent<NetworkedPlayer>().PlayerInput = _playerInput;
             //  PhotonNetwork.Instantiate(Path.Combine("NetworkedPrefabs", "Player_Networked"),
            //                     Vector3.zero,
             //                    Quaternion.identity);

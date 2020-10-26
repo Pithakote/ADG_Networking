@@ -30,7 +30,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
         if (obj.action.name == _controls.PlayerMovement.Fire.name)
         {
-            //  OnChangeColor(obj);
+            
 
             OnShoot(obj);
         }
@@ -49,12 +49,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
 
             OnRotateController(obj);
-
-
-
-
-
-
         }
 
 

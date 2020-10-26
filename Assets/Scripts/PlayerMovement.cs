@@ -18,7 +18,7 @@ public Vector2 MovementInput { get; set; }//property value set in PlayerControll
     PlayerBase _player;
     private void Start()
     {
-        _player = GetComponent<Networked_PlayerManager>();
+        _player = GetComponent<NetworkedPlayer>();
         rb = GetComponent<Rigidbody2D>();
     }
     void FixedUpdate()

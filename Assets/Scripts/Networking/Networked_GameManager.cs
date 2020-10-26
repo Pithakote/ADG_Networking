@@ -106,7 +106,7 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
             //                Quaternion.identity,
             //                _players[i]); 
 
-            if (Networked_PlayerManager.LocalPlayerInstance == null)
+            if (NetworkedPlayer.LocalPlayerInstance == null)
             {
 
 
@@ -140,7 +140,7 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPCAssignPlayerData(Vector2 _spawnPosition, Quaternion _spawnRotation,  Player thisPlayer)
     {
-        if (Networked_PlayerManager.LocalPlayerInstance == null)
+        if (NetworkedPlayer.LocalPlayerInstance == null)
         {
             
 

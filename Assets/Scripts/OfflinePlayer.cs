@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
 
-public class PlayerController : PlayerBase
+public class OfflinePlayer : PlayerBase
 {
    
     private PlayerDataConfiguration _playerConfig;
