@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 8296290341844064148}
   - component: {fileID: -5561124699754293289}
   - component: {fileID: 4917060536509114335}
+  - component: {fileID: -7223660516810156339}
   - component: {fileID: 7067806922761994918}
   m_Layer: 0
   m_Name: Player_Networked
@@ -229,6 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 116919419729351113}
+  PlayerHealth: 0
   PlayerMaxHealth: 50
   _isActivated: 0
   _playerShapesAndColor: {fileID: 11400000, guid: 3019a7f70d510d1468e3ed9163e30f10,
@@ -466,6 +468,19 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &-7223660516810156339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559370750279609980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b9dff943a383bd4cbb5a55c65865f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 8296290341844064148}
 --- !u!114 &7067806922761994918
 MonoBehaviour:
   m_ObjectHideFlags: 0

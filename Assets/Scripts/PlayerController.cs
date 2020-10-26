@@ -37,7 +37,7 @@ public class PlayerController : PlayerBase
         _playerRenderer.sprite = pc.PlayerShape;
         _playerRenderer.color = pc.PlayerSpriteColor;
 
-        _playerConfig.Input.onActionTriggered += Input_onActionTriggered;
+        _playerConfig.Input.onActionTriggered += _playerInputHandler.Input_onActionTriggered;
      
        
     }

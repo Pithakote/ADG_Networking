@@ -31,7 +31,7 @@ public class Networked_PlayerManager : PlayerBase, IPunObservable
     {
         base.Awake();
         transform.parent = GameObject.Find("Newtowked_GameManager").transform;
-        _playerShooting = GetComponent<NetworkedPlayerShooting>();
+        //_playerShooting = GetComponent<NetworkedPlayerShooting>();
 
 
         if (photonView.IsMine )
@@ -84,7 +84,7 @@ public class Networked_PlayerManager : PlayerBase, IPunObservable
            )
         {
 
-            PlayerInput.onActionTriggered += Input_onActionTriggered;
+            PlayerInput.onActionTriggered += _playerInputHandler.Input_onActionTriggered;
         }
         int _playerNumber ;       
         _playerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
@@ -117,7 +117,7 @@ public class Networked_PlayerManager : PlayerBase, IPunObservable
     {
         if (stream.IsWriting)//if the client who owns this variable is doing this action, the value of the variable is sent across the network
         {
-            stream.SendNext(rb.rotation);
+            stream.SendNext(_playerInputHandler.rb.rotation);
             stream.SendNext(_isActivated);
             stream.SendNext(name);
         
