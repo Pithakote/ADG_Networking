@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c30520c297c9cd4ea33de0f3497d471, type: 3}
-  m_Name: PlayerShape&Color
+  m_Name: OfflinePlayerShape&Color
   m_EditorClassIdentifier: 
   _playerColor: {r: 0, g: 0, b: 0, a: 0}
   _playerShape:
-  - {fileID: 21300000, guid: 4ce162959cd9e9a4b944531d09622648, type: 3}
-  - {fileID: 21300000, guid: f2ba63b5c42e26045b6ba4d2796a8663, type: 3}
-  - {fileID: 21300000, guid: c9656b199d1c13845ba43f6c83eac981, type: 3}
-  - {fileID: 21300000, guid: aa23fc40e41eef14e8ac029f0ac6c313, type: 3}
+  - {fileID: 21300000, guid: 2dd8a1afee05850418b7e6faa265841c, type: 3}
+  - {fileID: 21300000, guid: e19fa83520b069842aca4e1dce41400c, type: 3}
+  - {fileID: 21300000, guid: 2a7afbc83a22d88439c57704fc6148dc, type: 3}
+  - {fileID: 21300000, guid: d510bfa19a4662f41b043b0be237cb82, type: 3}

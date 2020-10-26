@@ -12,11 +12,13 @@ public class MainMenuControl : MonoBehaviour
                 PlayButton;
     private void Start()
     {
-        if (PlayButton != null &&
-            (Application.platform == RuntimePlatform.Android
+        if (PlayButton == null)
+            return;
+
+        if (Application.platform == RuntimePlatform.Android
             || Application.platform == RuntimePlatform.IPhonePlayer
             )
-            )
+            
         {
             PlayButton.SetActive(false);
         }
