@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 8296290341844064148}
   - component: {fileID: -5561124699754293289}
   - component: {fileID: 4917060536509114335}
+  - component: {fileID: 7067806922761994918}
   m_Layer: 0
   m_Name: Player_Networked
   m_TagString: Untagged
@@ -227,18 +228,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6bc556c71db4e42a42a286f32f59cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 8.46
-  _isActivated: 0
-  test:
-  - {fileID: 21300000, guid: 13cef8d119aa5a844b7748bd46c0c8c8, type: 3}
-  - {fileID: 21300000, guid: b88e40fa2ad45004faa2935ee95aed82, type: 3}
   _healthBar: {fileID: 116919419729351113}
+  PlayerMaxHealth: 50
+  _isActivated: 0
   _playerShapesAndColor: {fileID: 11400000, guid: 3019a7f70d510d1468e3ed9163e30f10,
     type: 2}
   _playerInfo: {fileID: 628834542528356238}
-  PlayerHealth: 50
-  PlayerMaxHealth: 50
-  PlayerTakeDamageAmount: 2
   offset: 90
 --- !u!212 &-6261924048756453356
 SpriteRenderer:
@@ -471,6 +466,20 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &7067806922761994918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559370750279609980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af85532b485ca9d4e9432252191774eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mousePos: {x: 0, y: 0, z: 0}
+  offset: 90
 --- !u!1 &3836363377451910479
 GameObject:
   m_ObjectHideFlags: 0
