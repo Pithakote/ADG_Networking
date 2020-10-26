@@ -9,6 +9,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 [RequireComponent(typeof(PlayerInputHandler))]
 [RequireComponent(typeof(PlayerMovement))]
+[RequireComponent(typeof(DontGoOffScreen))]
 public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
 {
 
@@ -32,18 +33,17 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
     public float networkedRotation { get; set; }
 
     protected PlayerInputHandler _playerInputHandler;
-    
+
 
     // Start is called before the first frame update
+    protected abstract void InitializePlayer();
+
+    public abstract void InitializePlayer(PlayerDataConfiguration pc);
 
     protected virtual void Awake()
     {
 
         _playerRenderer = GetComponent<SpriteRenderer>();
-
-       
-
-
         _playerInputHandler = GetComponent<PlayerInputHandler>();
 
 
@@ -62,10 +62,7 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
    
 
 
-    protected abstract void InitializePlayer();
-
-    public abstract void InitializePlayer(PlayerDataConfiguration pc);
-   
+  
     public virtual void ReduceHealth()
     {
         if (PlayerHealth > 0)
