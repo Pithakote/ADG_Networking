@@ -128,6 +128,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2657085945889207957, guid: 05837df30b3c31042836873fd3972aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657085945889207957, guid: 05837df30b3c31042836873fd3972aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657085945889207957, guid: 05837df30b3c31042836873fd3972aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657085945889207957, guid: 05837df30b3c31042836873fd3972aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1557638797}
+    - target: {fileID: 2657085945889207957, guid: 05837df30b3c31042836873fd3972aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657085945889207957, guid: 05837df30b3c31042836873fd3972aa6,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2657085945889207958, guid: 05837df30b3c31042836873fd3972aa6,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -288,6 +318,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6338366106748033778, guid: 05837df30b3c31042836873fd3972aa6,
+        type: 3}
+      propertyPath: PlayButton
+      value: 
+      objectReference: {fileID: 771616723}
     - target: {fileID: 7025761475516016440, guid: 05837df30b3c31042836873fd3972aa6,
         type: 3}
       propertyPath: m_Name
@@ -399,6 +434,13 @@ MonoBehaviour:
   _currentCanvas: {fileID: 0}
   _startingCanvas: {fileID: 0}
   _lastActiveCanvas: {fileID: 0}
+  MobileControls: {fileID: 0}
+--- !u!1 &771616723 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2657085947617827409, guid: 05837df30b3c31042836873fd3972aa6,
+    type: 3}
+  m_PrefabInstance: {fileID: 213733725}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1109372767 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2657085946795932794, guid: 05837df30b3c31042836873fd3972aa6,

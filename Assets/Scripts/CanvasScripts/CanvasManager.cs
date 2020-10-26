@@ -15,6 +15,8 @@ public class CanvasManager : MonoBehaviour
     public CanvasController _newCanvas { get {return _currentCanvas; } set { _currentCanvas = value; } }
     [SerializeField]
     CanvasController _lastActiveCanvas;
+    [SerializeField]
+    GameObject MobileControls;
     private void Awake()
     {
         if (Instance == null)
@@ -42,7 +44,28 @@ public class CanvasManager : MonoBehaviour
             return;
         _currentCanvas = _startingCanvas;
         SwitchCanvas(_currentCanvas.CanvasType);
+
+        SetupMobileControlsVisibility();
     }
+
+    private void SetupMobileControlsVisibility()
+    {
+        if (MobileControls == null)
+            return;
+
+        if (Application.platform == RuntimePlatform.Android
+            || Application.platform == RuntimePlatform.IPhonePlayer
+            )
+           
+        {
+            MobileControls.SetActive(true);
+        }
+        else
+        {
+            MobileControls.SetActive(false);
+        }
+    }
+
     public void SwitchCanvas(CanvasTypesInsideScenes _cType)
     {
         if (_currentCanvas != null &&
