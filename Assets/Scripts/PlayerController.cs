@@ -7,9 +7,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
-[RequireComponent(typeof(PlayerMovement))]
-[RequireComponent(typeof(PlayerShooting))]
-public class PlayerController : PlayerBase, ITakeDamage
+
+public class PlayerController : PlayerBase
 {
    
     private PlayerDataConfiguration _playerConfig;
@@ -18,22 +17,27 @@ public class PlayerController : PlayerBase, ITakeDamage
    
    // PlayerControls _controls; 
   
-    private void Awake()
+    protected override void Awake()
     {
-        PhotonNetwork.OfflineMode = true;
         
+        PhotonNetwork.OfflineMode = true;
 
-     
+        base.Awake();
+
     }
 
-    
+    protected override void Start()
+    {
+        base.Start();
+    }
+
     public override void InitializePlayer(PlayerDataConfiguration pc)
     {
         _playerConfig = pc;
-        GetComponent<SpriteRenderer>().sprite = pc.PlayerShape;
-        GetComponent<SpriteRenderer>().color = pc.PlayerSpriteColor;
+        _playerRenderer.sprite = pc.PlayerShape;
+        _playerRenderer.color = pc.PlayerSpriteColor;
 
-        _playerConfig.Input.onActionTriggered += base.Input_onActionTriggered;
+        _playerConfig.Input.onActionTriggered += Input_onActionTriggered;
      
        
     }

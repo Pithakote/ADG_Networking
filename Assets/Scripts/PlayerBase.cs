@@ -47,18 +47,7 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
         
 
 
-        if (photonView.IsMine)
-        {
-            PlayerBase.LocalPlayerInstance = this.gameObject;
-        }
-
-        if (photonView.IsMine && PlayerInput == null)
-        {
-            PlayerInput = GetComponent<PlayerInput>();
-            
-        }
-        else if (!photonView.IsMine && GetComponent<PlayerInput>())
-            GetComponent<PlayerInput>().enabled = false;
+       
 
         _controls = new PlayerControls();
     }
@@ -68,11 +57,7 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
         PlayerMaxHealth = 50;
         // PlayerHealth = PlayerMaxHealth;
 
-      //  if (photonView.IsMine || !PhotonNetwork.IsConnected || PhotonNetwork.LocalPlayer.IsLocal)
-      //  {
-
-      //      PlayerInput.onActionTriggered += Input_onActionTriggered;
-       // }
+       
     }
 
     // Update is called once per frame

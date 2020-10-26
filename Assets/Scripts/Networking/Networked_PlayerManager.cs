@@ -32,6 +32,20 @@ public class Networked_PlayerManager : PlayerBase, IPunObservable
         base.Awake();
         transform.parent = GameObject.Find("Newtowked_GameManager").transform;
         _playerShooting = GetComponent<NetworkedPlayerShooting>();
+
+
+        if (photonView.IsMine )
+        {
+            PlayerBase.LocalPlayerInstance = this.gameObject;
+        }
+
+        if (photonView.IsMine && PlayerInput == null)
+        {
+            PlayerInput = GetComponent<PlayerInput>();
+
+        }
+        else if (!photonView.IsMine && GetComponent<PlayerInput>())
+            GetComponent<PlayerInput>().enabled = false;
         //   _playerMovement = GetComponent<PlayerMovement>();
 
         //  InitialisePlayer(PhotonNetwork.LocalPlayer);
@@ -63,14 +77,21 @@ public class Networked_PlayerManager : PlayerBase, IPunObservable
     
     protected override void InitializePlayer()
     {
-        
 
+        if (photonView.IsMine ||
+           !PhotonNetwork.IsConnected ||
+           PhotonNetwork.LocalPlayer.IsLocal
+           )
+        {
+
+            PlayerInput.onActionTriggered += Input_onActionTriggered;
+        }
         int _playerNumber ;       
         _playerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
 
         int shapeID = _playerNumber - 1;
 
-        PlayerInput.onActionTriggered += base.Input_onActionTriggered;
+      //  PlayerInput.onActionTriggered += base.Input_onActionTriggered;
 
         photonView.RPC("SetupCharacter", RpcTarget.All, shapeID, PlayerMaxHealth);
         
