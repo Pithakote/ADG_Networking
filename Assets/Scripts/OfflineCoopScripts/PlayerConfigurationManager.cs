@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         public event onSelectLocal ButtonSelectEvent;
   
          public PlayerPropertySetting SetPlayerProperty { get {return _setPlayerSetting; } }
+         [SerializeField] TMP_Text _noOfPlayersJoinedText; 
         public int CurrentPlayers
         {
             get { return _currentPlayers; }
@@ -56,7 +58,8 @@ public class PlayerConfigurationManager : MonoBehaviour
         private void Start()
         {
             _currentPlayers = 0;
-        }
+        _noOfPlayersJoinedText.text = _currentPlayers + "/4 Players Joined";
+    }
   
         public List<PlayerDataConfiguration> GetPlayerConfigs()
         {
@@ -97,6 +100,8 @@ public class PlayerConfigurationManager : MonoBehaviour
                 _playerConfigs[pi.playerIndex].IsReady = false;
                
                 _currentPlayers += 1;
+
+            _noOfPlayersJoinedText.text = _currentPlayers + "/4 Players Joined";
 
             }
         }
