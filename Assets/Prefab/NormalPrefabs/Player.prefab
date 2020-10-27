@@ -362,6 +362,8 @@ MonoBehaviour:
   _bullets: {fileID: 4157696462344666892, guid: 870574cc5c7df0949b2610204d3cb087,
     type: 3}
   _refireRate: 0.2
+  _useObjectPool: 1
+  _numberOfBulletsInPool: 0
 --- !u!61 &7987544052161437508
 BoxCollider2D:
   m_ObjectHideFlags: 0

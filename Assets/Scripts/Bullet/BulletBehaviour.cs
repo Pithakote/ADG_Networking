@@ -8,8 +8,7 @@ public class BulletBehaviour : MonoBehaviourPunCallbacks
     float _moveSpeed = 30f;
     float lifefTime;
     float maxLifeTime = 2f;
-
-
+  
     private void OnEnable()
     {
         lifefTime = 0f;
@@ -21,7 +20,9 @@ public class BulletBehaviour : MonoBehaviourPunCallbacks
         lifefTime += Time.deltaTime;
         if (lifefTime > maxLifeTime)
         {
-            Destroy(gameObject);
+
+            GoToPool();
+            //Destroy(gameObject);
         }
     }
 
@@ -34,15 +35,22 @@ public class BulletBehaviour : MonoBehaviourPunCallbacks
         {
                //photonView.RPC()
                _damageTakingObject.ReduceHealth();
-            
-              //if (other.name != "Shield_Collider")
-              //{
-              //       other.SendMessage("TakeDamage", damage);
-              //}
-             
-         //   Debug.Log("Shot");
 
-            Destroy(gameObject);
+            //if (other.name != "Shield_Collider")
+            //{
+            //       other.SendMessage("TakeDamage", damage);
+            //}
+
+            //   Debug.Log("Shot");
+
+            GoToPool();
+           // Destroy(gameObject);
         }
+    }
+
+    void GoToPool()
+    {
+       // _objectPool.ReturnToPool(this.gameObject);
+        ObjectPool.Instance.ReturnToPool(this.gameObject);
     }
 }

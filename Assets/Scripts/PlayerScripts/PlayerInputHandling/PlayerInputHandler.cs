@@ -19,6 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
         if (_playerMovement == null)
             gameObject.AddComponent<PlayerMovement>();
+
         _playerShooting = GetComponent<PlayerShooting>();
 
         if(GetComponent<Rigidbody2D>())

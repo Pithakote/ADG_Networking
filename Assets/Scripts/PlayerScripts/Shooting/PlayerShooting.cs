@@ -8,6 +8,9 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     [SerializeField] protected Transform bulletFirer;
     [SerializeField] protected GameObject _bullets;
     [SerializeField] protected float _refireRate = 0.2f;
+    [SerializeField] protected bool _useObjectPool;
+    [SerializeField] protected float _numberOfBulletsInPool;
+
     protected float fireTimer = 0;
     bool isShooting;
     public bool _isActivated { get { return isShooting; } set { isShooting = value; } }
@@ -16,8 +19,15 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     
     private void Awake()
     {
-
         _isActivated = false;
+    }
+
+    private void Start()
+    {
+        if (_numberOfBulletsInPool == 0)
+            _numberOfBulletsInPool = 20;
+
+    
     }
 
     protected  virtual void Update()
@@ -40,10 +50,25 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     [PunRPC]
     protected virtual void Fire()
     {
-        var shot = Instantiate(_bullets,
-                                            bulletFirer.position,
-                                            bulletFirer.rotation
-                                            );
+        if (_useObjectPool)
+        {
+            
+
+            GameObject _bulletShot = ObjectPool.Instance.Get();
+
+            _bulletShot.transform.position = bulletFirer.position;
+            _bulletShot.transform.rotation = bulletFirer.rotation;
+
+            _bulletShot.SetActive(true);
+        }
+        else
+        {
+            var shot = Instantiate(_bullets,
+                                               bulletFirer.position,
+                                               bulletFirer.rotation
+                                               );
+        }
+
     }
     
 }
