@@ -1,5 +1,6 @@
 ﻿
 
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,4 +17,16 @@ public class PlayerDataConfiguration
     public int PlayerIndex { get; set; }
     public bool IsReady { get; set; }
     public UnityEngine.Color PlayerSpriteColor { get; set; }
+}
+
+public class NetworkedPlayerDataConfiguration
+{
+    public NetworkedPlayerDataConfiguration(Player _player)
+    {
+       
+    }
+
+    public Sprite NetworkedPlayerSprite {get; set;}
+    public bool isNetworkedPlayerReady {get; set;}
+
 }

@@ -11,15 +11,15 @@ public class Launcher : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_InputField _roomNameInputField, _playerNameInputField;
     [SerializeField] TMP_Text _errorText, _roomName;
-    [SerializeField] Transform _roomListContent, _playerListContent;
-    [SerializeField] GameObject _roomListItemPrefab, _playerListItemPrefab;
+    [SerializeField] Transform _roomListContent, _playerListContent, _colorSelectorPanel;
+    [SerializeField] GameObject _roomListItemPrefab, _playerListItemPrefab, _colorSelector;
     [SerializeField] Button _startGameButton;
     [SerializeField] int _numberOfPlayersAllowedInRoom = 4;
     public static Launcher Instance;
 
     public List<PlayerDataConfiguration> PlayerConfigs { get; set ;  }
-    
 
+    List<NetworkedPlayerDataConfiguration> _networkedPlayerConfig;
 
     private void Awake()
     {
@@ -32,6 +32,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.OfflineMode = false;
+        _networkedPlayerConfig = new List<NetworkedPlayerDataConfiguration>();
         Debug.Log("Connecting to Master");
         // CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
         if (!PhotonNetwork.IsConnected)
@@ -101,12 +102,19 @@ public class Launcher : MonoBehaviourPunCallbacks
         foreach (Transform children in _playerListContent)
             Destroy(children.gameObject);
 
-        foreach (Player _player in players)
-            Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(_player);
+        foreach (Transform colorSelectors in _colorSelectorPanel)
+            Destroy(colorSelectors.gameObject);
 
+        foreach (Player _player in players)
+        {
+            GameObject _selector = Instantiate(_colorSelector, _colorSelectorPanel);
+            Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(_player, _selector);
+            
+        }
 
 
         _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
+
 
         
     }
@@ -174,7 +182,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        GameObject _selector = Instantiate(_colorSelector, _colorSelectorPanel);
+        Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer, _selector);
+      //  Instantiate(_colorSelector, _colorSelectorPanel);
+
         if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             SetRoomVisibilityAndJoining(false);
     }
