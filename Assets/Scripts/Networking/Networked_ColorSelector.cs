@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Networked_ColorSelector : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] TMP_Text _playerNameDisplayText;
+    [SerializeField] Button[] _buttonsInPanel;
+
+
+
+    private void Awake()
     {
-        
+        _buttonsInPanel = transform.GetComponentsInChildren<Button>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetupNetworkedPanel(string _playerName)
     {
-        
+        _playerNameDisplayText.text = _playerName;
     }
 }

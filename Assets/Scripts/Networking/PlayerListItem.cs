@@ -24,9 +24,11 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
         _playerNumber = _player.ActorNumber;
 
         _colorSelectorLocal = _colorSelector;
+        _colorSelectorLocal.GetComponent<Networked_ColorSelector>().SetupNetworkedPanel(_player.NickName);
         if(PhotonNetwork.LocalPlayer.IsLocal)
         Debug.Log("The player index is: "+_playerNumber);
     }
+
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
