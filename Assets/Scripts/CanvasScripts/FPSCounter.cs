@@ -7,33 +7,16 @@ using UnityEngine;
 
 public class FPSCounter : MonoBehaviour
 {
-    public float Rate = 50.0f;
-    float currentFrameTime;
+    
     [SerializeField] TMP_Text fpsText;
-    void Start()
-    {
-        QualitySettings.vSyncCount = 0;
-        Application.targetFrameRate = 9999;
-        currentFrameTime = Time.realtimeSinceStartup;
-        StartCoroutine("WaitForNextFrame");
-       
-    }
+    public int avgFrameRate;
+   
 
-    IEnumerator WaitForNextFrame()
+    public void Update()
     {
-        while (true)
-        {
-            yield return new WaitForEndOfFrame();
-            currentFrameTime += 1.0f / Rate;
-            var t = Time.realtimeSinceStartup;
-            var sleepTime = currentFrameTime - t - 0.01f;
-            if (sleepTime > 0)
-                Thread.Sleep((int)(sleepTime * 1000));
-            while (t < currentFrameTime)
-                t = Time.realtimeSinceStartup;
-
-            fpsText.text = currentFrameTime + " FPS";
-        }
-        
+        float current = 0;
+        current = (int)(1f / Time.unscaledDeltaTime);
+        avgFrameRate = (int)current;
+        fpsText.text = avgFrameRate.ToString() + " FPS";
     }
 }

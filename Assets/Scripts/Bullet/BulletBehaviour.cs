@@ -52,5 +52,7 @@ public class BulletBehaviour : MonoBehaviourPunCallbacks
     {
        // _objectPool.ReturnToPool(this.gameObject);
         ObjectPool.Instance.ReturnToPool(this.gameObject);
+
+      //  Destroy(gameObject);
     }
 }
