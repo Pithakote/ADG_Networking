@@ -113,7 +113,7 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
 
                 var _player = PhotonNetwork.Instantiate(this._playerPrefab.name,
                                                         _newSpawnPos,
-                                                        Quaternion.identity           );
+                                                        transform.rotation          );
 
                 _player.GetComponent<NetworkedPlayer>().InitialisePlayer(_playerConfig[i]);
 

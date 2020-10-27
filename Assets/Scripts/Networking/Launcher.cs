@@ -111,7 +111,6 @@ public class Launcher : MonoBehaviourPunCallbacks
             //                                                  0);
             //_selector.transform.parent = _colorSelectorPanel.transform;
             Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(_player);
-            Networked_RoomManager.Instance.NetworkedDataConfig.Add(new NetworkedPlayerDataConfiguration(_player));
             //if (!PhotonNetwork.LocalPlayer.IsLocal)
              //   _selector.GetComponent<Networked_ColorSelector>().GetEventSystem().SetActive(false);
         }
@@ -152,7 +151,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         SetRoomVisibilityAndJoining(false);
-        PhotonNetwork.LoadLevel("Testing");
+        PhotonNetwork.LoadLevel("NetworkedColorSelection");
+        //PhotonNetwork.LoadLevel("Testing");
      //  PhotonNetwork.LoadLevel("NetworkedSampleScene");
        // PhotonNetwork.LoadLevel("PlayerSelection");
     }
@@ -193,7 +193,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         
         //    _selector.transform.parent = _colorSelectorPanel.transform;
         Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
-        Networked_RoomManager.Instance.NetworkedDataConfig.Add(new NetworkedPlayerDataConfiguration(newPlayer));
+       // Networked_RoomManager.Instance.NetworkedDataConfig.Add(new NetworkedPlayerDataConfiguration(newPlayer));
 
 
         //if (!PhotonNetwork.LocalPlayer.IsLocal)

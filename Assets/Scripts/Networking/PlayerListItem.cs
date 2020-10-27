@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerListItem : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_Text _text;
-    [SerializeField] GameObject _colorSelectorLocal;
+    [SerializeField] GameObject _colorSelectorLocal, _colorSelector;
     GameObject _colorSelectorHolder;
     Player player;
     int _playerNumber;
@@ -23,8 +23,14 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
         _text.text = _player.NickName;
         _playerNumber = _player.ActorNumber;
 
-      //  _colorSelectorLocal = _colorSelector;
-       // _colorSelectorLocal.GetComponent<Networked_ColorSelector>().SetupNetworkedPanel(_player.NickName, _playerNumber);
+
+       // GameObject _selector = PhotonNetwork.Instantiate(this._colorSelector.name,
+         //                                               Vector2.zero,
+           //                                                 Quaternion.identity
+             //                                           );
+
+        //_colorSelectorLocal = _colorSelector;
+        //_colorSelectorLocal.GetComponent<Networked_ColorSelector>().SetupNetworkedPanel(_player.NickName, _playerNumber);
         if (PhotonNetwork.LocalPlayer.IsLocal)
             Debug.Log("The player index is: " + _playerNumber);
         //else
@@ -40,7 +46,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
     {
         if (player == otherPlayer)
         {
-          //  Destroy(_colorSelectorLocal);
+            Destroy(_colorSelectorLocal);
             Destroy(gameObject);
             
         }
@@ -48,7 +54,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-    //    Destroy(_colorSelectorLocal);
+        Destroy(_colorSelectorLocal);
         Destroy(gameObject);
 
         

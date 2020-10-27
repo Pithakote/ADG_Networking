@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6825906971346674031}
   - component: {fileID: 5640561480769442801}
   - component: {fileID: 7551017614601694251}
+  - component: {fileID: -7700785016885944564}
   m_Layer: 5
   m_Name: PlayerListItem
   m_TagString: Untagged
@@ -147,3 +148,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 5640561480769442801}
+  _colorSelectorLocal: {fileID: 0}
+  _colorSelector: {fileID: 8298370440918943196, guid: f281d8fb82d18f44f9c5b5b98657b82e,
+    type: 3}
+--- !u!114 &-7700785016885944564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6825267994166879218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

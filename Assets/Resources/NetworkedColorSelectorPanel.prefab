@@ -66,6 +66,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: -6615835158756249253}
+  - {fileID: 8545144967619721268}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -82,9 +83,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerNameDisplayText: {fileID: 8298370442388001089}
-  _buttonsInPanel: []
+  _buttonsInPanel:
+  - {fileID: 8298370442244531184}
+  - {fileID: 8298370440857379344}
+  - {fileID: 8298370441495209103}
+  - {fileID: 8298370441623359282}
   _playerInputInSelectionPanel: []
   _localEventSystem: {fileID: 8444277400122642087}
+  _playerName: 
 --- !u!114 &6320614970546259377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +467,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3362083871411815330, guid: 7ee15306a847ceb4ca0562131e9f6540,
+        type: 3}
+      propertyPath: m_text
+      value: Player0603
+      objectReference: {fileID: 0}
     - target: {fileID: 3362083872092664083, guid: 7ee15306a847ceb4ca0562131e9f6540,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -570,6 +581,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8298370442244531184 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3362083872092664083, guid: 7ee15306a847ceb4ca0562131e9f6540,
+    type: 3}
+  m_PrefabInstance: {fileID: 6737735257093640931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8298370440857379345 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3362083870803947762, guid: 7ee15306a847ceb4ca0562131e9f6540,
@@ -580,6 +603,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8298370440857379344 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3362083870803947763, guid: 7ee15306a847ceb4ca0562131e9f6540,
+    type: 3}
+  m_PrefabInstance: {fileID: 6737735257093640931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8298370441495209096 stripped
@@ -594,6 +629,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8298370441495209103 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3362083870233949804, guid: 7ee15306a847ceb4ca0562131e9f6540,
+    type: 3}
+  m_PrefabInstance: {fileID: 6737735257093640931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8298370441623359283 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3362083870634597840, guid: 7ee15306a847ceb4ca0562131e9f6540,
@@ -604,6 +651,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8298370441623359282 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3362083870634597841, guid: 7ee15306a847ceb4ca0562131e9f6540,
+    type: 3}
+  m_PrefabInstance: {fileID: 6737735257093640931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8298370442388001089 stripped
