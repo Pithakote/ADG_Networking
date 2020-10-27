@@ -4,8 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Networked_RoomManager : MonoBehaviourPunCallbacks
+public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] GameObject _colorSelectionPanel;
     [SerializeField] Transform [] _spawnPoints;
@@ -13,8 +14,12 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks
 
     List<NetworkedPlayerDataConfiguration> _networkedDataConfig;
     [SerializeField] Player[] players;
+    [SerializeField] Button _startGameButton;
     public List<NetworkedPlayerDataConfiguration> NetworkedDataConfig
     { get {return _networkedDataConfig; } set { _networkedDataConfig = value; } }
+
+
+    public int ColorNumber { get; set; }
     private void Awake()
     {
         if (Instance)
@@ -25,8 +30,8 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks
         {
             Instance = this;
             DontDestroyOnLoad(this);
-            NetworkedDataConfig = new List<NetworkedPlayerDataConfiguration>();
         }
+        NetworkedDataConfig = new List<NetworkedPlayerDataConfiguration>();
 
     }
 
@@ -40,8 +45,15 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks
             photonView.RPC("SpawnSelector", players[i], _spawnPoints[i].position, _spawnPoints[i].rotation);
            
         }
-    }
+        if(_startGameButton)
+        _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
 
+    }
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        if (_startGameButton)
+            _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
+    }
     [PunRPC]
     void SpawnSelector(Vector3 pos, Quaternion rot)
     {
@@ -52,5 +64,15 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks
                                         rot
                                         );
         }
+    }
+
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel("Testing");
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        
     }
 }

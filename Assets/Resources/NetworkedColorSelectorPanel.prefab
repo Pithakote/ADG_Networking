@@ -91,6 +91,9 @@ MonoBehaviour:
   _playerInputInSelectionPanel: []
   _localEventSystem: {fileID: 8444277400122642087}
   _playerName: 
+  _localPlayerNumber: 0
+  _ownerPlayerNumber: 0
+  _getPlayerNumber: 0
 --- !u!114 &6320614970546259377
 MonoBehaviour:
   m_ObjectHideFlags: 0

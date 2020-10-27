@@ -27,7 +27,6 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     
    [SerializeField] float offset;
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -81,7 +80,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
             _npc = npc;
             //  GetComponent<SpriteRenderer>().color = npc.NetworkedPlayerSpriteColor;
          //   _localColorVar = npc.NetworkedPlayerSpriteColor;
-            InitializePlayer(npc.NetworkedPlayerSpriteColor);
+            InitializePlayer(Networked_RoomManager.Instance.ColorNumber);
 
         }
     }

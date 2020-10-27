@@ -25,6 +25,8 @@ public class Launcher : MonoBehaviourPunCallbacks
             Destroy(this);
         else
             Instance = this;
+
+        Destroy(GameObject.Find("Networked_RoomManager"));
     }
     // Start is called before the first frame update
     void Start()
