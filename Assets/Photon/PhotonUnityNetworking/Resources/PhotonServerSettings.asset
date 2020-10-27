@@ -47,6 +47,7 @@ MonoBehaviour:
   - ReduceHealth
   - EventHandlerStatus
   - SpawnSelector
+  - InitialFunctionsToBeShared
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

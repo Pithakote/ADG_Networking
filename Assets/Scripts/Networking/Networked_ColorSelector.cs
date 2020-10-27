@@ -19,10 +19,10 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks, IPunObservable
     List<NetworkedPlayerDataConfiguration> _networkedPlayerDataConfig;
     private void Awake()
     {
-        transform.parent = GameObject.Find("ColorSelectorPanel").transform;
+        transform.SetParent(GameObject.Find("ColorSelectorPanel").transform);
       //  transform.position = Vector3.zero;
         Networked_RoomManager.Instance.NetworkedDataConfig.Add(new NetworkedPlayerDataConfiguration(PhotonNetwork.LocalPlayer));
-        _playerName = PhotonNetwork.LocalPlayer.NickName;
+        _playerName = photonView.Owner.NickName;
         _playerNameDisplayText.text = _playerName;
 
         if (photonView.IsMine)
@@ -34,7 +34,8 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks, IPunObservable
             _localEventSystem.SetActive(false);
         }
 
-        photonView.RPC("EventHandlerStatus", RpcTarget.All, null );
+     //   photonView.RPC("EventHandlerStatus", RpcTarget.Others, null );
+
         //foreach (PlayerInput _inputComponent in _playerInputInSelectionPanel)
         //{
 
@@ -42,8 +43,14 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks, IPunObservable
         // }
 
         // photonView.RPC("EventHandlerStatus", RpcTarget.All, null);
+        photonView.RPC("InitialFunctionsToBeShared", RpcTarget.Others, _playerName);
     }
 
+    [PunRPC]
+    void InitialFunctionsToBeShared(string _pName)
+    {
+        _playerNameDisplayText.text = _pName;
+    }
     public GameObject GetEventSystem()
     {
         return _localEventSystem;
