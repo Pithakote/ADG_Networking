@@ -7,10 +7,11 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool Instance { get; set; }
 
     [SerializeField] GameObject _pooledObject;
-    Queue<GameObject> _poolOfObjects = new Queue<GameObject>();
-
+    LinkedList<GameObject> _poolOfObjects;
     private void Awake()
     {
+        _poolOfObjects = new LinkedList<GameObject>();
+
         Instance = this;
     }
 
@@ -21,7 +22,9 @@ public class ObjectPool : MonoBehaviour
             AddShots(1);
         }
 
-        return _poolOfObjects.Dequeue();
+        GameObject pooledObject = _poolOfObjects.First.Value;
+        _poolOfObjects.RemoveFirst();
+        return pooledObject;
     }
 
     private void AddShots(int count)
@@ -31,13 +34,13 @@ public class ObjectPool : MonoBehaviour
             GameObject _projectile = Instantiate(_pooledObject);
             if(!_projectile.activeSelf)
             _projectile.SetActive(true);
-            _poolOfObjects.Enqueue(_pooledObject);
+            _poolOfObjects.AddFirst(_pooledObject);
         }
     }
 
     public void ReturnToPool(GameObject _pooledObject)
     {
         _pooledObject.SetActive(false);
-        _poolOfObjects.Enqueue(_pooledObject);
+        _poolOfObjects.AddFirst(_pooledObject);
     }
 }
