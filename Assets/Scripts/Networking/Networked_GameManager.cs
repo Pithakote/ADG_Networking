@@ -15,7 +15,7 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
     [SerializeField] PlayerColorAndShape _playerShapesAndColor;
 
     private ExitGames.Client.Photon.Hashtable _myCustomProperty = new ExitGames.Client.Photon.Hashtable();
-
+    public List<NetworkedPlayerDataConfiguration> _playerConfig; 
     //public Networked_GameManager Instance { get; set; }
     //private void Awake()
     //{
@@ -61,6 +61,7 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
         //                  Quaternion.identity);
 
         Debug.Log("The number of players are: "+ PhotonNetwork.PlayerList.Length);
+        _playerConfig = Networked_RoomManager.Instance.NetworkedDataConfig;
         AssignShapes();
 
 
@@ -114,10 +115,8 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
                                                         _newSpawnPos,
                                                         Quaternion.identity           );
 
-                //if (!photonView.IsMine)
-                //{
-                //    _player.gameObject.GetComponent<PlayerInput>().enabled = false;
-              //  }
+                _player.GetComponent<NetworkedPlayer>().InitialisePlayer(_playerConfig[i]);
+
                 
             }
             else
@@ -151,21 +150,6 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
 
            
 
-            //_player.GetComponent<Networked_PlayerManager>().InitialisePlayer(thisPlayer);
-
-
-            // _player.transform.parent = gameObject.transform;//sets this gameobject as the player's parent
-
-            //  _myCustomProperty["PlayerIndexNumber"] = thisPlayer.ActorNumber;
-
-            //  _myCustomProperty["PlayerShape"] = System.Convert.ToByte(_playerShapesAndColor._playerShape[_playerShapeNumber]);
-
-            //  _myCustomProperty.Add("PlayerShape", _playerShapesAndColor._playerShape[_playerShapeNumber]);
-            //PhotonNetwork.LocalPlayer.SetCustomProperties(_myCustomProperty);
-            // PhotonNetwork.LocalPlayer.CustomProperties = _myCustomProperty;
-            //   
-            //  if (_player.GetComponent<Networked_PlayerManager>())
-            //     _player.GetComponent<Networked_PlayerManager>().InitialisePlayer(thisPlayer);
         }
         else
         {

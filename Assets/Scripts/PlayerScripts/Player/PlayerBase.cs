@@ -36,7 +36,7 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
 
 
     // Start is called before the first frame update
-    protected abstract void InitializePlayer();
+    protected abstract void InitializePlayer(int _playerColorNumber);
 
     public abstract void InitializePlayer(PlayerDataConfiguration pc);
 

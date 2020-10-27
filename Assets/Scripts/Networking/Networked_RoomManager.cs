@@ -6,8 +6,11 @@ using UnityEngine;
 
 public class Networked_RoomManager : MonoBehaviourPunCallbacks
 {
-    public Networked_RoomManager Instance { get; set; }
+    public static Networked_RoomManager Instance { get; set; }
 
+    List<NetworkedPlayerDataConfiguration> _networkedDataConfig;
+    public List<NetworkedPlayerDataConfiguration> NetworkedDataConfig
+    { get {return _networkedDataConfig; } set { _networkedDataConfig = value; } }
     private void Awake()
     {
         if (Instance)
@@ -18,7 +21,10 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks
         {
             Instance = this;
             DontDestroyOnLoad(this);
+            NetworkedDataConfig = new List<NetworkedPlayerDataConfiguration>();
         }
 
     }
+
+
 }

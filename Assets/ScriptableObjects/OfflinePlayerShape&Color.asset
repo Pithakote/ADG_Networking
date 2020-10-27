@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c30520c297c9cd4ea33de0f3497d471, type: 3}
   m_Name: OfflinePlayerShape&Color
   m_EditorClassIdentifier: 
-  _playerColor: {r: 0, g: 0, b: 0, a: 0}
+  _playerColor:
+  - {r: 1, g: 0, b: 0.24742365, a: 1}
+  - {r: 0, g: 0.52797985, b: 1, a: 1}
+  - {r: 1, g: 0.49459833, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.970881, a: 1}
   _playerShape:
   - {fileID: 21300000, guid: 2dd8a1afee05850418b7e6faa265841c, type: 3}
   - {fileID: 21300000, guid: e19fa83520b069842aca4e1dce41400c, type: 3}

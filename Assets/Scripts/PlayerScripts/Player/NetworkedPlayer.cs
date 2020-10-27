@@ -23,6 +23,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     
      string name;
 
+    NetworkedPlayerDataConfiguration _npc;
     
    [SerializeField] float offset;
 
@@ -57,10 +58,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     {
         base.Start();
 
-        if (photonView.IsMine)
-        {
-            InitializePlayer();
-        }
+       
     }
   
 
@@ -74,8 +72,20 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
             _myCustomProperty.Remove("PlayerIndexNumber");
         }
     }
-    
-    protected override void InitializePlayer()
+    [SerializeField] Color _localColorVar;
+    public void InitialisePlayer(NetworkedPlayerDataConfiguration npc)
+    {
+        if (photonView.IsMine)
+        {
+     
+            _npc = npc;
+            //  GetComponent<SpriteRenderer>().color = npc.NetworkedPlayerSpriteColor;
+         //   _localColorVar = npc.NetworkedPlayerSpriteColor;
+            InitializePlayer(npc.NetworkedPlayerSpriteColor);
+
+        }
+    }
+    protected override void InitializePlayer(int _playerColorNumber)
     {
 
         if (photonView.IsMine ||
@@ -93,13 +103,15 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
 
       //  PlayerInput.onActionTriggered += base.Input_onActionTriggered;
 
-        photonView.RPC("SetupCharacter", RpcTarget.All, shapeID);
-        
-   
+        photonView.RPC("SetupCharacter", RpcTarget.All, shapeID, _playerColorNumber);
+    }
+    [PunRPC]
+    void SetupCharacter(int shapeID, int _playerColorNumber)
+    {
+        name = PhotonNetwork.LocalPlayer.NickName;
+        _playerRenderer.sprite = _playerShapesAndColor._playerShape[shapeID];
+        _playerRenderer.color = _playerShapesAndColor._playerColor[_playerColorNumber];
 
-       
-        
-        
 
     }
     // Update is called once per frame
@@ -132,14 +144,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     }
 
 
-    [PunRPC]
-    void SetupCharacter(int shapeID)
-    {
-        name = PhotonNetwork.LocalPlayer.NickName;
-        GetComponent<SpriteRenderer>().sprite = _playerShapesAndColor._playerShape[shapeID];
-       
-
-    }
+   
 
     public override void InitializePlayer(PlayerDataConfiguration pc)
     {

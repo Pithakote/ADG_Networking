@@ -21,12 +21,14 @@ public class PlayerDataConfiguration
 
 public class NetworkedPlayerDataConfiguration
 {
+
     public NetworkedPlayerDataConfiguration(Player _player)
     {
-       
+        thisPlayer = _player;
     }
 
-    public Sprite NetworkedPlayerSprite {get; set;}
+    public Player thisPlayer { get; set; }
+    public int NetworkedPlayerSpriteColor {get; set;}
     public bool isNetworkedPlayerReady {get; set;}
 
 }

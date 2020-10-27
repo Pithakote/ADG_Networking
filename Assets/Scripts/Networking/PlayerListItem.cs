@@ -12,29 +12,35 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
     GameObject _colorSelectorHolder;
     Player player;
     int _playerNumber;
-
+    Color _playerColor;
     private void Start()
     {
       //  _colorSelectorHolder = GameObject.Find("ColorSelectorPanel");
     }
-    public void SetUp(Player _player, GameObject _colorSelector)
+    public void SetUp(Player _player)
     {
         player = _player;
         _text.text = _player.NickName;
         _playerNumber = _player.ActorNumber;
 
-        _colorSelectorLocal = _colorSelector;
-        _colorSelectorLocal.GetComponent<Networked_ColorSelector>().SetupNetworkedPanel(_player.NickName);
-        if(PhotonNetwork.LocalPlayer.IsLocal)
-        Debug.Log("The player index is: "+_playerNumber);
+      //  _colorSelectorLocal = _colorSelector;
+       // _colorSelectorLocal.GetComponent<Networked_ColorSelector>().SetupNetworkedPanel(_player.NickName, _playerNumber);
+        if (PhotonNetwork.LocalPlayer.IsLocal)
+            Debug.Log("The player index is: " + _playerNumber);
+        //else
+          //  _colorSelectorLocal.GetComponent<Networked_ColorSelector>().GetEventSystem().SetActive(false);
     }
 
+    public void SetupColor(Color selectedColor)
+    {
+        _playerColor = selectedColor;
+    }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         if (player == otherPlayer)
         {
-                Destroy(_colorSelectorLocal);
+          //  Destroy(_colorSelectorLocal);
             Destroy(gameObject);
             
         }
@@ -42,7 +48,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        Destroy(_colorSelectorLocal);
+    //    Destroy(_colorSelectorLocal);
         Destroy(gameObject);
 
         

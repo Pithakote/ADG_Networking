@@ -45,6 +45,7 @@ MonoBehaviour:
   - SetupCharacter
   - OnTriggerEnter2D
   - ReduceHealth
+  - EventHandlerStatus
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

@@ -234,10 +234,11 @@ MonoBehaviour:
   PlayerHealth: 0
   PlayerMaxHealth: 50
   _isActivated: 0
-  _playerShapesAndColor: {fileID: 11400000, guid: 3019a7f70d510d1468e3ed9163e30f10,
+  _playerShapesAndColor: {fileID: 11400000, guid: f5c0f5fb392e1c348a784e4a7e3f6417,
     type: 2}
   _playerInfo: {fileID: 628834542528356238}
   offset: 90
+  _localColorVar: {r: 0, g: 0, b: 0, a: 0}
 --- !u!212 &-6261924048756453356
 SpriteRenderer:
   m_ObjectHideFlags: 0

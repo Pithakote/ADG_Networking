@@ -46,7 +46,7 @@ public class OfflinePlayer : PlayerBase
 
 
 
-    protected override void InitializePlayer()
+    protected override void InitializePlayer(int _playerColorNumber)
     {
         throw new System.NotImplementedException();
     }
