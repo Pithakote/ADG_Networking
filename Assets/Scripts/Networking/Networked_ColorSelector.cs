@@ -14,7 +14,7 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_Text _playerNameDisplayText;
     [SerializeField] Button[] _buttonsInPanel;
-  //  [SerializeField] Button _readyButton;
+  
     [SerializeField] Networked_ColorSelector[] _playerInputInSelectionPanel;
     [SerializeField] GameObject _localEventSystem, _selectionMenu, _readyMenu, _readyButton;
     public static GameObject LocalSelectorInstance;
@@ -73,18 +73,16 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
 
     public void NetworkedSetColor(int _colorNumber)
     {
-        //  Networked_RoomManager.Instance.NetworkedDataConfig[photonView.Controller.ActorNumber - 1].NetworkedPlayerSpriteColor = _colorNumber;
-        Networked_RoomManager.Instance.ColorNumber = _colorNumber;
+         Networked_RoomManager.Instance.ColorNumber = _colorNumber;
         _readyMenu.SetActive(true);
         _selectionMenu.SetActive(false);
-        //  photonView.RPC("SyncList", RpcTarget.All, _colorNumber);
     }
 
 
     public void IsReadyButton()
     {
         photonView.RPC("IsReady", RpcTarget.All, null) ;
-       // IsReady();
+       
     }
     [PunRPC]
     void EventHandlerStatus()
@@ -96,11 +94,9 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
    [PunRPC]
      void IsReady()
     {
-        //  Networked_RoomManager.Instance.EventRaiser();
-        //   Networked_RoomManager.Instance.NetworkedDataConfig[photonView.Controller.ActorNumber - 1].NetworkedPlayerSpriteColor = _colorNumber;
-        Networked_RoomManager.Instance._isReady = true;
+          Networked_RoomManager.Instance._isReady = true;
         _readyButton.SetActive(false);
-        //Networked_RoomManager.Instance._isReady = false;
+        
     } 
 
 }

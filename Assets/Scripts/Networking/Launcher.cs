@@ -35,6 +35,7 @@ public class Launcher : MonoBehaviourPunCallbacks
       //  _networkedPlayerConfig = new List<NetworkedPlayerDataConfiguration>();
         Debug.Log("Connecting to Master");
         // CanvasManager.Instance.SwitchCanvas(CanvasTypesInsideScenes.LoadingScreen);
+
         if (!PhotonNetwork.IsConnected)
         {
             PhotonNetwork.ConnectUsingSettings();

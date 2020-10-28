@@ -13,7 +13,6 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     [SerializeField] bool _isActivated = false;
  
     [SerializeField] PlayerColorAndShape _playerShapesAndColor;
-   // [SerializeField] int _playerNumber = 3;
     [SerializeField] TMP_Text _playerInfo;
 
     private ExitGames.Client.Photon.Hashtable _myCustomProperty = new ExitGames.Client.Photon.Hashtable();
@@ -114,13 +113,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
 
 
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-          // HealthReduced = false;
-        
-    }
+   
 
    
   
