@@ -27,7 +27,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (Instance)
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         }
         else
         {

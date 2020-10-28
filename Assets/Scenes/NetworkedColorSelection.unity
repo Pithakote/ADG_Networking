@@ -631,7 +631,7 @@ PrefabInstance:
     - target: {fileID: 3865845468453258718, guid: 9451355bf50d73b4a84fd74cc9cf5880,
         type: 3}
       propertyPath: m_Name
-      value: Networked_RoomManager
+      value: Networked_PlayerManager
       objectReference: {fileID: 0}
     - target: {fileID: 3865845468453258719, guid: 9451355bf50d73b4a84fd74cc9cf5880,
         type: 3}
