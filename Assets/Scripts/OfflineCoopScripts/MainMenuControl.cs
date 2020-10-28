@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuControl : MonoBehaviour
 {
@@ -11,11 +12,19 @@ public class MainMenuControl : MonoBehaviour
                 MainMenuCanvas,
                 PlayerConfigurationManager,
                 PlayButton;
-    bool isMuted;
+    [SerializeField] bool isMuted;
     [SerializeField] TMP_Text _muteButtonText;
+    [SerializeField] Sprite _unmuteSprite, _muteSprite;
+    [SerializeField] Button _muteButton;
     private void Start()
     {
-        isMuted = false;
+        isMuted = MusicHandler.Instance._audioSource.mute;
+        if (_muteButton)
+        {
+            ChangeButtonSprite(_muteButton);
+        }
+
+
         if (PlayButton == null)
             return;
 
@@ -54,18 +63,27 @@ public class MainMenuControl : MonoBehaviour
         Application.Quit();
     }
 
-    public void MuteOrUnmute()
+    public void MuteOrUnmute(Button _muteButton)
     {
-       
-            isMuted = !isMuted;
-            MusicHandler.Instance._audioSource.mute = isMuted;
+        if (this._muteButton == null)
+            this._muteButton = _muteButton;
 
+        isMuted = !isMuted;
+        MusicHandler.Instance._audioSource.mute = isMuted;
+        ChangeButtonSprite(_muteButton);
+    }
+
+    private void ChangeButtonSprite(Button _muteButton)
+    {
         if (isMuted)
         {
+            _muteButton.GetComponent<Image>().sprite = _muteSprite;
             _muteButtonText.text = "Muted";
         }
         else
         {
+
+            _muteButton.GetComponent<Image>().sprite = _unmuteSprite;
             _muteButtonText.text = "Unmuted";
         }
     }
