@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 {
 
     float speed = 5;
-public Vector2 MovementInput { get; set; }//property value set in PlayerController
+    public bool _isPlayerAlive { get; set; }
+    public Vector2 MovementInput { get; set; }//property value set in PlayerController
                                               //   public int PlayerIndex { get { return _playerIndex; } }
 
     public Vector3 _mousePos;
@@ -18,20 +19,22 @@ public Vector2 MovementInput { get; set; }//property value set in PlayerControll
     PlayerBase _player;
     private void Start()
     {
+        _isPlayerAlive = true;
         _player = GetComponent<NetworkedPlayer>();
         rb = GetComponent<Rigidbody2D>();
     }
     void FixedUpdate()
     {
-       
 
-        rb.MovePosition(rb.position + MovementInput * speed * Time.deltaTime);
-      
+        if (_isPlayerAlive)
+        {
+            rb.MovePosition(rb.position + MovementInput * speed * Time.deltaTime);
 
-        
-      
-        MouseRotation();
 
+
+
+            MouseRotation();
+        }
         
 
     }

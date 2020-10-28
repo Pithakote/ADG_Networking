@@ -135,6 +135,8 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LocalPlayer.CustomProperties = _myCustomProperty;
     }
 
+
+
     [PunRPC]
     void RPCAssignPlayerData(Vector2 _spawnPosition, Quaternion _spawnRotation,  Player thisPlayer)
     {

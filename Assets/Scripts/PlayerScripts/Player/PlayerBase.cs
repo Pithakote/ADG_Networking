@@ -14,7 +14,7 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
 {
 
     [SerializeField] protected Image _healthBar;
-
+    [SerializeField] protected Sprite _deadIcon;
 
     public static GameObject LocalPlayerInstance;
 
@@ -33,12 +33,15 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
     public float networkedRotation { get; set; }
 
     protected PlayerInputHandler _playerInputHandler;
+    
 
 
     // Start is called before the first frame update
     protected abstract void InitializePlayer(int _playerColorNumber);
 
     public abstract void InitializePlayer(PlayerDataConfiguration pc);
+
+    public bool _isPlayerAlive;
 
     protected virtual void Awake()
     {
@@ -51,6 +54,7 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
     }
     protected virtual void Start()
     {
+        _isPlayerAlive = true;
         HealthReduced = false;
         PlayerTakeDamageAmount = 2;
         if (PlayerMaxHealth == 0)
@@ -79,7 +83,11 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
         }
         else
         {
-            gameObject.SetActive(false);
+            _isPlayerAlive = false;
+            GetComponent<PlayerMovement>()._isPlayerAlive = _isPlayerAlive;
+            GetComponent<PlayerShooting>().enabled = _isPlayerAlive;
+            _playerRenderer.sprite = _deadIcon;
+            //gameObject.SetActive(false);
         }
     }
 

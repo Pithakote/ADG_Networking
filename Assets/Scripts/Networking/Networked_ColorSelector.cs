@@ -50,7 +50,7 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
         _ownerPlayerNumber = photonView.Owner.ActorNumber;
         _getPlayerNumber = photonView.Owner.GetPlayerNumber();
     
-        photonView.RPC("InitialFunctionsToBeShared", RpcTarget.Others, _playerName);
+        photonView.RPC("InitialFunctionsToBeShared", RpcTarget.All, _playerName);
     }
 
     [PunRPC]

@@ -309,8 +309,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 4451751714481734350}
+  _deadIcon: {fileID: 21300000, guid: 25c45db9326a3a94dbe84ac28827059a, type: 3}
   PlayerHealth: 0
   PlayerMaxHealth: 50
+  _isPlayerAlive: 0
 --- !u!114 &-1204562665539671302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,8 +559,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 0}
+  _deadIcon: {fileID: 0}
   PlayerHealth: 0
   PlayerMaxHealth: 20
+  _isPlayerAlive: 0
 --- !u!1001 &8409898911784964771
 PrefabInstance:
   m_ObjectHideFlags: 0

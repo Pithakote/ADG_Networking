@@ -14,7 +14,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] Transform _roomListContent, _playerListContent;
     [SerializeField] GameObject _roomListItemPrefab, _playerListItemPrefab;
     [SerializeField] Button _startGameButton;
-    [SerializeField] int _numberOfPlayersAllowedInRoom = 4;
+    [SerializeField] int _numberOfPlayersAllowedInRoom = 4, _numberOfMinimumPlayersNeeded = 2;
     public static Launcher Instance;
 
     
@@ -118,16 +118,22 @@ public class Launcher : MonoBehaviourPunCallbacks
              //   _selector.GetComponent<Networked_ColorSelector>().GetEventSystem().SetActive(false);
         }
 
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= _numberOfMinimumPlayersNeeded &&
+           PhotonNetwork.IsMasterClient)
+            _startGameButton.gameObject.SetActive(true);//only be interactable if the player is the host
+        else
+            _startGameButton.gameObject.SetActive(false);//only be interactable if the player is the host
 
-        _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
-
-
-        
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
-        _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= _numberOfMinimumPlayersNeeded &&
+           PhotonNetwork.IsMasterClient)
+            _startGameButton.gameObject.SetActive(true);//only be interactable if the player is the host
+        else
+            _startGameButton.gameObject.SetActive(false);//only be interactable if the player is the host
+
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
@@ -193,8 +199,16 @@ public class Launcher : MonoBehaviourPunCallbacks
         //                                                       _colorSelectorPanel.transform.position,
         //                                                       Quaternion.identity,
         //                                                       0);
-        
+
         //    _selector.transform.parent = _colorSelectorPanel.transform;
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= _numberOfMinimumPlayersNeeded &&
+           PhotonNetwork.IsMasterClient)
+            _startGameButton.gameObject.SetActive(true);//only be interactable if the player is the host
+        else
+            _startGameButton.gameObject.SetActive(false);//only be interactable if the player is the host
+
+
         Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
        // Networked_RoomManager.Instance.NetworkedDataConfig.Add(new NetworkedPlayerDataConfiguration(newPlayer));
 
