@@ -9,12 +9,13 @@ using Photon.Realtime;
 using UnityEngine.InputSystem;
 using Photon.Pun.UtilityScripts;
 
-public class Networked_ColorSelector : MonoBehaviourPunCallbacks, IPunObservable
+public class Networked_ColorSelector : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_Text _playerNameDisplayText;
     [SerializeField] Button[] _buttonsInPanel;
+  //  [SerializeField] Button _readyButton;
     [SerializeField] Networked_ColorSelector[] _playerInputInSelectionPanel;
-    [SerializeField] GameObject _localEventSystem;
+    [SerializeField] GameObject _localEventSystem, _selectionMenu, _readyMenu, _readyButton;
     public static GameObject LocalSelectorInstance;
     [SerializeField] string _playerName;
     List<NetworkedPlayerDataConfiguration> _networkedPlayerDataConfig;
@@ -27,27 +28,25 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks, IPunObservable
         _playerName = photonView.Owner.NickName;
         _playerNameDisplayText.text = _playerName;
 
+        _buttonsInPanel = GetComponentsInChildren<Button>();
+
         if (photonView.IsMine)
         {
             LocalSelectorInstance = this.gameObject;
+        
         }
         else
         {
+            foreach (Button _button in _buttonsInPanel)
+                _button.interactable = false;
+
             _localEventSystem.SetActive(false);
         }
 
         _localPlayerNumber = PhotonNetwork.LocalPlayer.ActorNumber;
         _ownerPlayerNumber = photonView.Owner.ActorNumber;
         _getPlayerNumber = photonView.Owner.GetPlayerNumber();
-     //   photonView.RPC("EventHandlerStatus", RpcTarget.Others, null );
-
-        //foreach (PlayerInput _inputComponent in _playerInputInSelectionPanel)
-        //{
-
-        //GetComponent<PlayerInput>().enabled = false;
-        // }
-
-        // photonView.RPC("EventHandlerStatus", RpcTarget.All, null);
+    
         photonView.RPC("InitialFunctionsToBeShared", RpcTarget.Others, _playerName);
     }
 
@@ -73,9 +72,16 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks, IPunObservable
     {
         //  Networked_RoomManager.Instance.NetworkedDataConfig[photonView.Controller.ActorNumber - 1].NetworkedPlayerSpriteColor = _colorNumber;
         Networked_RoomManager.Instance.ColorNumber = _colorNumber;
+        _readyMenu.SetActive(true);
+        _selectionMenu.SetActive(false);
         //  photonView.RPC("SyncList", RpcTarget.All, _colorNumber);
     }
 
+
+    public void IsReadyButton()
+    {
+        photonView.RPC("IsReady", RpcTarget.All, null) ;
+    }
     [PunRPC]
     void EventHandlerStatus()
     {
@@ -84,20 +90,11 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    void SyncList(int _colorNumber)
+     void IsReady()
     {
-        Networked_RoomManager.Instance.NetworkedDataConfig[photonView.Controller.ActorNumber - 1].NetworkedPlayerSpriteColor = _colorNumber;
+        //Networked_RoomManager.Instance.NetworkedDataConfig[photonView.Controller.ActorNumber - 1].NetworkedPlayerSpriteColor = _colorNumber;
+        _readyButton.SetActive(false);
 
     }
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)//if the client who o\wns this variable is doing this action, the value of the variable is sent across the network
-        {
-            stream.SendNext(_playerName);
-        }
-        else
-        {
-            this._playerName = (string)stream.ReceiveNext();
-        }
-    }
+
 }

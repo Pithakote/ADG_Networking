@@ -66,7 +66,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: -6615835158756249253}
-  - {fileID: 8545144967619721268}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -90,6 +89,9 @@ MonoBehaviour:
   - {fileID: 8298370441623359282}
   _playerInputInSelectionPanel: []
   _localEventSystem: {fileID: 8444277400122642087}
+  _selectionMenu: {fileID: 8298370441255516573}
+  _readyMenu: {fileID: 8298370441164742510}
+  _readyButton: {fileID: 8298370441083478525}
   _playerName: 
   _localPlayerNumber: 0
   _ownerPlayerNumber: 0
@@ -469,6 +471,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 8545144967619721268}
+    - target: {fileID: 3362083871181042460, guid: 7ee15306a847ceb4ca0562131e9f6540,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IsReadyButton
       objectReference: {fileID: 0}
     - target: {fileID: 3362083871411815330, guid: 7ee15306a847ceb4ca0562131e9f6540,
         type: 3}
@@ -668,6 +675,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8298370441164742510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3362083871025319309, guid: 7ee15306a847ceb4ca0562131e9f6540,
+    type: 3}
+  m_PrefabInstance: {fileID: 6737735257093640931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8298370441083478525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3362083871181042462, guid: 7ee15306a847ceb4ca0562131e9f6540,
+    type: 3}
+  m_PrefabInstance: {fileID: 6737735257093640931}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8298370442388001089 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3362083871411815330, guid: 7ee15306a847ceb4ca0562131e9f6540,
