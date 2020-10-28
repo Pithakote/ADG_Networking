@@ -7,11 +7,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
+public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] GameObject _colorSelectionPanel;
     [SerializeField] Transform [] _spawnPoints;
-    public static Networked_RoomManager Instance { get; set; }
+    public static Networked_PlayerManager Instance { get; set; }
 
     List<NetworkedPlayerDataConfiguration> _networkedDataConfig;
     [SerializeField] Player[] players;
@@ -20,9 +20,8 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField] public int _noOfRediedPlayers { get  ;  set ;  }
     public List<NetworkedPlayerDataConfiguration> NetworkedDataConfig
     { get {return _networkedDataConfig; } set { _networkedDataConfig = value; } }
-    public byte PLAYER_READY_EVENT = 0;
 
-    public bool _isReady;
+   public bool _isReady;
     public int ColorNumber { get; set; }
     private void Awake()
     {
@@ -88,22 +87,22 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         object[] data = new object[] { _noOfRediedPlayers };
 
-        PhotonNetwork.RaiseEvent(PLAYER_READY_EVENT, data, RaiseEventOptions.Default, ExitGames.Client.Photon.SendOptions.SendReliable);
+     //   PhotonNetwork.RaiseEvent(PLAYER_READY_EVENT, data, RaiseEventOptions.Default, ExitGames.Client.Photon.SendOptions.SendReliable);
 
     }
     private void NetworkingClient_EventReceived(ExitGames.Client.Photon.EventData obj)
     {
-        if (obj.Code == PLAYER_READY_EVENT)
-        {
-            Debug.Log("Event raised");
-            object[] data = (object[])obj.CustomData;
-            int _readyPlayers = (int)data[0];
+      //  if (obj.Code == PLAYER_READY_EVENT)
+      //  {
+      //      Debug.Log("Event raised");
+     //       object[] data = (object[])obj.CustomData;
+        //    int _readyPlayers = (int)data[0];
 
-            _noOfRediedPlayers = _readyPlayers;
+        //    _noOfRediedPlayers = _readyPlayers;
 
-            _noOfRediedPlayers++;
+        //    _noOfRediedPlayers++;
         
-        }
+        //}
     }
 
     void Update()
@@ -118,8 +117,12 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
                 PhotonNetwork.IsMasterClient)
                 _startGameButton.gameObject.SetActive(true);//only be interactable if the player is the host
 
-            _isReady = false;
+            _isReady = false; 
         }
+
+       
+        //check the deadplayer and play music or show text
+          
     }
 
     public void StartGame()
@@ -129,6 +132,6 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        
+      
     }
 }

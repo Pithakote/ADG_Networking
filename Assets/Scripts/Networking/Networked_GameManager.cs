@@ -6,8 +6,9 @@ using System.IO;
 using System.Linq;
 using Photon.Realtime;
 using UnityEngine.InputSystem;
+using TMPro;
 
-public class Networked_GameManager : MonoBehaviourPunCallbacks
+public class Networked_GameManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     public GameObject _playerPrefab;
     [SerializeField]Vector2[] _playerSpawnsPositions;
@@ -15,69 +16,64 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
     [SerializeField] PlayerColorAndShape _playerShapesAndColor;
 
     private ExitGames.Client.Photon.Hashtable _myCustomProperty = new ExitGames.Client.Photon.Hashtable();
-    public List<NetworkedPlayerDataConfiguration> _playerConfig; 
-    //public Networked_GameManager Instance { get; set; }
-    //private void Awake()
-    //{
-    //    if (Instance)
-    //    {
-    //        Instance = this;
-    //        DontDestroyOnLoad(this);
-    //    }
-    //    else
-    //    {
-    //        Destroy(this);
-    //    }
-    //}
+    public List<NetworkedPlayerDataConfiguration> _playerConfig;
+    [SerializeField] TMP_Text GameOverText;
+
+    [SerializeField] int numberofdeadplayers;
+    [SerializeField] bool isLocalPlayerDead;
+    [SerializeField] int _playersInList = PhotonNetwork.PlayerList.Length;
+    public int NumberOfDeadPlayers { get {return numberofdeadplayers; } set { numberofdeadplayers = value; } }
+    public bool IsLocalClientDead { get {return isLocalPlayerDead; } set { isLocalPlayerDead = value; } }
+
+    public static Networked_GameManager Instance { get; set; }
+
+    void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     private void Start()
     {
-        #region Newcode
-        //replace with the number of players in the room
-        /*
-        _playerSpawnsPositions = new Vector2[PlayerConfigurationManager.Instance.CurrentPlayers];
-
-        PlayerDataConfiguration[] _playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
-        for (int i = 0; i < _playerConfigs.Length; i++)
-
-        {
-            SetSpawnPosition(i);
-
-           // var player = Instantiate(_playerPrefab,
-          //                           _playerSpawnsPositions[i],
-           //                          _playerPrefab.transform.rotation,
-           //                          gameObject.transform);
-
-            var player = PhotonNetwork.Instantiate(this._playerPrefab.name,
-                                                   Vector3.zero,
-                                                   Quaternion.identity);
-
-
-            player.GetComponent<PlayerController>().InitializePlayer(_playerConfigs[i]);
-        }
-        */
-        #endregion
-        // PhotonNetwork.Instantiate(Path.Combine("NetworkedPrefabs", "PlayerConfiguration&MenuSetup_Networked"),
-        //                      Vector3.zero,
-        //                  Quaternion.identity);
+        NumberOfDeadPlayers = 0;
+        IsLocalClientDead = false;
 
         Debug.Log("The number of players are: "+ PhotonNetwork.PlayerList.Length);
-        _playerConfig = Networked_RoomManager.Instance.NetworkedDataConfig;
+        _playerConfig = Networked_PlayerManager.Instance.NetworkedDataConfig;
         AssignShapes();
 
 
 
     }
 
+    void Update()
+    { 
+        if(NumberOfDeadPlayers == PhotonNetwork.PlayerList.Length-1)
+        {
+            if (IsLocalClientDead)
+            {
+                GameOverText.text = "Game Over";
+            }
+            else
+            {
+
+                GameOverText.text = "You won";
+            }
+        }
+    }
    
 
     private void SetSpawnPosition(int i)
     {
-       // _playerSpawnsPositions[i] = Vector2.zero;
         Vector2 _newSpawnPos = new Vector2(Random.Range(_minPosValue, _maxPosValue),
                                          Random.Range(_minPosValue, _maxPosValue));
 
 
-        //  if (_playerSpawnsPositions == null &&
         if (_playerSpawnsPositions.Any(sp => sp == _newSpawnPos))
             return ;
 
@@ -88,23 +84,12 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
     void AssignShapes()
     {
         Player[] _players = PhotonNetwork.PlayerList;
-
-        //  _myCustomProperty.Add("PlayerIndexNumber", photonView.Owner.ActorNumber);
-
-       // _myCustomProperty.Add("PlayerIndexNumber", PhotonNetwork.LocalPlayer.ActorNumber);
-     //   Debug.Log("GameManager actor number is " + PhotonNetwork.LocalPlayer.ActorNumber);
-      //  PhotonNetwork.LocalPlayer.SetCustomProperties(_myCustomProperty);
       
         for (int i = 0;i<_players.Length;i++)
         {
-            //  SetSpawnPosition(i);
             Vector2 _newSpawnPos = new Vector2(Random.Range(_minPosValue, _maxPosValue),
                                            Random.Range(_minPosValue, _maxPosValue));
-            //photonView.RPC("RPCAssignPlayerData",
-            //                _players[i],
-            //                _newSpawnPos,
-            //                Quaternion.identity,
-            //                _players[i]); 
+           
 
             if (NetworkedPlayer.LocalPlayerInstance == null)
             {
@@ -127,40 +112,17 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks
         }
     }
 
-    [PunRPC]
-    void RPCAssignActorNumber()
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        _myCustomProperty["PlayerIndexNumber"] = PhotonNetwork.LocalPlayer.ActorNumber;
-        Debug.Log("GameManager actor number is " + PhotonNetwork.LocalPlayer.ActorNumber);
-        PhotonNetwork.LocalPlayer.CustomProperties = _myCustomProperty;
-    }
-
-
-
-    [PunRPC]
-    void RPCAssignPlayerData(Vector2 _spawnPosition, Quaternion _spawnRotation,  Player thisPlayer)
-    {
-        if (NetworkedPlayer.LocalPlayerInstance == null)
+        if (stream.IsWriting)
         {
-            
-
-            var _player = PhotonNetwork.Instantiate(this._playerPrefab.name,
-                                                    _spawnPosition,
-                                                    _spawnRotation
-                                                    );
-
-           
-
+            stream.SendNext(NumberOfDeadPlayers);
+           // stream.SendNext(IsLocalClientDead);
         }
         else
         {
-            Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+            this.NumberOfDeadPlayers = (int)stream.ReceiveNext();
+          //  this.IsLocalClientDead = (bool)stream.ReceiveNext();
         }
-
-        //for (int i = 0; i < gameObject.transform.childCount; i++)
-        //{
-        //    gameObject.transform.GetChild(i).GetComponent<Networked_PlayerManager>().SpriteRendererComponent.sprite = _playerShapesAndColor._playerShape[i];
-
-        //}
     }
 }

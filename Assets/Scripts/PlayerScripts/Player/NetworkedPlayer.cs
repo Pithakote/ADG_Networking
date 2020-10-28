@@ -56,7 +56,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     {
         base.Start();
 
-        _playerInfo.text = "Name is: " + name;// + " Health Amount: " + PlayerHealth.ToString();
+        _playerInfo.text = name;// + " Health Amount: " + PlayerHealth.ToString();
 
     }
 
@@ -80,7 +80,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
             _npc = npc;
             //  GetComponent<SpriteRenderer>().color = npc.NetworkedPlayerSpriteColor;
          //   _localColorVar = npc.NetworkedPlayerSpriteColor;
-            InitializePlayer(Networked_RoomManager.Instance.ColorNumber);
+            InitializePlayer(Networked_PlayerManager.Instance.ColorNumber);
 
         }
     }
@@ -102,7 +102,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
 
       //  PlayerInput.onActionTriggered += base.Input_onActionTriggered;
 
-        photonView.RPC("SetupCharacter", RpcTarget.All, shapeID, _playerColorNumber);
+        photonView.RPC("SetupCharacter", RpcTarget .All, shapeID, _playerColorNumber);
     }
     [PunRPC]
     void SetupCharacter(int shapeID, int _playerColorNumber)

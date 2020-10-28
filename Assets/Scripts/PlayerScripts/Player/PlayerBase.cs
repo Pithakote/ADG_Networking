@@ -84,9 +84,17 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
         else
         {
             _isPlayerAlive = false;
+            GetComponent<Collider2D>().enabled = false;
             GetComponent<PlayerMovement>()._isPlayerAlive = _isPlayerAlive;
             GetComponent<PlayerShooting>().enabled = _isPlayerAlive;
             _playerRenderer.sprite = _deadIcon;
+
+            if (Networked_GameManager.Instance )
+            {
+                Networked_GameManager.Instance.NumberOfDeadPlayers++;
+                if(photonView.IsMine)
+                Networked_GameManager.Instance.IsLocalClientDead = !_isPlayerAlive;
+            }
             //gameObject.SetActive(false);
         }
     }

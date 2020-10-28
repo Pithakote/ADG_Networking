@@ -26,7 +26,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         else
             Instance = this;
 
-        Destroy(GameObject.Find("Networked_RoomManager"));
+        Destroy(GameObject.Find("Networked_PlayerManager"));
     }
     // Start is called before the first frame update
     void Start()
@@ -210,7 +210,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
 
         Instantiate(_playerListItemPrefab, _playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
-       // Networked_RoomManager.Instance.NetworkedDataConfig.Add(new NetworkedPlayerDataConfiguration(newPlayer));
+       // Networked_PlayerManager.Instance.NetworkedDataConfig.Add(new NetworkedPlayerDataConfiguration(newPlayer));
 
 
         //if (!PhotonNetwork.LocalPlayer.IsLocal)

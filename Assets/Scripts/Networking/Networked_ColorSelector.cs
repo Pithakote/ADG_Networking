@@ -27,7 +27,7 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
     {
         transform.SetParent(GameObject.Find("ColorSelectorPanel").transform);
       //  transform.position = Vector3.zero;
-        Networked_RoomManager.Instance.NetworkedDataConfig.Add(new NetworkedPlayerDataConfiguration(PhotonNetwork.LocalPlayer));
+        Networked_PlayerManager.Instance.NetworkedDataConfig.Add(new NetworkedPlayerDataConfiguration(PhotonNetwork.LocalPlayer));
         _playerName = photonView.Owner.NickName;
         _playerNameDisplayText.text = _playerName;
 
@@ -73,7 +73,7 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
 
     public void NetworkedSetColor(int _colorNumber)
     {
-         Networked_RoomManager.Instance.ColorNumber = _colorNumber;
+         Networked_PlayerManager.Instance.ColorNumber = _colorNumber;
         _readyMenu.SetActive(true);
         _selectionMenu.SetActive(false);
     }
@@ -94,7 +94,7 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
    [PunRPC]
      void IsReady()
     {
-          Networked_RoomManager.Instance._isReady = true;
+          Networked_PlayerManager.Instance._isReady = true;
         _readyButton.SetActive(false);
         
     } 
