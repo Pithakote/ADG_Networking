@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,8 +11,11 @@ public class MainMenuControl : MonoBehaviour
                 MainMenuCanvas,
                 PlayerConfigurationManager,
                 PlayButton;
+    bool isMuted;
+    [SerializeField] TMP_Text _muteButtonText;
     private void Start()
     {
+        isMuted = false;
         if (PlayButton == null)
             return;
 
@@ -48,5 +52,21 @@ public class MainMenuControl : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void MuteOrUnmute()
+    {
+       
+            isMuted = !isMuted;
+            MusicHandler.Instance._audioSource.mute = isMuted;
+
+        if (isMuted)
+        {
+            _muteButtonText.text = "Muted";
+        }
+        else
+        {
+            _muteButtonText.text = "Unmuted";
+        }
     }
 }
