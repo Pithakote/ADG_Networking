@@ -57,11 +57,12 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     {
         base.Start();
 
-       
-    }
-  
+        _playerInfo.text = "Name is: " + name;// + " Health Amount: " + PlayerHealth.ToString();
 
-  
+    }
+
+
+
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
@@ -116,9 +117,9 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     // Update is called once per frame
     void Update()
     {
-
-       _playerInfo.text = "Name is: " + name + " Health Amount: " + PlayerHealth.ToString();
-
+        
+          // HealthReduced = false;
+        
     }
 
    

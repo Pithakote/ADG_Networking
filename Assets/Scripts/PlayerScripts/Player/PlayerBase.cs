@@ -20,7 +20,7 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
 
 
     
-    
+    public bool HealthReduced { get; set; }
     
     
     protected SpriteRenderer _playerRenderer;
@@ -51,6 +51,7 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
     }
     protected virtual void Start()
     {
+        HealthReduced = false;
         PlayerTakeDamageAmount = 2;
         if (PlayerMaxHealth == 0)
         PlayerMaxHealth = 50;
@@ -67,11 +68,13 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
     {
         if (PlayerHealth > 0)
         {
+            HealthReduced = true;
             PlayerHealth -= PlayerTakeDamageAmount;
           
             _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
 
             Debug.Log("Health decreasing");
+            
 
         }
         else

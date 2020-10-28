@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +16,13 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
     List<NetworkedPlayerDataConfiguration> _networkedDataConfig;
     [SerializeField] Player[] players;
     [SerializeField] Button _startGameButton;
+    [SerializeField] TMP_Text _readyText;
+    [SerializeField] public int _noOfRediedPlayers { get  ;  set ;  }
     public List<NetworkedPlayerDataConfiguration> NetworkedDataConfig
     { get {return _networkedDataConfig; } set { _networkedDataConfig = value; } }
+    public byte PLAYER_READY_EVENT = 0;
 
-
+    public bool _isReady;
     public int ColorNumber { get; set; }
     private void Awake()
     {
@@ -37,6 +41,7 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Start()
     {
+        _isReady = false;
         players = PhotonNetwork.PlayerList;
 
         for (int i = 0; i < players.Length; i++)
@@ -45,8 +50,8 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
             photonView.RPC("SpawnSelector", players[i], _spawnPoints[i].position, _spawnPoints[i].rotation);
            
         }
-        if(_startGameButton)
-        _startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);//only be interactable if the player is the host
+        _readyText.text = _noOfRediedPlayers + " / " + PhotonNetwork.PlayerList.Length.ToString() + " Players are ready";
+
 
     }
     public override void OnMasterClientSwitched(Player newMasterClient)
@@ -63,6 +68,57 @@ public class Networked_RoomManager : MonoBehaviourPunCallbacks, IPunObservable
                                        pos,
                                         rot
                                         );
+        }
+    }
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+
+    private void OnDestroy()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+
+    }
+    public void EventRaiser()
+    {
+        object[] data = new object[] { _noOfRediedPlayers };
+
+        PhotonNetwork.RaiseEvent(PLAYER_READY_EVENT, data, RaiseEventOptions.Default, ExitGames.Client.Photon.SendOptions.SendReliable);
+
+    }
+    private void NetworkingClient_EventReceived(ExitGames.Client.Photon.EventData obj)
+    {
+        if (obj.Code == PLAYER_READY_EVENT)
+        {
+            Debug.Log("Event raised");
+            object[] data = (object[])obj.CustomData;
+            int _readyPlayers = (int)data[0];
+
+            _noOfRediedPlayers = _readyPlayers;
+
+            _noOfRediedPlayers++;
+        
+        }
+    }
+
+    void Update()
+    {
+        if (_isReady)
+        {
+            _noOfRediedPlayers++;
+            _readyText.text = _noOfRediedPlayers + " / " + PhotonNetwork.PlayerList.Length.ToString() + " Players are ready";
+
+            if (_startGameButton &&
+                _noOfRediedPlayers == PhotonNetwork.PlayerList.Length &&
+                PhotonNetwork.IsMasterClient)
+                _startGameButton.gameObject.SetActive(true);//only be interactable if the player is the host
+
+            _isReady = false;
         }
     }
 

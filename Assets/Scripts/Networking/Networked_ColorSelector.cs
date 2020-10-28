@@ -8,6 +8,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.InputSystem;
 using Photon.Pun.UtilityScripts;
+using ExitGames.Client.Photon;
 
 public class Networked_ColorSelector : MonoBehaviourPunCallbacks
 {
@@ -20,6 +21,8 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
     [SerializeField] string _playerName;
     List<NetworkedPlayerDataConfiguration> _networkedPlayerDataConfig;
     [SerializeField] int _localPlayerNumber, _ownerPlayerNumber, _getPlayerNumber;
+
+    
     private void Awake()
     {
         transform.SetParent(GameObject.Find("ColorSelectorPanel").transform);
@@ -81,6 +84,7 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
     public void IsReadyButton()
     {
         photonView.RPC("IsReady", RpcTarget.All, null) ;
+       // IsReady();
     }
     [PunRPC]
     void EventHandlerStatus()
@@ -89,12 +93,14 @@ public class Networked_ColorSelector : MonoBehaviourPunCallbacks
 
     }
 
-    [PunRPC]
+   [PunRPC]
      void IsReady()
     {
-        //Networked_RoomManager.Instance.NetworkedDataConfig[photonView.Controller.ActorNumber - 1].NetworkedPlayerSpriteColor = _colorNumber;
+        //  Networked_RoomManager.Instance.EventRaiser();
+        //   Networked_RoomManager.Instance.NetworkedDataConfig[photonView.Controller.ActorNumber - 1].NetworkedPlayerSpriteColor = _colorNumber;
+        Networked_RoomManager.Instance._isReady = true;
         _readyButton.SetActive(false);
-
-    }
+        //Networked_RoomManager.Instance._isReady = false;
+    } 
 
 }
