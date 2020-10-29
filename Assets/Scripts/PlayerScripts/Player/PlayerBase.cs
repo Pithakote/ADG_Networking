@@ -71,8 +71,37 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
     }
 
 
+   
+    public virtual void ReduceHealth()
+    {
+        if (PlayerHealth > 0)
+        {
+            HealthReduced = true;
+            PlayerHealth -= PlayerTakeDamageAmount;
 
-    public abstract void ReduceHealth();
+            _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
+
+            Debug.Log("Health decreasing");
+
+
+        }
+        else
+        {
+            _isPlayerAlive = false;
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<PlayerMovement>()._isPlayerAlive = _isPlayerAlive;
+            GetComponent<PlayerShooting>().enabled = _isPlayerAlive;
+            _playerRenderer.sprite = _deadIcon;
+
+            if (Networked_GameManager.Instance)
+            {
+                Networked_GameManager.Instance.NumberOfDeadPlayers++;
+                if (photonView.IsMine)
+                    Networked_GameManager.Instance.IsLocalClientDead = !_isPlayerAlive;
+            }
+            //gameObject.SetActive(false);
+        }
+    }
     
 
   

@@ -139,6 +139,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
         {
             HealthReduced = true;
             PlayerHealth -= PlayerTakeDamageAmount;
+            _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
 
 
             Debug.Log("Health decreasing");

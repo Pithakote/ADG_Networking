@@ -39,22 +39,44 @@ public class BulletBehaviour : MonoBehaviourPun
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ITakeDamage _damageTakingObject = collision.gameObject.GetComponent<ITakeDamage>() as ITakeDamage;
-        
-        if (_damageTakingObject != null && photonView.IsMine)
+
+        if (PhotonNetwork.OfflineMode == false)
         {
-               //photonView.RPC()
-               _damageTakingObject.ReduceHealth();
+            if (_damageTakingObject != null && photonView.IsMine)
+            {
+                //photonView.RPC()
+                _damageTakingObject.ReduceHealth();
 
-            //if (other.name != "Shield_Collider")
-            //{
-            //       other.SendMessage("TakeDamage", damage);
-            //}
+                //if (other.name != "Shield_Collider")
+                //{
+                //       other.SendMessage("TakeDamage", damage);
+                //}
 
-            //   Debug.Log("Shot");
+                //   Debug.Log("Shot");
 
-            // GoToPool();
-            photonView.RPC("Destroy", RpcTarget.All, null);
-          
+                // GoToPool();
+                photonView.RPC("Destroy", RpcTarget.All, null);
+
+            }
+        }
+        else
+        {
+            if (_damageTakingObject != null )
+            {
+                //photonView.RPC()
+                _damageTakingObject.ReduceHealth();
+
+                //if (other.name != "Shield_Collider")
+                //{
+                //       other.SendMessage("TakeDamage", damage);
+                //}
+
+                //   Debug.Log("Shot");
+                Destroy(this.gameObject);
+                // GoToPool();
+                //  photonView.RPC("Destroy", RpcTarget.All, null);
+
+            }
         }
     }
     [PunRPC]

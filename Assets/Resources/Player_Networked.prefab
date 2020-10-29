@@ -306,7 +306,7 @@ MonoBehaviour:
   bulletFirer: {fileID: 3468666282547530150}
   _bullets: {fileID: 4157696462344666892, guid: 870574cc5c7df0949b2610204d3cb087,
     type: 3}
-  _refireRate: 0.5
+  _refireRate: 0.3
   _useObjectPool: 0
   _numberOfBulletsInPool: 0
 --- !u!114 &-7366127845652830871
