@@ -50,4 +50,21 @@ public class OfflinePlayer : PlayerBase
     {
         throw new System.NotImplementedException();
     }
+
+    public override void ReduceHealth()
+    {
+        if (PlayerHealth > 0)
+        {
+            HealthReduced = true;
+            PlayerHealth -= PlayerTakeDamageAmount;
+
+
+            Debug.Log("Health decreasing");
+
+
+        }
+        else
+            gameObject.SetActive(false);
+
+    }
 }

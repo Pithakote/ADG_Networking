@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBehaviour : MonoBehaviourPunCallbacks
+public class BulletBehaviour : MonoBehaviourPun
 {
     float _moveSpeed = 30f;
     float lifefTime;
@@ -13,6 +13,10 @@ public class BulletBehaviour : MonoBehaviourPunCallbacks
     {
         lifefTime = 0f;
     }
+    private void Start()
+    {
+        
+    }
     // Update is called once per frame
     void Update()
     {
@@ -21,17 +25,22 @@ public class BulletBehaviour : MonoBehaviourPunCallbacks
         if (lifefTime > maxLifeTime)
         {
 
-            GoToPool();
-            //Destroy(gameObject);
+            //  GoToPool();
+            //   Destroy(gameObject);
+            photonView.RPC("Destroy", RpcTarget.All, null);
+
         }
     }
 
-  //  [PunRPC]
+   
+
+
+    //  [PunRPC]
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ITakeDamage _damageTakingObject = collision.gameObject.GetComponent<ITakeDamage>() as ITakeDamage;
         
-        if (_damageTakingObject != null)
+        if (_damageTakingObject != null && photonView.IsMine)
         {
                //photonView.RPC()
                _damageTakingObject.ReduceHealth();
@@ -43,11 +52,16 @@ public class BulletBehaviour : MonoBehaviourPunCallbacks
 
             //   Debug.Log("Shot");
 
-            GoToPool();
-           // Destroy(gameObject);
+            // GoToPool();
+            photonView.RPC("Destroy", RpcTarget.All, null);
+          
         }
     }
-
+    [PunRPC]
+    void Destroy()
+    {
+        Destroy(this.gameObject);
+    }
     void GoToPool()
     {
        // _objectPool.ReturnToPool(this.gameObject);

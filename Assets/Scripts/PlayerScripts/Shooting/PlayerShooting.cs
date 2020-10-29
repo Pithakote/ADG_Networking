@@ -19,6 +19,7 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     
     private void Awake()
     {
+        _useObjectPool = false;
         _isActivated = false;
     }
 
@@ -32,22 +33,10 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
 
     protected  virtual void Update()
     {
-        if (_isActivated)
-        {
-            Debug.Log("Shooting");
-            fireTimer += Time.deltaTime;
-            if (fireTimer >= _refireRate)
-            {
-                fireTimer = 0;
-
-               
-                    Fire();
-              
-            }
-        }
+       
     }
 
-    [PunRPC]
+    
     protected virtual void Fire()
     {
         if (_useObjectPool)
@@ -63,7 +52,7 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
         }
         else
         {
-            var shot = Instantiate(_bullets,
+             Instantiate(_bullets,
                                                bulletFirer.position,
                                                bulletFirer.rotation
                                                );

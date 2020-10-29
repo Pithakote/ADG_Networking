@@ -23,7 +23,7 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     [SerializeField] int numberofdeadplayers;
     [SerializeField] bool isLocalPlayerDead;
-    [SerializeField] int _playersInList = PhotonNetwork.PlayerList.Length;
+    [SerializeField] int _playersInList;// = PhotonNetwork.PlayerList.Length;
     public int NumberOfDeadPlayers { get {return numberofdeadplayers; } set { numberofdeadplayers = value; } }
     public bool IsLocalClientDead { get {return isLocalPlayerDead; } set { isLocalPlayerDead = value; } }
 
@@ -36,6 +36,9 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     void Awake()
     {
+
+        PhotonNetwork.SendRate = 40;
+        PhotonNetwork.SerializationRate = 15;
         if (Instance)
         {
             Destroy(this);
@@ -52,6 +55,7 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks, IPunObservable
     }
     private void Start()
     {
+        _playersInList = PhotonNetwork.PlayerList.Length;
         NumberOfDeadPlayers = 0;
         IsLocalClientDead = false;
 
@@ -65,7 +69,7 @@ public class Networked_GameManager : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     { 
-        if(NumberOfDeadPlayers == PhotonNetwork.PlayerList.Length-1)
+        if(NumberOfDeadPlayers == _playersInList - 1)
         {
             if (IsLocalClientDead)
             {

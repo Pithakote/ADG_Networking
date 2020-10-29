@@ -64,41 +64,18 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
         PlayerHealth = PlayerMaxHealth;
     }
 
-   
-
-
-  
-    public virtual void ReduceHealth()
+    protected virtual void Update()
     {
-        if (PlayerHealth > 0)
-        {
-            HealthReduced = true;
-            PlayerHealth -= PlayerTakeDamageAmount;
-          
-            _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
+        _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
 
-            Debug.Log("Health decreasing");
-            
-
-        }
-        else
-        {
-            _isPlayerAlive = false;
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<PlayerMovement>()._isPlayerAlive = _isPlayerAlive;
-            GetComponent<PlayerShooting>().enabled = _isPlayerAlive;
-            _playerRenderer.sprite = _deadIcon;
-
-            if (Networked_GameManager.Instance )
-            {
-                Networked_GameManager.Instance.NumberOfDeadPlayers++;
-                if(photonView.IsMine)
-                Networked_GameManager.Instance.IsLocalClientDead = !_isPlayerAlive;
-            }
-            //gameObject.SetActive(false);
-        }
     }
 
+
+
+    public abstract void ReduceHealth();
+    
+
+  
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         if (otherPlayer == PhotonNetwork.LocalPlayer && photonView.IsMine && PhotonNetwork.OfflineMode == false)

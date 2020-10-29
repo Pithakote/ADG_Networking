@@ -391,9 +391,6 @@ MonoBehaviour:
   numberofdeadplayers: 0
   isLocalPlayerDead: 0
   _playersInList: 0
-  _winGameAudio: {fileID: 8300000, guid: 930c4f7dc007eac48a6de6c316ef1dd9, type: 3}
-  _loseGameAudio: {fileID: 8300000, guid: ba8001265e0f6a941bfc26d603513ed9, type: 3}
-  _audioPlayer: {fileID: 199031583}
 --- !u!4 &199031580
 Transform:
   m_ObjectHideFlags: 0
@@ -609,6 +606,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ObjectPool
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486686894520900131, guid: 1ce6b02c629c87f4ebe3d0081ecff6dc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ce6b02c629c87f4ebe3d0081ecff6dc, type: 3}

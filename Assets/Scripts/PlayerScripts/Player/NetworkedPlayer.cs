@@ -10,6 +10,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class NetworkedPlayer : PlayerBase, IPunObservable
 {
+   
     [SerializeField] bool _isActivated = false;
  
     [SerializeField] PlayerColorAndShape _playerShapesAndColor;
@@ -28,6 +29,8 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
 
     protected override void Awake()
     {
+        PhotonNetwork.SendRate = 40;
+        PhotonNetwork.SerializationRate = 15;
         base.Awake();
         transform.parent = GameObject.Find("Newtowked_GameManager").transform;
         //_playerShooting = GetComponent<NetworkedPlayerShooting>();
@@ -55,7 +58,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     protected override void Start()
     {
         base.Start();
-        _playerInfo.text = name;// + " Health Amount: " + PlayerHealth.ToString();
+        _playerInfo.text = name + " Health Amount: " + PlayerHealth.ToString();
 
 
 
@@ -63,7 +66,8 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
 
     void Update()
     {
-        _playerInfo.text = name;// + " Health Amount: " + PlayerHealth.ToString();
+        _playerInfo.text = name + " Health Amount: " + PlayerHealth.ToString();
+
 
     }
 
@@ -113,6 +117,12 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
 
     
     }
+
+    public override void ReduceHealth()
+    {
+        photonView.RPC("HealthDeduction", RpcTarget.All, null);
+
+    }
     [PunRPC]
     void SetupCharacter(int shapeID, int _playerColorNumber)
     {
@@ -122,11 +132,40 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
 
 
     }
-   
+    [PunRPC]
+    void HealthDeduction()
+    {
+        if (PlayerHealth > 0)
+        {
+            HealthReduced = true;
+            PlayerHealth -= PlayerTakeDamageAmount;
 
-   
-  
-  
+
+            Debug.Log("Health decreasing");
+
+
+        }
+        else
+        {
+            _isPlayerAlive = false;
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<PlayerMovement>()._isPlayerAlive = _isPlayerAlive;
+            GetComponent<PlayerShooting>().enabled = _isPlayerAlive;
+            _playerRenderer.sprite = _deadIcon;
+
+            if (Networked_GameManager.Instance)
+            {
+                Networked_GameManager.Instance.NumberOfDeadPlayers++;
+                if (photonView.IsMine)
+                    Networked_GameManager.Instance.IsLocalClientDead = !_isPlayerAlive;
+            }
+            //gameObject.SetActive(false);
+        }
+    }
+
+
+
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)//if the client who owns this variable is doing this action, the value of the variable is sent across the network

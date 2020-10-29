@@ -50,6 +50,9 @@ MonoBehaviour:
   - InitialFunctionsToBeShared
   - SyncList
   - IsReady
+  - HealthDeduction
+  - RemoveBullet
+  - Destroy
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
