@@ -55,7 +55,14 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     protected override void Start()
     {
         base.Start();
+        _playerInfo.text = name;// + " Health Amount: " + PlayerHealth.ToString();
 
+
+
+    }
+
+    void Update()
+    {
         _playerInfo.text = name;// + " Health Amount: " + PlayerHealth.ToString();
 
     }
@@ -76,7 +83,7 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
     {
         if (photonView.IsMine)
         {
-     
+           
             _npc = npc;
             //  GetComponent<SpriteRenderer>().color = npc.NetworkedPlayerSpriteColor;
          //   _localColorVar = npc.NetworkedPlayerSpriteColor;
@@ -103,6 +110,8 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
       //  PlayerInput.onActionTriggered += base.Input_onActionTriggered;
 
         photonView.RPC("SetupCharacter", RpcTarget .All, shapeID, _playerColorNumber);
+
+    
     }
     [PunRPC]
     void SetupCharacter(int shapeID, int _playerColorNumber)
@@ -125,13 +134,16 @@ public class NetworkedPlayer : PlayerBase, IPunObservable
             stream.SendNext(_playerInputHandler.rb.rotation);
             stream.SendNext(_isActivated);
             stream.SendNext(name);
-        
+            stream.SendNext(_isPlayerAlive);
+            stream.SendNext(PlayerHealth);
         }
         else if (stream.IsReading)//else be ready to receive the action
         {
             this.networkedRotation = (float)stream.ReceiveNext();
             this._isActivated = (bool)stream.ReceiveNext();
             this.name = (string)stream.ReceiveNext();
+            this._isPlayerAlive = (bool)stream.ReceiveNext();
+            this.PlayerHealth = (float)stream.ReceiveNext();
           
         }
     }
