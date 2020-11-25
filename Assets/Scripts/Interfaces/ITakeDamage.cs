@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ITakeDamage  
 {
-     void ReduceHealth();
+      void ReduceHealth(int PlayerTakeDamageAmount);
 }

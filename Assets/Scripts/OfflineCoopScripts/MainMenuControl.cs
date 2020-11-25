@@ -49,7 +49,7 @@ public class MainMenuControl : MonoBehaviour
     {
       //  PlayerConfigurationManager.Ins
      
-        SceneManager.LoadScene("PlayerSetup");
+        SceneManager.LoadScene("MainMenu");
     //    CanvasManager.Instance.ChangeCanvasForScene();
     }
 

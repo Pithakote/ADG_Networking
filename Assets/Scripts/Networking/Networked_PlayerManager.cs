@@ -127,7 +127,7 @@ public class Networked_PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void StartGame()
     {
-        PhotonNetwork.LoadLevel("Testing");
+        PhotonNetwork.LoadLevel("NetworkedGameLevel");
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

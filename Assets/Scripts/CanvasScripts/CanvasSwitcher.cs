@@ -68,7 +68,7 @@ public class CanvasSwitcher : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveLobby();
         PhotonNetwork.Disconnect();
-        PhotonNetwork.LoadLevel("PlayerSetup");
+        PhotonNetwork.LoadLevel("MainMenu");
     }
 
 }

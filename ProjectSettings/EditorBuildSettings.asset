@@ -6,25 +6,25 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PlayerSetup.unity
+    path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: b0ecdcd7be6827a499a341c0b9598617
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Offline/LocalGameLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/PlayerSelection.unity
+    path: Assets/Scenes/Offline/PlayerSelection.unity
     guid: 7a89faec487610446a44fab3271c45e1
   - enabled: 1
-    path: Assets/Scenes/NetworkedSelectionScene.unity
+    path: Assets/Scenes/Online/NetworkedSelectionScene.unity
     guid: edbdc84bab3425c498d498d6dd49f251
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NetworkedSampleScene.unity
     guid: 9ff16a9ca65e6b148ba50ebb6f2b9db8
   - enabled: 1
-    path: Assets/Scenes/Testing.unity
+    path: Assets/Scenes/Online/NetworkedGameLevel.unity
     guid: 6098ead7ad8818546b362e906cc942be
   - enabled: 1
-    path: Assets/Scenes/NetworkedColorSelection.unity
+    path: Assets/Scenes/Online/NetworkedColorSelection.unity
     guid: 2e716d2612bd9f6448774f7a77ed0cfb
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b37d16d85307b0e49800cb49d9138cc2,

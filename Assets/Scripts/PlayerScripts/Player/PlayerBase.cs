@@ -7,9 +7,12 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEngine.InputSystem.InputAction;
 
+//--Ensures the following components are there in the player gameobject that inherit from this class
 [RequireComponent(typeof(PlayerInputHandler))]
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(DontGoOffScreen))]
+
+//------------------------------------------
 public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
 {
 
@@ -29,20 +32,25 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
 
     [SerializeField] protected float PlayerHealth;
     [SerializeField] protected float PlayerMaxHealth;
-    protected int PlayerTakeDamageAmount;
     public float networkedRotation { get; set; }
 
     protected PlayerInputHandler _playerInputHandler;
-    
 
-
-    // Start is called before the first frame update
-    protected abstract void InitializePlayer(int _playerColorNumber);
-
-    public abstract void InitializePlayer(PlayerDataConfiguration pc);
 
     public bool _isPlayerAlive;
 
+    //-------Abstract functions inherited and used by the child classes----------------
+    #region Abstract Functions
+    //wanted to create one function to handle player data initialization but thw way of handling data
+    //was different so had to create two function for offline and online player classes
+    protected abstract void InitializePlayer(int _playerColorNumber);
+    public abstract void InitializePlayer(PlayerDataConfiguration pc);
+    protected abstract void Update();
+    //  public abstract void ReduceHealth(int PlayerTakeDamageAmount);
+
+    #endregion
+
+    //-----------------------------------------------------------------
     protected virtual void Awake()
     {
 
@@ -52,11 +60,17 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
 
 
     }
+    //In both Offline and Online players, change in the health bar will occur only when ReduceHealth function 
+    //is called. This is called when the bullet class checks for the ITakeDamage interface 
+    public virtual void ReduceHealth(int PlayerTakeDamageAmount)
+    {
+        _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
+
+    }
     protected virtual void Start()
     {
         _isPlayerAlive = true;
         HealthReduced = false;
-        PlayerTakeDamageAmount = 2;
         if (PlayerMaxHealth == 0)
         PlayerMaxHealth = 50;
         // PlayerHealth = PlayerMaxHealth;
@@ -64,53 +78,14 @@ public abstract class PlayerBase : MonoBehaviourPunCallbacks, ITakeDamage
         PlayerHealth = PlayerMaxHealth;
     }
 
-    protected virtual void Update()
-    {
-        _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
+    //PhotonNetwork function for handling when PlayerLeaves the room
+    //need to inherit from MonoBehaviourPunCallbacks to use this
 
-    }
-
-
-   
-    public virtual void ReduceHealth()
-    {
-        if (PlayerHealth > 0)
-        {
-            HealthReduced = true;
-            PlayerHealth -= PlayerTakeDamageAmount;
-
-            _healthBar.fillAmount = (PlayerHealth / PlayerMaxHealth);
-
-            Debug.Log("Health decreasing");
-
-
-        }
-        else
-        {
-            _isPlayerAlive = false;
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<PlayerMovement>()._isPlayerAlive = _isPlayerAlive;
-            GetComponent<PlayerShooting>().enabled = _isPlayerAlive;
-            _playerRenderer.sprite = _deadIcon;
-
-            if (Networked_GameManager.Instance)
-            {
-                Networked_GameManager.Instance.NumberOfDeadPlayers++;
-                if (photonView.IsMine)
-                    Networked_GameManager.Instance.IsLocalClientDead = !_isPlayerAlive;
-            }
-            //gameObject.SetActive(false);
-        }
-    }
-    
-
-  
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         if (otherPlayer == PhotonNetwork.LocalPlayer && photonView.IsMine && PhotonNetwork.OfflineMode == false)
         {
             PhotonNetwork.RemoveRPCs(PhotonNetwork.LocalPlayer);
-         //   _myCustomProperty.Remove("PlayerIndexNumber");
         }
     }
 }

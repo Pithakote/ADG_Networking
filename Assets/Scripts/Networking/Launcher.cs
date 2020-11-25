@@ -161,9 +161,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         SetRoomVisibilityAndJoining(false);
         PhotonNetwork.LoadLevel("NetworkedColorSelection");
-        //PhotonNetwork.LoadLevel("Testing");
-     //  PhotonNetwork.LoadLevel("NetworkedSampleScene");
-       // PhotonNetwork.LoadLevel("PlayerSelection");
+        //PhotonNetwork.LoadLevel("NetworkedGameLevel");
+        //  PhotonNetwork.LoadLevel("NetworkedSampleScene");
+        // PhotonNetwork.LoadLevel("PlayerSelection");
     }
     public override void OnLeftRoom()
     {

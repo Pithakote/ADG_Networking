@@ -82,7 +82,7 @@ public class PlayerConfigurationManager : MonoBehaviour
                                         && _currentPlayers <= _playerInputManager.maxPlayerCount
                                         && _playerConfigs.All(p => p.IsReady == true))
                 {            
-                   SceneManager.LoadScene("SampleScene");
+                   SceneManager.LoadScene("LocalGameLevel");
                    _playerInputManager.DisableJoining();//stops people from joining after the game has been set
                 }
         }

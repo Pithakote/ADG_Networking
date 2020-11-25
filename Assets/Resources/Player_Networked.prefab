@@ -144,14 +144,14 @@ GameObject:
   - component: {fileID: 6605641638236233216}
   - component: {fileID: 2922598974060037163}
   - component: {fileID: 2144869656150636367}
-  - component: {fileID: 5373666163265500413}
   - component: {fileID: -6261924048756453356}
-  - component: {fileID: 2206166201347103073}
   - component: {fileID: -7366127845652830871}
   - component: {fileID: 1496448873531337342}
   - component: {fileID: 8296290341844064148}
   - component: {fileID: -5561124699754293289}
   - component: {fileID: 4917060536509114335}
+  - component: {fileID: 5373666163265500413}
+  - component: {fileID: 2206166201347103073}
   - component: {fileID: -7223660516810156339}
   - component: {fileID: 7067806922761994918}
   - component: {fileID: 4289560027816289398}
@@ -218,29 +218,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
---- !u!114 &5373666163265500413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3559370750279609980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f6bc556c71db4e42a42a286f32f59cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healthBar: {fileID: 116919419729351113}
-  _deadIcon: {fileID: 21300000, guid: 25c45db9326a3a94dbe84ac28827059a, type: 3}
-  PlayerHealth: 0
-  PlayerMaxHealth: 50
-  _isPlayerAlive: 0
-  _isActivated: 0
-  _playerShapesAndColor: {fileID: 11400000, guid: f5c0f5fb392e1c348a784e4a7e3f6417,
-    type: 2}
-  _playerInfo: {fileID: 628834542528356238}
-  offset: 90
-  _localColorVar: {r: 0, g: 0, b: 0, a: 0}
 --- !u!212 &-6261924048756453356
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -291,24 +268,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2206166201347103073
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3559370750279609980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d27ac748b44482044b1b028b92f28b43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletFirer: {fileID: 3468666282547530150}
-  _bullets: {fileID: 4157696462344666892, guid: 870574cc5c7df0949b2610204d3cb087,
-    type: 3}
-  _refireRate: 0.3
-  _useObjectPool: 0
-  _numberOfBulletsInPool: 0
 --- !u!114 &-7366127845652830871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +433,47 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &5373666163265500413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559370750279609980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6bc556c71db4e42a42a286f32f59cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBar: {fileID: 116919419729351113}
+  _deadIcon: {fileID: 21300000, guid: 25c45db9326a3a94dbe84ac28827059a, type: 3}
+  PlayerHealth: 0
+  PlayerMaxHealth: 50
+  _isPlayerAlive: 0
+  _isActivated: 0
+  _playerShapesAndColor: {fileID: 11400000, guid: f5c0f5fb392e1c348a784e4a7e3f6417,
+    type: 2}
+  _playerInfo: {fileID: 628834542528356238}
+  offset: 90
+  _localColorVar: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &2206166201347103073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559370750279609980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27ac748b44482044b1b028b92f28b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletFirer: {fileID: 3468666282547530150}
+  _bullets: {fileID: 4157696462344666892, guid: 870574cc5c7df0949b2610204d3cb087,
+    type: 3}
+  _refireRate: 0.3
+  _useObjectPool: 0
+  _numberOfBulletsInPool: 0
 --- !u!114 &-7223660516810156339
 MonoBehaviour:
   m_ObjectHideFlags: 0

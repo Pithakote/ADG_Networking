@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShooting : MonoBehaviourPunCallbacks
+public abstract class PlayerShooting : MonoBehaviourPunCallbacks
 {
     [SerializeField] protected Transform bulletFirer;
     [SerializeField] protected GameObject _bullets;
@@ -12,11 +12,29 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     [SerializeField] protected float _numberOfBulletsInPool;
 
     protected float fireTimer = 0;
+
+
+    //the bool isShooting is set by _isActivated property
     bool isShooting;
-    public bool _isActivated { get { return isShooting; } set { isShooting = value; } }
+
+
+    //the property _isActivated's value is determined by the PlayerInputHandler class  
+    public bool _isActivated 
+    {
+        get
+        {
+            return isShooting;
+        }
+        set
+        { 
+            isShooting = value;
+        }
+    }
     public SpriteRenderer _spriteRendererComponent{ get; set; }
 
-    
+    //OfflinePlayerShooting class and NetworkedPlayerShooting classes overrried and 
+    //use Update accordingly 
+    protected abstract void Update();
     private void Awake()
     {
         _useObjectPool = false;
@@ -31,14 +49,14 @@ public class PlayerShooting : MonoBehaviourPunCallbacks
     
     }
 
-    protected  virtual void Update()
-    {
-       
-    }
+  
 
     
     protected virtual void Fire()
     {
+        //made two conditions to test objectPooling and using Instantiating normally
+        //using objectpooling was causing some
+        //unwanted behaviour so ended up not using it at all
         if (_useObjectPool)
         {
             

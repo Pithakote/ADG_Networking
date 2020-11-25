@@ -347,12 +347,17 @@ PrefabInstance:
     - target: {fileID: 2657085947047617498, guid: 05837df30b3c31042836873fd3972aa6,
         type: 3}
       propertyPath: m_fontSize
-      value: 42.3
+      value: 27.89
       objectReference: {fileID: 0}
     - target: {fileID: 2657085947047617498, guid: 05837df30b3c31042836873fd3972aa6,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 42.3
+      value: 27.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 2657085947047617498, guid: 05837df30b3c31042836873fd3972aa6,
+        type: 3}
+      propertyPath: m_text
+      value: Local Multiplayer
       objectReference: {fileID: 0}
     - target: {fileID: 2657085947203823846, guid: 05837df30b3c31042836873fd3972aa6,
         type: 3}
@@ -907,7 +912,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.048
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

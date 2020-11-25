@@ -6,6 +6,8 @@ public class OfflinePlayerShooting : PlayerShooting
 {
     protected override void Update()
     {
+        //if the player is shooting.
+        //value is determined by the PlayerInputHandler class
         if (_isActivated)
         {
         //    Debug.Log("Shooting");
@@ -17,7 +19,6 @@ public class OfflinePlayerShooting : PlayerShooting
 
                 Fire();
 
-              //  Debug.Log("Offline shooting");
 
             }
         }

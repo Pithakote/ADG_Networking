@@ -8,21 +8,16 @@ public class NetworkedPlayerShooting : PlayerShooting
    
     protected override void Update()
     {
+        //if the player is local and the player is shooting.
+        //value is determined by the PlayerInputHandler class
         if (photonView.IsMine && _isActivated)
         {
-           // Debug.Log("Shooting");
             fireTimer += Time.deltaTime;
             if (fireTimer >= _refireRate)
             {
                 fireTimer = 0;
-
-               //   photonView.RPC("Fire",RpcTarget.All,  null);
                 Fire();
-                //   Debug.Log("Online shooting");
-                //PhotonNetwork.Instantiate(_bullets.name,
-                //                               bulletFirer.position,
-                //                               bulletFirer.rotation,
-                //                               0);
+             
 
             }
 
